@@ -5,15 +5,12 @@
 /vendor/
 /node_modules/
 /.php_cs.cache
-
 /yarn-error.log
 
 ###< symfony/framework-bundle ###
 
 ###> friendsofphp/php-cs-fixer ###
 /.php_cs.cache
-###< friendsofphp/php-cs-fixer ###
-
 ###> symfony/phpunit-bridge ###
 .phpunit
 /phpunit.xml
