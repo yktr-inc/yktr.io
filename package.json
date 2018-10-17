@@ -1,0 +1,28 @@
+{
+  "name": "yktr.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yktr-inc/yktr.io.git"
+  },
+  "author": "HARANG, LIEGE",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yktr-inc/yktr.io/issues"
+  },
+  "homepage": "https://github.com/yktr-inc/yktr.io#readme",
+  "devDependencies": {
+    "husky": "^1.1.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "php-cs-fixer",
+      "pre-push": "npm test",
+    }
+  }
+}
