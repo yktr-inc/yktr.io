@@ -25,7 +25,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "yarn php-cs && yarn phpstan analyse src && yarn phpunit",
-      "pre-push": "php-cs-fixer fix"
+      "pre-push": "yarn phpstan analyse src && yarn phpunit"
     }
   }
 }
