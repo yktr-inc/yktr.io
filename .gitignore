@@ -6,7 +6,8 @@
 /node_modules/
 /.php_cs.cache
 
-yarn-error.log
+/yarn-error.log
+
 ###< symfony/framework-bundle ###
 
 ###> friendsofphp/php-cs-fixer ###
