@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "phpstan": "vendor/bin/phpstan",
+    "phpunit": "php bin/phpunit",
+    "php-cs": "vendor/bin/php-cs-fixer fix"
   },
   "repository": {
     "type": "git",
@@ -21,8 +24,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "php-cs-fixer",
-      "pre-push": "npm test",
+      "pre-commit": "vendor/bin/php-cs-fixer fix && php bin/phpunit && vendor/bin/phpstan analyse src",
+      "pre-push": "php-cs-fixer fix",
     }
   }
 }
