@@ -58,4 +58,11 @@ phpcs-dry:
 	docker run --rm -v $$(pwd)/src:/src phpqa/php-cs-fixer fix /src --dry-run
 
 phpcs:
+<<<<<<< HEAD
 	docker run --rm -v $$(pwd)/src:/src phpqa/php-cs-fixer fix /src
+=======
+	docker run --rm -v $$(pwd)/src:/src phpqa/php-cs-fixer fix /src
+
+cache-clear:
+	docker-compose exec php app/console cache:clear
+>>>>>>> Adding docker to project (#5)
