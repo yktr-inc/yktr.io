@@ -9,7 +9,6 @@ services:
       POSTGRES_PASSWORD: root
     ports:
     - 53306:5432
-
   php:
     build: ./docker/php
     ports:
