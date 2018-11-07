@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "phpstan": "make phpstan",
-    "phpunit": "make phpunit",
-    "php-cs": "make phpcs-dry"
+    "phpstan": "vendor/bin/phpstan",
+    "phpunit": "php bin/phpunit",
+    "php-cs": "vendor/bin/php-cs-fixer fix"
   },
   "repository": {
     "type": "git",
