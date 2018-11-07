@@ -12,6 +12,15 @@ install:
 	docker run --rm -v $$(pwd):/app composer install \
 	&& docker-compose exec php yarn install
 
+yarn:
+	docker-compose exec php yarn install
+
+composer-install:
+	docker run --rm -v $$(pwd):/app composer install
+
+composer-update:
+	docker run --rm -v $$(pwd):/app composer install
+
 create-app-dir:
 	mkdir app/cache \
 	&& mkdir app/logs \
@@ -50,6 +59,3 @@ phpcs-dry:
 
 phpcs:
 	docker run --rm -v $$(pwd)/src:/src phpqa/php-cs-fixer fix /src
-
-cache-clear:
-	docker-compose exec php app/console cache:clear
