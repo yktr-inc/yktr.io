@@ -59,3 +59,6 @@ phpcs-dry:
 
 phpcs:
 	docker run --rm -v $$(pwd)/src:/src phpqa/php-cs-fixer fix /src
+
+cache-clear:
+	docker-compose exec php app/console cache:clear
