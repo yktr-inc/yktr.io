@@ -26,7 +26,7 @@ class User implements UserInterface
 
     /**
      *
-     * @Assert\Range(
+     * @Assert\Length(
      *      min = 5,
      *      max = 30,
      *      minMessage = "Le nom d'utilisateur doit faire plus de {{ limit }} caractères",
@@ -47,7 +47,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @Assert\Range(
+     * @Assert\Length(
      *      min = 8,
      *      max = 20,
      *      minMessage = "Le mot de passe doit faire plus de {{ limit }} caractères",
@@ -59,7 +59,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @Assert\Range(
+     * @Assert\Length(
      *      min = 2,
      *      max = 100,
      *      minMessage = "Le nom de famille doit faire au moins {{ limit }} caractères",
@@ -71,7 +71,7 @@ class User implements UserInterface
     private $firstname;
 
     /**
-     * @Assert\Range(
+     * @Assert\Length(
      *      min = 2,
      *      max = 100,
      *      minMessage = "Le prénom doit faire au moins {{ limit }} caractères",
