@@ -4,10 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "phpstan": "make phpstan",
     "phpunit": "make phpunit",
-    "php-cs": "make phpcs-dry"
+    "php-cs": "make phpcs-dry",
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production"
   },
   "repository": {
     "type": "git",
@@ -20,7 +23,16 @@
   },
   "homepage": "https://github.com/yktr-inc/yktr.io#readme",
   "devDependencies": {
-    "husky": "^1.1.2"
+    "@symfony/webpack-encore": "^0.22.4",
+    "autoprefixer": "^9.4.5",
+    "husky": "^1.1.2",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "node-sass": "^4.11.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "tailwindcss": "^0.7.3",
+    "webpack-notifier": "^1.7.0"
   },
   "husky": {
     "hooks": {
