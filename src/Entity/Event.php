@@ -4,13 +4,13 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\DateTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
  */
 class Event
 {
-
     use DateTrait;
 
     /**
@@ -21,6 +21,13 @@ class Event
     private $id;
 
     /**
+     *  @Assert\Range(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Le titre de l'évenement doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Le titre de l'évenement ne peut pas faire plus de {{ limit }} caractères"
+     * )
+     *
      * @ORM\Column(type="string", nullable=false)
      */
     private $title;

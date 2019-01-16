@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\DateTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FileRepository")
@@ -20,11 +21,20 @@ class File
     private $id;
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Le chemin vers le fichier ne devrait pas être vide"
+     * )
+     *
      * @ORM\Column(type="string", nullable=false)
      */
     private $path;
 
     /**
+     * @Assert\Choice(
+     *     choices={"video", "image", "audio", "pdf", "file" },
+     *     message="Le type de fichierr est incorrect."
+     * )
+     *
      * @ORM\Column(type="string", nullable=false)
      */
     private $type;

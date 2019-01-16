@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\DateTrait;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GradeRepository")
@@ -27,6 +28,9 @@ class Grade
     private $user;
 
     /**
+     * Assert\NotBlank(
+     *     message = "La note ne peut pas être vide"
+     * )
      * @ORM\Column(type="float", nullable=false)
      */
     private $value;

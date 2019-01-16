@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PromotionRepository")
@@ -19,21 +20,39 @@ class Promotion
     private $id;
 
     /**
+     *  @Assert\Range(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Le nom de la promotion doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Le nom de la promotion ne peut pas faire plus de {{ limit }} caractères"
+     * )
+     *
      * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $title;
 
     /**
+     *  @Assert\Range(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "La spécialité ne doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "La spécialité ne ne peut pas faire plus de {{ limit }} caractères"
+     * )
+     *
      * @ORM\Column(type="string", length=70, nullable=false)
      */
     private $speciality;
 
     /**
+     * @Assert\Date()
+     *
      * @ORM\Column(type="date", nullable=false)
      */
     private $startedAt;
 
     /**
+     * @Assert\Date()
+     *
      * @ORM\Column(type="date", nullable=false)
      */
     private $finishedAt;

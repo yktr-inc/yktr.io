@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\DateTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Traits\DateTrait;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="account")
@@ -23,32 +23,67 @@ class User
     private $id;
 
     /**
+     *
+     * @Assert\Range(
+     *      min = 5,
+     *      max = 30,
+     *      minMessage = "Le nom d'utilisateur doit faire plus de {{ limit }} caractères",
+     *      maxMessage = "Le nom d'utilisateur ne peut pas faire plus de {{ limit }} caractères"
+     * )
+     *
      * @ORM\Column(type="string", length=30, unique=true, nullable=false)
      */
     private $username;
 
     /**
+     *  @Assert\Email(
+     *     message = "L'email saisi est invalide."
+     * )
+     *
      * @ORM\Column(type="string", length=200, unique=true, nullable=false)
      */
     private $email;
 
     /**
+     * @Assert\Range(
+     *      min = 8,
+     *      max = 20,
+     *      minMessage = "Le mot de passe doit faire plus de {{ limit }} caractères",
+     *      maxMessage = "Le mot de passe ne peut pas faire plus de {{ limit }} caractères"
+     * )
+     *
      * @ORM\Column(type="string", nullable=false)
      */
     private $password;
 
     /**
+     * @Assert\Range(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Le nom de famille doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Le nom de famille ne peut pas faire plus de {{ limit }} caractères"
+     * )
+     *
      * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $firstname;
 
     /**
+     * @Assert\Range(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Le prénom doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Le prénom ne peut pas faire plus de {{ limit }} caractères"
+     * )
+     *
      * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $lastname;
 
     /**
-     * @ORM\Column(type="date")
+     * @Assert\Date
+     *
+     * @ORM\Column(type="date", nullable=true)
      */
     private $birthdate;
 
@@ -59,6 +94,11 @@ class User
     private $avatar;
 
     /**
+     * @Assert\Choice(
+     *     choices={"created", "active", "disable" },
+     *     message="Le status est incorrect."
+     * )
+     *
      * @ORM\Column(type="string", length=50, nullable=false)
      */
     private $status;

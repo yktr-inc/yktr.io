@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\DateTrait;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ExamRepository")
@@ -20,22 +21,37 @@ class Exam
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=false)
+     * @Assert\Choice(
+     *     choices={"exam", "test" },
+     *     message="Le type est incorrect."
+     * )
+     *
+     * @ORM\Column(type="string", length=4, nullable=false)
      */
     private $type;
 
     /**
+     *  @Assert\Range(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Le nom de l'examen doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Le nom de l'examen ne peut pas faire plus de {{ limit }} caractères"
+     * )
+     *
      * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Classroom", inversedBy="exams")
+     * @ORM\ManyToOne(targetEntity="Classroom")
      * @ORM\JoinColumn(name="classroom_id", referencedColumnName="id")
      */
     private $classroom;
 
     /**
+     *
+     * @Assert\Date
+     *
      * @ORM\Column(type="datetime", nullable=false)
      */
     private $date;

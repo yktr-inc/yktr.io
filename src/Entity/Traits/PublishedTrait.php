@@ -2,10 +2,16 @@
 
 namespace App\Entity\Traits;
 
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 trait PublishedTrait
 {
     /**
-     * @var \DateTime
+     * @Assert\Datetime
+     *
+     * @ORM\Column(type="datetime", name="published_at")
+     *
      */
     protected $publishedAt;
 
@@ -31,5 +37,4 @@ trait PublishedTrait
     {
         return $this->publishedAt;
     }
-
 }
