@@ -1,21 +1,29 @@
 <?php
 
 namespace App\Entity\Traits;
+
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 trait DateTrait
 {
     /**
+     * @Assert\DateTime
+     *
      * @ORM\Column(type="datetime", name="created_at")
      */
     protected $createdAt;
 
     /**
+     * @Assert\DateTime
+     *
      * @ORM\Column(type="datetime", name="updated_at")
      */
     protected $updatedAt;
 
     /**
+     * @Assert\DateTime
+     *
      * @ORM\Column(type="datetime", name="deleted_at")
      */
     protected $deletedAt;
@@ -83,5 +91,4 @@ trait DateTrait
     {
         return $this->deletedAt;
     }
-
 }

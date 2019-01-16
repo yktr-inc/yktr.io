@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\DateTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Traits\DateTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CourseRepository")
@@ -22,7 +23,14 @@ class Course
     private $id;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     *  @Assert\Range(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Le nom du cours doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Le nom du cours ne peut pas faire plus de {{ limit }} caractères"
+     * )
+     *
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $title;
 
