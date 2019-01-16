@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\DateTrait;
 use App\Entity\Traits\PublishedTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\InformationRepository")
@@ -21,11 +22,22 @@ class Information
     private $id;
 
     /**
+     *  @Assert\Range(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Le titre de l'information doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Le titre de l'information ne peut pas faire plus de {{ limit }} caractères"
+     * )
+     *
      * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $title;
 
     /**
+     * @Assert\NotBlank(
+     *     message = "Le contenu de l'information ne devrait pas être vide"
+     * )
+     *
      * @ORM\Column(type="text", nullable=false)
      */
     private $content;
@@ -58,5 +70,4 @@ class Information
 
         return $this;
     }
-
 }

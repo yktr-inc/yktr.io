@@ -1,0 +1,20 @@
+framework:
+    workflows:
+        user:
+            marking_store:
+                type: single_state
+                arguments:
+                    - status
+            supports: App\Entity\User
+            initial_place: created
+            places:
+                - created
+                - disable
+                - active
+            transitions:
+                disable:
+                    from: [created, active]
+                    to: disable
+                activate:
+                    from: created
+                    to: active
