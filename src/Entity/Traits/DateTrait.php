@@ -10,21 +10,21 @@ trait DateTrait
     /**
      * @Assert\DateTime
      *
-     * @ORM\Column(type="datetime", name="created_at")
+     * @ORM\Column(type="datetime", name="created_at", nullable=true)
      */
     protected $createdAt;
 
     /**
      * @Assert\DateTime
      *
-     * @ORM\Column(type="datetime", name="updated_at")
+     * @ORM\Column(type="datetime", name="updated_at", nullable=true)
      */
     protected $updatedAt;
 
     /**
      * @Assert\DateTime
      *
-     * @ORM\Column(type="datetime", name="deleted_at")
+     * @ORM\Column(type="datetime", name="deleted_at", nullable=true))
      */
     protected $deletedAt;
 

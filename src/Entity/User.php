@@ -6,12 +6,15 @@ use App\Entity\Traits\DateTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Traits\DateTrait;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="account")
  */
-class User
+class User implements UserInterface
 {
     use DateTrait;
 
@@ -90,8 +93,9 @@ class User
     /**
      * @ORM\OneToOne(targetEntity="File")
      * @ORM\JoinColumn(name="avatar", referencedColumnName="id")
+     * @ORM\Column(nullable=true)
      */
-    private $avatar;
+    private $avatar = 'https://cdn.pixabay.com/photo/2016/04/01/11/29/avatar-1300370_960_720.png';
 
     /**
      * @Assert\Choice(
@@ -101,22 +105,30 @@ class User
      *
      * @ORM\Column(type="string", length=50, nullable=false)
      */
-    private $status;
+    private $status = 'created';
 
     /**
      * @ORM\OneToMany(targetEntity="Course", mappedBy="teacher")
+     * @ORM\Column(nullable=true)
      */
     private $courses;
 
     /**
      * @ORM\OneToMany(targetEntity="Attendance", mappedBy="user")
+     * @ORM\Column(nullable=true)
      */
     private $attendances;
 
     /**
      * @ORM\OneToMany(targetEntity="Grade", mappedBy="user")
+     * @ORM\Column(nullable=true)
      */
     private $grades;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
 
     public function __construct()
     {
@@ -316,6 +328,38 @@ class User
             }
         }
 
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
+    }
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
         return $this;
     }
 }

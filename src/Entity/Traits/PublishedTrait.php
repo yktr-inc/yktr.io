@@ -10,8 +10,7 @@ trait PublishedTrait
     /**
      * @Assert\Datetime
      *
-     * @ORM\Column(type="datetime", name="published_at")
-     *
+     * @ORM\Column(type="datetime", name="published_at", , nullable=true)
      */
     protected $publishedAt;
 
