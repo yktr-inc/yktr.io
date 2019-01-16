@@ -6,7 +6,6 @@ use App\Entity\Traits\DateTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Traits\DateTrait;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
-    use DateTrait;
+    //use DateTrait;
 
     /**
      * @ORM\Id()
@@ -95,7 +94,7 @@ class User implements UserInterface
      * @ORM\JoinColumn(name="avatar", referencedColumnName="id")
      * @ORM\Column(nullable=true)
      */
-    private $avatar = 'https://cdn.pixabay.com/photo/2016/04/01/11/29/avatar-1300370_960_720.png';
+    private $avatar;
 
     /**
      * @Assert\Choice(
