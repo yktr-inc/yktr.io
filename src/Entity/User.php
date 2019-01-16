@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
-    use DateTrait;
+    //use DateTrait;
 
     /**
      * @ORM\Id()
