@@ -93,7 +93,6 @@ class User implements UserInterface
     /**
      * @ORM\OneToOne(targetEntity="File")
      * @ORM\JoinColumn(name="avatar", referencedColumnName="id")
-     * @ORM\Column(nullable=true)
      */
     private $avatar;
 
@@ -109,19 +108,16 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="Course", mappedBy="teacher")
-     * @ORM\Column(nullable=true)
      */
     private $courses;
 
     /**
      * @ORM\OneToMany(targetEntity="Attendance", mappedBy="user")
-     * @ORM\Column(nullable=true)
      */
     private $attendances;
 
     /**
      * @ORM\OneToMany(targetEntity="Grade", mappedBy="user")
-     * @ORM\Column(nullable=true)
      */
     private $grades;
 
