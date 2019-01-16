@@ -12,10 +12,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="account")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User implements UserInterface
 {
-    //use DateTrait;
+    use DateTrait;
 
     /**
      * @ORM\Id()

@@ -91,4 +91,28 @@ trait DateTrait
     {
         return $this->deletedAt;
     }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreFlush
+     */
+    public function setUpdatedAtValue()
+    {
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function setDeletedAtValue()
+    {
+        $this->deletedAt = new \DateTime();
+    }
 }
