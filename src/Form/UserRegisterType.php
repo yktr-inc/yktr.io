@@ -19,6 +19,8 @@ class UserRegisterType extends AbstractType
         $builder
             ->add('email', EmailType::class, ['label' => 'Your email'])
             ->add('username', TextType::class, ['label' => 'Your Pseudo'])
+            ->add('firstname', TextType::class, ['label' => 'Your First Name'])
+            ->add('lastname', TextType::class, ['label' => 'Your Last Name'])
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
