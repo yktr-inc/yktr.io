@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class UserRegisterType extends AbstractType
 {
@@ -27,7 +28,15 @@ class UserRegisterType extends AbstractType
                 'required' => true,
                 'first_options'  => array('label' => 'Enter your Password'),
                 'second_options' => array('label' => 'Repeat Password'),
-            ));
+            ))
+            ->add('submit', SubmitType::class, [
+                    'label' => 'Register',
+                    'attr' => [
+                        //'class' => 'change button style here',
+                        'forgotten' => false,
+                    ],
+                ]
+            )
         ;
     }
 

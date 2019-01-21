@@ -4,5 +4,5 @@ let tailwindcss = require('tailwindcss');
      plugins: [
          tailwindcss('tailwind.js'), // your tailwind.js configuration file path
          require('autoprefixer'),
-     ]
- }
+     ],
+ };

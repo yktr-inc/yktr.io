@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 use App\Form\UserRegisterType;
+use App\Form\UserLoginType;
 use App\Entity\User;
 
 /**
@@ -22,8 +23,13 @@ class SecurityController extends Controller
      */
     public function login(AuthenticationUtils $helper): Response
     {
-        return $this->render('security/login.html.twig', [
+        $user = new User();
+        $form = $this->createForm(UserLoginType::class, $user);
+        return $this->render('security/template.html.twig', [
             'error' => $helper->getLastAuthenticationError(),
+            'label' => 'Login',
+            'title' => 'Login in !',
+            'form' => $form->createView()
         ]);
     }
 
@@ -52,7 +58,9 @@ class SecurityController extends Controller
             return $this->redirectToRoute('app_front_security_login');
         }
         return $this->render(
-            'Back/user/new.html.twig', [
+            'security/template.html.twig', [
+                'label' => 'Sign up',
+                'title' => 'Register !',
                 'form' => $form->createView()
             ]
         );
