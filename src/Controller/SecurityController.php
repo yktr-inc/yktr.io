@@ -25,6 +25,7 @@ class SecurityController extends Controller
     {
         $user = new User();
         $form = $this->createForm(UserLoginType::class, $user);
+
         return $this->render('security/template.html.twig', [
             'error' => $helper->getLastAuthenticationError(),
             'label' => 'Login',

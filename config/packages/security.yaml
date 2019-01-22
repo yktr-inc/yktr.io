@@ -21,11 +21,11 @@ security:
         form_login:
           check_path: app_front_security_login
           login_path: app_front_security_login
-          #default_target_path: app_front_default_home
+          username_parameter: user_login[username]
+          password_parameter: user_login[password]
 
         logout:
-          path: /logout
-          target: /
+          path: app_logout
 
     role_hierarchy:
         ROLE_DEV: ROLE_USER
