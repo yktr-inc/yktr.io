@@ -1,14 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% include "Back/layouts/navbar.html.twig" %}
-        {% block breadcrum %}{% endblock %}
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %}</title>
+  {% block stylesheets %}{% endblock %}
+  <link rel="stylesheet" type="text/css" href="public/build/css/app.css">
+  <link rel="stylesheet" type="text/css" href="public/build/css/style.css">
+</head>
+<body>
+  <div class="min-h-screen flex">
+    {% include "Back/layouts/sidebar.html.twig" %}
+    <div class="content">
+      <nav id="navbar" class="flex fixed shadow navbar pin-l pin-t pin-r items-center justify-between flex-wrap bg-blue-darker p-6 pl-10">
+        <div class="toggle-sidebar" id="toggle-sidebar">
+          <span class="icon-circle-left"></span>
+        </div>
+        <div class="flex-1 text-center">
+          {% block breadcrumb %}{% endblock %}
+        </div>
+        <div class="flex-1 text-center">
+          <ul>
+            <input type="text" id="search" class="search bg-blue-darker" placeholder="Search" name="search">
+          </ul>
+        </div>
+        <div class="flex-1 text-right">
+          <div class="dropdown">
+            <a href="#" id="user-dropdown" class="inline-block text-sm text-white border-white hover:border-transparent hover:text-teal">Connected user</a>
+            <ul class="dropdown-items">
+              <li>
+                <a href="#"> Action </a>
+              </li>
+              <li>
+                <a href="#"> Action </a>
+              </li>
+              <li>
+                <a href="#"> Action </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="p-10 mt-50">
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+      </div>
+    </div>
+  </div>
+  {% block javascripts %}{% endblock %}
+  <script type="text/javascript" src="public/build/js/app.js"></script>
+</body>
 </html>

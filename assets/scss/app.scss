@@ -1,3 +1,101 @@
+@tailwind preflight;
+@tailwind components;
+@tailwind utilities;
+
+
 body {
-    background-color: #eeeeee;
+  background-color: #eeeeee;
+  height: 10000px;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.shrinked .link-label {
+  display: none;
+}
+
+.shrinked.sidebar {
+  width: 50px;
+}
+
+.shrinked.sidebar > .navbar {
+  width: 50px;
+}
+
+.sidebar {
+  width: 200px;
+  order: 0;
+  flex: 0 1 100%;
+}
+
+.school-logo{
+  width: 40px;
+  margin: 0 auto;
+  display: block;
+}
+
+.content {
+  margin-left: 200px;
+  order: 1;
+  flex: 0 1 100%;
+  min-height: 100vh;
+  padding:20px;
+  flex-direction: row;
+}
+
+.search{
+  border-bottom: 2px solid #1c3d5a;
+  color: #FFF;
+}
+
+.navbar{
+  left:200px;
+  &.shrinked {
+    left: 50px;
+  }
+  &:hover .toggle-sidebar{
+    display: block;
+  }
+  &:hover .search{
+    border-bottom: 2px #3e6587 solid;
+  }
+}
+
+.mt-50{
+  margin-top: 50px;
+}
+
+.toggle-sidebar {
+  position: fixed;
+  display: none;
+  left: 210px;
+  z-index: 1;
+  font-size: 21px;
+  cursor: pointer;
+  color: #FFFFFF;
+  top: 23px;
+  &.shrinked{
+    left:60px;
+  }
+}
+.dropdown:hover > .dropdown-items {
+  display: inline-block;
+}
+
+.dropdown-items{
+  position: absolute;
+  background: #FFF;
+  padding: 20px;
+  display: none;
+  right: 20px;
+  top: 50px;
+  & > a {
+    display: block;
+    color: #000;
+  }
+  & > a:hover {
+    color: blue;
+  }
 }
