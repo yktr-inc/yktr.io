@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('sidebar').classList.toggle('shrinked');
     document.getElementById('toggle-sidebar').classList.toggle('shrinked');
     document.getElementById('navbar').classList.toggle('shrinked');
+    document.getElementById('content').classList.toggle('shrinked');
     this.children[0].classList.toggle('icon-circle-right');
     this.children[0].classList.toggle('icon-circle-left');
   });

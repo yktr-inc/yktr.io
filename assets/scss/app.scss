@@ -5,7 +5,6 @@
 
 body {
   background-color: #eeeeee;
-  height: 10000px;
 }
 
 a {
@@ -43,6 +42,9 @@ a {
   min-height: 100vh;
   padding:20px;
   flex-direction: row;
+  &.shrinked{
+    margin-left: 50px;
+  }
 }
 
 .search{
@@ -58,9 +60,6 @@ a {
   &:hover .toggle-sidebar{
     display: block;
   }
-  &:hover .search{
-    border-bottom: 2px #3e6587 solid;
-  }
 }
 
 .mt-50{
@@ -75,27 +74,43 @@ a {
   font-size: 21px;
   cursor: pointer;
   color: #FFFFFF;
-  top: 23px;
+  top: 30px;
   &.shrinked{
     left:60px;
   }
 }
-.dropdown:hover > .dropdown-items {
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
   display: inline-block;
 }
 
-.dropdown-items{
-  position: absolute;
-  background: #FFF;
-  padding: 20px;
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
   display: none;
-  right: 20px;
-  top: 50px;
-  & > a {
-    display: block;
-    color: #000;
-  }
-  & > a:hover {
-    color: blue;
-  }
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 0;
+  overflow: hidden;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  padding: 12px 16px;
+  display: block;
+}
+
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
 }

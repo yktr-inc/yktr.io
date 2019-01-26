@@ -10,7 +10,7 @@
 <body>
   <div class="min-h-screen flex">
     {% include "Back/layouts/sidebar.html.twig" %}
-    <div class="content">
+    <div class="content" id="content">
       <nav id="navbar" class="flex fixed shadow navbar pin-l pin-t pin-r items-center justify-between flex-wrap bg-blue-darker p-6 pl-10">
         <div class="toggle-sidebar" id="toggle-sidebar">
           <span class="icon-circle-left"></span>
@@ -24,20 +24,14 @@
           </ul>
         </div>
         <div class="flex-1 text-right">
-          <div class="dropdown">
-            <a href="#" id="user-dropdown" class="inline-block text-sm text-white border-white hover:border-transparent hover:text-teal">Connected user</a>
-            <ul class="dropdown-items">
-              <li>
-                <a href="#"> Action </a>
-              </li>
-              <li>
-                <a href="#"> Action </a>
-              </li>
-              <li>
-                <a href="#"> Action </a>
-              </li>
-            </ul>
+        <div class="dropdown">
+          <button class="text-white font-bold py-2 px-4">User</button>
+          <div class="dropdown-content rounded">
+            <a href="#" class="hover:bg-blue-dark hover:text-white text-black">Profil</a>
+            <a href="#" class="hover:bg-blue-dark hover:text-white text-black">Settings</a>
+            <a href="#" class="hover:bg-blue-dark hover:text-white text-black">Logout</a>
           </div>
+        </div>
         </div>
       </nav>
 
