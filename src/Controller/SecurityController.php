@@ -26,7 +26,7 @@ class SecurityController extends Controller
         $user = new User();
         $form = $this->createForm(UserLoginType::class, $user);
 
-        return $this->render('security/template.html.twig', [
+        return $this->render('security/security.html.twig', [
             'error' => $helper->getLastAuthenticationError(),
             'label' => 'Login',
             'title' => 'Login in !',
@@ -59,7 +59,7 @@ class SecurityController extends Controller
             return $this->redirectToRoute('app_front_security_login');
         }
         return $this->render(
-            'security/template.html.twig', [
+            'security/security.html.twig', [
                 'label' => 'Sign up',
                 'title' => 'Register !',
                 'form' => $form->createView()

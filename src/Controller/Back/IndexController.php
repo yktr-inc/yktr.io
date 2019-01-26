@@ -7,11 +7,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/admin", methods={"GET"})
+     * @Route("/dashboard", methods={"GET"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index()
+    public function dashboard()
     {
-        return $this->render('Front/index.html.twig');
+        return $this->render('Back/dashboard/index.html.twig');
     }
 }

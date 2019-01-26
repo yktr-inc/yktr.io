@@ -23,14 +23,16 @@ security:
           login_path: app_front_security_login
           username_parameter: user_login[username]
           password_parameter: user_login[password]
+          default_target_path: app_back_index_dashboard
 
         logout:
           path: app_logout
 
     role_hierarchy:
-        ROLE_DEV: ROLE_USER
-        ROLE_ADMIN: ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_DEV]
+        ROLE_STUDENT: ROLE_USER
+        ROLE_ADMINISTRATIVE: ROLE_USER
+        ROLE_SUPERADMIN: [ROLE_ADMINISTRATIVE, ROLE_STUDENT]
 
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_SUPERADMIN }
+        - { path: ^/dashboard, roles: ROLE_USER }
