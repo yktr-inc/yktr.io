@@ -1,0 +1,18 @@
+{% extends 'Front/index.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<div class="h-screen bg-fixed bg-grey-lightest">
+    <section class="container md:h-full mx-auto h-full md:flex md:justify-center md:items-center">
+        <div class="mb-6 bg-white shadow-md rounded px-8 pt-10 pb-8">
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {% if error %}
+                    <div class="mt-6 text-center text-red italic">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+            {{ form_end(form) }}
+        </div>
+    </section>
+</div>
+{% endblock %}
