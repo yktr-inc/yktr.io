@@ -25,10 +25,13 @@
   "devDependencies": {
     "@symfony/webpack-encore": "^0.22.4",
     "autoprefixer": "^9.4.5",
+    "bootstrap": "^4.2.1",
     "husky": "^1.1.2",
+    "jquery": "^3.3.1",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
     "node-sass": "^4.11.0",
+    "popper.js": "^1.14.7",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "tailwindcss": "^0.7.3",
@@ -39,5 +42,9 @@
       "pre-commit": "yarn php-cs && yarn phpstan analyse src && yarn phpunit",
       "pre-push": "yarn phpstan analyse src && yarn phpunit"
     }
+  },
+  "dependencies": {
+    "bootswatch": "^4.2.1",
+    "material-icons": "^0.3.0"
   }
 }
