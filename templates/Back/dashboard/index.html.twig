@@ -1,13 +1,11 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
 {% block breadcrumb %}
-  <ol class="list-reset flex text-grey">
-    <li><a href="#" class="text-white font-bold">Home</a></li>
-    <li><span class="mx-2">/</span></li>
-    <li><a href="#" class="text-white font-bold">Javascript</a></li>
-    <li><span class="mx-2">/</span></li>
-    <li>Exam</li>
-  </ol>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Library</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Data</li>
+    </ol>
 {% endblock %}
 
 {% block body %}
