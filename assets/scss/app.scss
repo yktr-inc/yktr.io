@@ -4,8 +4,6 @@
 
 $sidebar-width: 260px;
 
-$primary-color: #9c27b0;
-
 /* SIDEBAR component */
 
 .sidebar {
@@ -16,8 +14,7 @@ $primary-color: #9c27b0;
   z-index: 2;
   width: $sidebar-width;
   background: #fff;
-  border-right: #D2D2D2 solid 1px;
-  /* box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2); */
+  box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 
   .logo{
     margin: 0;
@@ -134,8 +131,8 @@ $primary-color: #9c27b0;
 }
 
 .sidebar li.active>a {
-  background-color: #{$primary-color};
-  /* box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4); */
+  background-color: #9c27b0;
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
 }
 
 /* # MAIN PANEL COMPONENT */
