@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Knp\Component\Pager\Paginator;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +19,43 @@ class UserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, User::class);
     }
+
+    public function all()
+    {
+        return $this
+        ->createQueryBuilder('u')
+        ->getQuery();
+    }
+
+    public function findByRole($role)
+    {
+        $role = '%"'.$role.'"%';
+
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.roles LIKE :role')
+            ->setParameter('role', $role)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function allTeachers()
+    {
+
+    }
+
+    public function allAdministratives()
+    {
+
+    }
+
+    // public function allStudents()
+    // {
+    //     return $this->createQueryBuilder('p')
+    //     ->
+    // }
+
+
 
     // /**
     //  * @return User[] Returns an array of User objects

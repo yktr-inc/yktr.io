@@ -25,15 +25,17 @@ security:
           username_parameter: user_login[username]
           password_parameter: user_login[password]
           default_target_path: app_back_index_dashboard
+          use_referer: true
 
         logout:
           path: app_logout
 
     role_hierarchy:
         ROLE_STUDENT: ROLE_USER
-        ROLE_ADMINISTRATIVE: ROLE_USER
-        ROLE_SUPERADMIN: [ROLE_ADMINISTRATIVE, ROLE_STUDENT, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_TEACHER: ROLE_USER
+        ROLE_ADMINISTRATIVE: [ROLE_USER, ROLE_TEACHER]
+        ROLE_SUPERADMIN: [ROLE_ADMINISTRATIVE, ROLE_STUDENT, ROLE_TEACHER, ROLE_ALLOWED_TO_SWITCH]
 
     access_control:
-        - { path: ^/admin, roles: ROLE_SUPERADMIN }
+        - { path: ^/school, roles: ROLE_SUPERADMIN }
         - { path: ^/dashboard, roles: ROLE_USER }

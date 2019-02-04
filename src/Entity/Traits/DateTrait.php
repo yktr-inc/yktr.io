@@ -21,13 +21,6 @@ trait DateTrait
      */
     protected $updatedAt;
 
-    /**
-     * @Assert\DateTime
-     *
-     * @ORM\Column(type="datetime", name="deleted_at", nullable=true))
-     */
-    protected $deletedAt;
-
 
     /**
      *
@@ -72,27 +65,6 @@ trait DateTrait
     }
 
     /**
-     *
-     * @param  \DateTime $deletedAt
-     * @return $this
-     */
-    public function setDeletedAt(\DateTime $deletedAt)
-    {
-        $this->deletedAt = $deletedAt;
-
-        return $this;
-    }
-
-    /**
-     *
-     * @return \DateTime
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
      * @ORM\PrePersist
      */
     public function setCreatedAtValue()
@@ -108,11 +80,4 @@ trait DateTrait
         $this->updatedAt = new \DateTime();
     }
 
-    /**
-     * @ORM\PreRemove
-     */
-    public function setDeletedAtValue()
-    {
-        $this->deletedAt = new \DateTime();
-    }
 }
