@@ -4,6 +4,8 @@
 
 $sidebar-width: 260px;
 
+$primary-color: #9c27b0;
+
 /* SIDEBAR component */
 
 .sidebar {
@@ -14,7 +16,8 @@ $sidebar-width: 260px;
   z-index: 2;
   width: $sidebar-width;
   background: #fff;
-  box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  border-right: #D2D2D2 solid 1px;
+  /* box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2); */
 
   .logo{
     margin: 0;
@@ -97,11 +100,15 @@ $sidebar-width: 260px;
 }
 
 .sidebar li.active>a {
-  background-color: #9c27b0;
-  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+  background-color: #{$primary-color};
+  /* box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4); */
 }
 
 /* # MAIN PANEL COMPONENT */
+
+.content{
+  background-color: #F6F6F6;
+}
 
 .main-panel {
   position: relative;
@@ -119,7 +126,7 @@ $sidebar-width: 260px;
 /* NAVBAR Component */
 
 .navbar.navbar-transparent, .navbar .breadcrumb {
-  background-color: transparent !important;
+  background-color: #fff !important;
   box-shadow: none;
 }
 .navbar.navbar-absolute {
@@ -160,7 +167,7 @@ $sidebar-width: 260px;
 }
 
 .navbar .collapse .navbar-nav .nav-item .nav-link .notification {
-  top: 3px;
+  top: 0px;
 }
 
 .navbar .notification {
@@ -168,8 +175,8 @@ $sidebar-width: 260px;
   top: 5px;
   border: 1px solid #FFF;
   right: 10px;
-  font-size: 9px;
-  background: #f44336;
+  font-size: 10px;
+  background: #{$primary-color};
   color: #FFFFFF;
   min-width: 20px;
   padding: 0px 5px;
@@ -179,4 +186,88 @@ $sidebar-width: 260px;
   line-height: 19px;
   vertical-align: middle;
   display: block;
+}
+
+.notifications {
+  min-width:420px;
+
+  a.content {
+    text-decoration:none;
+    background:#E7E7E7;
+  }
+}
+
+.notifications-wrapper {
+  max-height:250px;
+}
+
+.item-title {
+  color:#000;
+  font-size: 1.3em;
+}
+.item-time {
+  font-size: 0.8em;
+  background-color: #{$primary-color};
+}
+
+.notification-item {
+  padding:7px;
+  margin:4px;
+  border-radius:1px;
+  background-color: #eeeeee;
+  overflow-x: hidden;
+}
+
+/*--------------------
+Input Search Bar
+--------------------*/
+.search-form {
+  position: relative;
+  width: 350px;
+  height: 40px;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.search-input {
+  position: absolute;
+  top: 5px;
+  left: 44px;
+  font-size: 14px;
+  background: none;
+  color: #5a6674;
+  width: 83%;
+  height: 30px;
+  border: none;
+  appearance: none;
+  outline: none;
+
+  border-bottom: #e0e0e0 solid 1px;
+  &:focus {
+    border-bottom: #878F99 solid 1px;
+  }
+  &::placeholder {
+    color:#878F99;
+    padding-left:2px;
+  }
+}
+
+.search-button {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  height: 20px;
+  width: 20px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  outline: none!important;
+  cursor: pointer;
+
+  & i {
+    width: 20px;
+    height: 20px;
+    color: #A5ABB3;
+  }
 }
