@@ -12,7 +12,12 @@
 
     <div class="main-panel">
         {% include "Back/layouts/sidebar.html.twig" %}
-        {% include "Back/layouts/navbar.html.twig" %}
+
+        {% set breadcrumb = block('breadcrumb') %}
+        {% embed "Back/layouts/navbar.html.twig" %}
+            {% block breadcrumb %}{{ breadcrumb|raw }}{% endblock %}
+        {% endembed %}
+
         <div class="content">
             {% block body %}{% endblock %}
         </div>
