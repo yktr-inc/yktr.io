@@ -7,11 +7,11 @@ Encore
     .addStyleEntry('css/app', './assets/scss/app.scss')
     .addStyleEntry('css/style', './assets/css/style.css')
     .cleanupOutputBeforeBuild()
-    .enableSingleRuntimeChunk()
     .enablePostCssLoader()
     .enableSassLoader(function (options) {}, {
         resolveUrlLoader: false
     })
+    .autoProvidejQuery()
 ;
 
 module.exports = Encore.getWebpackConfig();
