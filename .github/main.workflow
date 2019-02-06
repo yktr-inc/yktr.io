@@ -1,7 +1,6 @@
 workflow "Deploy" {
   resolves = [
     "Hyper Lazer Deployer",
-    "PHPStan",
   ]
   on = "push"
 }
@@ -15,10 +14,4 @@ action "Hyper Lazer Deployer" {
     "AFTER_PULL_COMMAND",
     "GITHUB_TOKEN",
   ]
-}
-
-action "PHPStan" {
-  uses = "docker://oskarstark/phpstan-ga:with-extensions"
-  args = "analyse src tests --level max --configuration extension.neon"
-  secrets = ["GITHUB_TOKEN"]
 }
