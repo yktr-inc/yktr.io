@@ -1,9 +1,9 @@
 workflow "Code Quality" {
-  on = "push"
   resolves = [
     "Hyper Lazer Deployer",
     "PHPStan",
   ]
+  on = "check_run"
 }
 
 action "Hyper Lazer Deployer" {
@@ -15,4 +15,4 @@ action "PHPStan" {
   uses = "docker://oskarstark/phpstan-ga:with-extensions"
   args = "analyse src tests --level max --configuration extension.neon"
   secrets = ["GITHUB_TOKEN"]
-  }
+}
