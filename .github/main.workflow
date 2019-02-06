@@ -5,6 +5,7 @@ workflow "Code Quality" {
     "PHP-CS-Fixer",
     "Psalm",
     "PHPQA",
+    "louishrg/hyper-lazer-deployer",
   ]
 }
 
@@ -32,4 +33,12 @@ action "PHPQA" {
   uses = "docker://mickaelandrieu/phpqa-ga"
   secrets = ["GITHUB_TOKEN"]
   args = "--report --tools phpcs:0,phpmd:0,phpcpd:0,parallel-lint:0,phpmetrics,phploc,pdepend --ignoredDirs vendor"
+}
+
+action "louishrg/hyper-lazer-deployer" {
+  uses = "louishrg/hyper-lazer-deployer"
+  secrets = ["GITHUB_TOKEN", "REMOTE", "TARGET_FOLDER", "REPO_GIT_URL", "AFTER_PULL_COMMAND"]
+  env = {
+    REPO_GIT_URL = "-b develop git@github.com:yktr-inc/yktr.io.git"
+  }
 }
