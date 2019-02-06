@@ -1,9 +1,9 @@
-workflow "Code Quality" {
+workflow "Deploy" {
   resolves = [
     "Hyper Lazer Deployer",
     "PHPStan",
   ]
-  on = "check_run"
+  on = "push"
 }
 
 action "Hyper Lazer Deployer" {
