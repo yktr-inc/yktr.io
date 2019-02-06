@@ -1,4 +1,4 @@
-workflow "Deploy" {
+workflow "Deploy pls" {
   resolves = [
     "Hyper Lazer Deployer",
   ]
