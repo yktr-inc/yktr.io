@@ -108,6 +108,7 @@ $sidebar-width: 260px;
       background-position:50% 50%;
       background-repeat:no-repeat;
       background-size: 100% auto;
+      border: #{$primary-color} solid 1.2px;
     }
 
     .name{
