@@ -38,7 +38,4 @@ action "PHPQA" {
 action "Hyper Lazer Deployer" {
   uses = "docker://louishrg/hyper-lazer-deployer"
   secrets = ["GITHUB_TOKEN", "REMOTE", "TARGET_FOLDER", "REPO_GIT_URL", "AFTER_PULL_COMMAND"]
-  env = {
-    REPO_GIT_URL = "-b develop git@github.com:yktr-inc/yktr.io.git"
-  }
 }
