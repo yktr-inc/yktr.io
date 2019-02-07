@@ -4,6 +4,8 @@ twig:
     strict_variables: '%kernel.debug%'
     form_themes:
         - 'Form/bootstrap_4_horizontal_layout.html.twig'
+    globals:
+        notications: "@App\\Service\\DBNotificationServiceInterface"
 
 knp_paginator:
     template:

@@ -8,6 +8,7 @@
         "gedmo/doctrine-extensions": "^2.4",
         "knplabs/doctrine-behaviors": "^1.6",
         "knplabs/knp-paginator-bundle": "^2.8",
+        "knplabs/knp-time-bundle": "^1.9",
         "opsway/doctrine-dbal-postgresql": "^0.8.1",
         "sensio/framework-extra-bundle": "^5.1",
         "stof/doctrine-extensions-bundle": "^1.3",
