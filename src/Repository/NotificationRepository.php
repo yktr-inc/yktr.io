@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Notification;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use App\Entity\User;
 
 /**
  * @method Notification|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +19,29 @@ class NotificationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Notification::class);
     }
+
+
+    public function findLast($limit, User $user)
+    {
+        return $this->createQueryBuilder('n')
+            ->andWhere('n.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('n.createdAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function countNotif(User $user){
+        return $this->createQueryBuilder('n')
+        ->select('count(n.id)')
+        ->andWhere('n.user = :user')
+        ->setParameter('user', $user)
+        ->getQuery()
+        ->getSingleScalarResult();
+    }
+
 
     // /**
     //  * @return Notification[] Returns an array of Notification objects
