@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/dashboard", methods={"GET"})
+     * @Route("/dashboard", methods={"GET"}, name="dashboard")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function dashboard()
