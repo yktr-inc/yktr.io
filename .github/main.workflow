@@ -7,7 +7,7 @@ workflow "CI/CD" {
 
 action "branch-filter" {
   uses = "actions/bin/filter@master"
-  args = "branch"
+  args = "branch master"
 }
 
 action "Hyper Lazer Deployer" {
