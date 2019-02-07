@@ -1,11 +1,24 @@
-{% extends 'Front/index.html.twig' %}
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+  <ol class="list-reset flex text-grey">
+    <li><a href="#" class="text-white font-bold">Home</a></li>
+    <li><span class="mx-2">/</span></li>
+    <li><a href="#" class="text-white font-bold">School</a></li>
+    <li><span class="mx-2">/</span></li>
+    <li><a href="#" class="text-white font-bold">Users</a></li>
+    <li><span class="mx-2">/</span></li>
+    <li>New</li>
+  </ol>
+{% endblock %}
 
 {% block title %}Register!{% endblock %}
 
 {% block body %}
+    <a href="{{ path('user_index') }}">back to list</a>
+
     <h1>Create new User</h1>
 
     {{ include('Back/user/_form.html.twig') }}
 
-    <a href="{{ path('user_index') }}">back to list</a>
 {% endblock %}
