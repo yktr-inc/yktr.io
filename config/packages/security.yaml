@@ -25,6 +25,7 @@ security:
           username_parameter: user_login[username]
           password_parameter: user_login[password]
           default_target_path: app_back_index_dashboard
+          success_handler: redirect.after.login
           use_referer: true
 
         logout:
