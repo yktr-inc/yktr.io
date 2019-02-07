@@ -1,0 +1,60 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+  <ol class="list-reset flex text-grey">
+    <li><a href="#" class="text-white font-bold">Home</a></li>
+    <li><span class="mx-2">/</span></li>
+    <li><a href="#" class="text-white font-bold">School</a></li>
+    <li><span class="mx-2">/</span></li>
+    <li>Users</li>
+  </ol>
+{% endblock %}
+
+{% block body %}
+    <h1>Users</h1>
+
+    <table class="table tableLayout w-full">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th{% if users.isSorted('u.email') %} class="sorted"{% endif %}>
+                {{ knp_pagination_sortable(users, 'Email', 'u.email') }}
+                </th>
+                <th{% if users.isSorted('u.username') %} class="sorted"{% endif %}>
+                {{ knp_pagination_sortable(users, 'Username', 'u.username') }}
+                </th>
+                <th{% if users.isSorted('u.firstname') %} class="sorted"{% endif %}>
+                {{ knp_pagination_sortable(users, 'Firstname', 'u.firstname') }}
+                </th>
+                <th{% if users.isSorted('u.lastname') %} class="sorted"{% endif %}>
+                {{ knp_pagination_sortable(users, 'Lastname', 'u.lastname') }}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>
+                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(users) }}
+    </div>
+
+    <a href="{{ path('user_new') }}">Create new</a>
+{% endblock %}

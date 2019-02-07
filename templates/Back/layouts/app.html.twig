@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %}</title>
+  {% block stylesheets %}{% endblock %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('build/css/app.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('build/css/style.css') }}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="main-panel">
+        {% include "Back/layouts/sidebar.html.twig" %}
+
+        {% set breadcrumb = block('breadcrumb') %}
+        {% embed "Back/layouts/navbar.html.twig" %}
+            {% block breadcrumb %}{{ breadcrumb|raw }}{% endblock %}
+        {% endembed %}
+
+        <div class="content">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+
+    {% block javascripts %}{% endblock %}
+
+    <script type="text/javascript" >
+        const elem = document.getElementById('search-input');
+        elem.onblur = () => {document.getElementById('search-icon').style.color = '#e0e0e0';};
+        elem.onfocus = () => {document.getElementById('search-icon').style.color = "#878F99";};
+    </script>
+    <script type="text/javascript" src="{{ asset('build/js/app.js ') }}"></script>
+</body>
+</html>

@@ -4,10 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "phpstan": "make phpstan",
     "phpunit": "make phpunit",
-    "php-cs": "make phpcs-dry"
+    "php-cs": "make phpcs-dry",
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production"
   },
   "repository": {
     "type": "git",
@@ -20,12 +23,29 @@
   },
   "homepage": "https://github.com/yktr-inc/yktr.io#readme",
   "devDependencies": {
-    "husky": "^1.1.2"
+    "@symfony/webpack-encore": "^0.22.4",
+    "autoprefixer": "^9.4.5",
+    "bootstrap": "^4.2.1",
+    "husky": "^1.1.2",
+    "jquery": "^3.3.1",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "node-sass": "^4.11.0",
+    "popper.js": "^1.14.7",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "tailwind": "^3.0.0",
+    "tailwindcss": "^0.7.3",
+    "webpack-notifier": "^1.7.0"
   },
   "husky": {
     "hooks": {
       "pre-commit": "yarn php-cs && yarn phpstan analyse src && yarn phpunit",
       "pre-push": "yarn phpstan analyse src && yarn phpunit"
     }
+  },
+  "dependencies": {
+    "bootswatch": "^4.2.1",
+    "material-icons": "^0.3.0"
   }
 }

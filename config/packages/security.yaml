@@ -1,0 +1,42 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+
+    firewalls:
+      dev:
+        pattern: ^/(_(profiler|wdt)|css|images|js)/
+        security: false
+      main:
+        switch_user: true
+        anonymous: true
+
+        form_login:
+          check_path: app_front_security_login
+          login_path: app_front_security_login
+          username_parameter: user_login[username]
+          password_parameter: user_login[password]
+          default_target_path: app_back_index_dashboard
+          success_handler: redirect.after.login
+          use_referer: true
+
+        logout:
+          path: app_logout
+
+    role_hierarchy:
+        ROLE_STUDENT: ROLE_USER
+        ROLE_TEACHER: ROLE_USER
+        ROLE_ADMINISTRATIVE: [ROLE_USER, ROLE_TEACHER]
+        ROLE_SUPERADMIN: [ROLE_ADMINISTRATIVE, ROLE_STUDENT, ROLE_TEACHER, ROLE_ALLOWED_TO_SWITCH]
+
+    access_control:
+        - { path: ^/school, roles: ROLE_SUPERADMIN }
+        - { path: ^/dashboard, roles: ROLE_USER }
