@@ -7,13 +7,11 @@ workflow "CI/CD" {
 }
 
 action "branch-filter" {
-  needs = ["Psalm", "PHPQA"]
   uses = "actions/bin/filter@master"
   args = "branch master"
 }
 
 action "branch-filter-dev" {
-  needs = ["Psalm", "PHPQA"]
   uses = "actions/bin/filter@master"
   args = "branch develop"
 }
