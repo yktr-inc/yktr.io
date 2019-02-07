@@ -7,8 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-
 use Symfony\Component\Validator\Constraints as Assert;
+use Knp\DoctrineBehaviors\Model\SoftDeletable\SoftDeletable;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="account")
@@ -17,6 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface
 {
     use DateTrait;
+    use SoftDeletable;
 
     /**
      * @ORM\Id()
@@ -122,6 +124,11 @@ class User implements UserInterface
     private $grades;
 
     /**
+     * @ORM\OneToMany(targetEntity="Notification", mappedBy="user")
+     */
+    private $notifications;
+
+    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -131,6 +138,7 @@ class User implements UserInterface
         $this->courses = new ArrayCollection();
         $this->attendances = new ArrayCollection();
         $this->grades = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -196,6 +204,11 @@ class User implements UserInterface
         $this->lastname = $lastname;
 
         return $this;
+    }
+
+    public function getFullname(): ?string
+    {
+        return $this->firstname.' '.$this->lastname;
     }
 
     public function getBirthdate(): ?\DateTimeInterface
@@ -358,4 +371,36 @@ class User implements UserInterface
         $this->roles = $roles;
         return $this;
     }
+
+    /**
+     * @return Collection|Notification[]
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications[] = $notification;
+            $notification->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->notifications->contains($notification)) {
+            $this->notifications->removeElement($notification);
+            // set the owning side to null (unless already changed)
+            if ($notification->getUser() === $this) {
+                $notification->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

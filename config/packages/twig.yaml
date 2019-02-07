@@ -4,3 +4,7 @@ twig:
     strict_variables: '%kernel.debug%'
     form_themes:
         - 'Form/bootstrap_4_horizontal_layout.html.twig'
+
+knp_paginator:
+    template:
+        pagination: bundles/knp/pagination.html.twig

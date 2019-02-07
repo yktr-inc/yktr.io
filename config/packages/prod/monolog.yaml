@@ -23,3 +23,19 @@ monolog:
             handler: deprecation
             max_level: info
             channels: ["php"]
+        swift:
+            type:       swift_mailer
+            from_email: 'yktrinc@gmail.com'
+            to_email:   'yktrinc@gmail.com'
+            # or list of recipients
+            # to_email:   ['dev1@example.com', 'dev2@example.com', ...]
+            subject:    'An Error Occurred! %%message%%'
+            level:      debug
+            formatter:  monolog.formatter.html
+            content_type: text/html
+        deduplicated:
+            type: deduplication
+            # the time in seconds during which duplicate entries are discarded (default: 60)
+            time: 600
+            handler: swift
+

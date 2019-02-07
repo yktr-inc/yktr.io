@@ -34,6 +34,7 @@
     "popper.js": "^1.14.7",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
+    "tailwind": "^3.0.0",
     "tailwindcss": "^0.7.3",
     "webpack-notifier": "^1.7.0"
   },

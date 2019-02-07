@@ -1,8 +1,19 @@
-<!DOCTYPE html>
+{% extends 'Back/layouts/app.html.twig' %}
 
-<title>User</title>
+{% block breadcrumb %}
+  <ol class="list-reset flex text-grey">
+    <li><a href="#" class="text-white font-bold">Home</a></li>
+    <li><span class="mx-2">/</span></li>
+    <li><a href="#" class="text-white font-bold">School</a></li>
+    <li><span class="mx-2">/</span></li>
+    <li><a href="#" class="text-white font-bold">Users</a></li>
+    <li><span class="mx-2">/</span></li>
+    <li>View</li>
+  </ol>
+{% endblock %}
 
 {% block body %}
+    <a href="{{ path('user_index') }}">back to list</a>
     <h1>User</h1>
 
     <table class="table">
@@ -34,7 +45,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('user_index') }}">back to list</a>
 
     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
 

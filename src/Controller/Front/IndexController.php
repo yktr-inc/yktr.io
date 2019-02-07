@@ -3,6 +3,9 @@ namespace App\Controller\Front;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\DBNotificationServiceInterface;
+use App\Repository\UserRepository;
+use Symfony\Component\Security\Core\Security;
 
 class IndexController extends AbstractController
 {
@@ -10,8 +13,13 @@ class IndexController extends AbstractController
      * @Route("/", methods={"GET"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index()
+    public function index(DBNotificationServiceInterface $notifService, UserRepository $userRepository, Security $security)
     {
+
+        $succeed = $notifService->notify("GRADE", $this->getUser(), "Salut à tous");
+
+        dd($succeed);
+
         return $this->render('Front/index.html.twig');
     }
 }
