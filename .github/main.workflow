@@ -13,8 +13,7 @@ action "Hyper Lazer Deployer" {
     "REPO_GIT_URL",
     "AFTER_PULL_COMMAND",
     "GITHUB_TOKEN",
+    "RSA_PRIV",
+    "RSA_PUB",
   ]
-  env = {
-    CAN_T_RE_RUN = "null"
-  }
 }
