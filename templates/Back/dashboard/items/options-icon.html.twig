@@ -1,0 +1,45 @@
+{% if is_granted('ROLE_PREVIOUS_ADMIN') or is_granted('ROLE_ALLOWED_TO_SWITCH')%}
+<div class="fixed-plugin">
+    <div class="dropdown show-dropdown open">
+        <a data-toggle="dropdown" aria-expanded="false">
+            <i id="admin-icon" class="material-icons">videogame_asset</i>
+        </a>
+        <div class="dropdown-menu" x-placement="bottom-start">
+            <div class="card-body" onclick=" event.stopPropagation();">
+                <h5 class="card-title">Impersonate User</h5>
+                {% if not is_granted('ROLE_PREVIOUS_ADMIN') %}
+                <div>
+                    <label for="switchUser" class="card-subtitle mb-2 text-muted">Choose a role to impersonate :</label>
+                    <select multiple class="form-control" id="switchUser">
+                        {% for data in impersonateList %}
+                            <option>{{ data }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div id="start-impersonate" class="custom-btn-validate nav-item active">
+                    <a class="nav-link">
+                        <i class="material-icons">assignment_ind</i>
+                        <p>Begin Impersonation</p>
+                    </a>
+                </div>
+                {% endif %}
+                {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                <div class="custom-btn-primary nav-item active">
+                    <a class="nav-link" href="{{ path(app.request.get('_route'), {'_switch_user': '_exit'}) }}">
+                        <i class="material-icons">exit_to_app</i>
+                        <p>Leave Impersonation</p>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    document.getElementById('start-impersonate').onclick = function(){
+        const selector = document.getElementById("switchUser");
+        const user = selector.options[selector.selectedIndex].text;
+        document.location.href='/dashboard?_switch_user='+user
+    };
+</script>
+{% endif %}

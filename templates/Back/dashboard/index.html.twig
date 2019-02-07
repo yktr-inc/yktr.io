@@ -1,5 +1,9 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
 {% block breadcrumb %}
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -9,5 +13,7 @@
 {% endblock %}
 
 {% block body %}
+    {% include 'Back/dashboard/items/options-icon.html.twig' %}
     {% include 'Back/dashboard/items/documents.html.twig' %}
 {% endblock %}
+

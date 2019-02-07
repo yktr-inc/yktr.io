@@ -1,10 +1,4 @@
-require('../scss/app.scss');
 const $ = require('jquery');
+require('popper.js');
 require('bootstrap');
 
-
-$(document).ready(function () {
-    $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active');
-    });
-});
