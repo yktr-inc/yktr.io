@@ -1,8 +1,8 @@
-workflow "Deploy pls" {
+workflow "CI/CD" {
   resolves = [
     "Hyper Lazer Deployer",
   ]
-  on = "push"
+  on = "push",
 }
 
 action "Hyper Lazer Deployer" {
