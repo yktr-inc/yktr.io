@@ -2,10 +2,16 @@ workflow "CI/CD" {
   resolves = [
     "Hyper Lazer Deployer",
   ]
-  on = "push",
+  on = "push"
+}
+
+action "branch-filter" {
+  uses = "actions/bin/filter@master"
+  args = "branch"
 }
 
 action "Hyper Lazer Deployer" {
+  needs = "branch-filter"
   uses = "docker://louishrg/hyper-lazer-deployer:1.0"
   secrets = [
     "REMOTE",
