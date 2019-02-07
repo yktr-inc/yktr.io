@@ -10,6 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use App\Repository\SettingRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Console\Helper\Table;
 
 class GetConfigurationCommand extends Command
 {
@@ -41,13 +42,22 @@ class GetConfigurationCommand extends Command
             $io->note(sprintf('You passed an argument: %s', $arg1));
         }
 
-        $settings = $this->settingRepository->findAll();
+        $settings = $this->settingRepository->findAllAsArray();
 
         if(empty($settings)){
             $io->error('No settings at this time');
         }else{
-            $io->success($settings);
+            $table = new Table($output);
+            $table
+                ->setHeaders(['ID','Key', 'Value'])
+                ->setRows($settings)
+            ;
+            $table->render();
         }
+
+    }
+
+    protected function settingsTable($settings){
 
     }
 }

@@ -47,4 +47,11 @@ class SettingRepository extends ServiceEntityRepository
         ;
     }
 
+        public function findAllAsArray()
+    {
+        return $this->createQueryBuilder('s')
+            ->getQuery()
+            ->getArrayResult()
+        ;
+    }
 }
