@@ -22,24 +22,26 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="material-icons">notifications</i>
-                        <span class="notification">5</span>
+                        <span class="notification">{{ notications.getNotificationsCount }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right notifications" role="menu" aria-labelledby="dLabel">
+                        {% for notif in notications.getNotifications() %}
                         <div class="notifications-wrapper">
                             <a class="content" href="#">
                                 <div class="notification-item">
                                     <div class="row">
-                                        <div class="col">
-                                            <span class="align-middle item-title">Evaluation Deadline</span>
+                                        <div class="col-md-12">
+                                            <span class="align-middle item-title">{{ notif.getType|noticationsType }}</span>
+                                            <div>{{ notif.getContent }}</div>
                                         </div>
-                                        <div class="col text-right">
-                                            <span class="align-middle badge badge-primary item-time">1 hour ago</span>
+                                        <div class="col-md-12 text-right">
+                                            <span class="align-middle badge badge-primary item-time">{{ notif.getCreatedAt|ago }}</span>
                                         </div>
                                     </div>
-                                    <div>Marketing Project, end today at 11:59pm</div>
                                 </div>
                             </a>
                         </div>
+                        {% endfor %}
                     </ul>
                 </li>
 

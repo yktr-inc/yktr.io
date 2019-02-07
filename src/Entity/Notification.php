@@ -7,6 +7,7 @@ use App\Entity\Traits\DateTrait;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NotificationRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Notification
 {

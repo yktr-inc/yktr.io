@@ -9,6 +9,7 @@ use App\Service\MailerServiceInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
+use Symfony\Component\Security\Core\Security;
 
 class DBNotificationService implements DBNotificationServiceInterface
 {
@@ -22,8 +23,12 @@ class DBNotificationService implements DBNotificationServiceInterface
 
     public function __construct(
       ObjectManager $objectManager,
-      NotificationRepository $notificationRepository ) {
+      NotificationRepository $notificationRepository,
+      Security $security
+    ) {
         $this->objectManager = $objectManager;
+        $this->notificationRepository = $notificationRepository;
+        $this->security = $security;
     }
 
     public function notify(string $type, $recipient, string $content): ?bool
@@ -45,5 +50,13 @@ class DBNotificationService implements DBNotificationServiceInterface
 
     private static function verifyType($type){
       return in_array($type, self::NOTICATION_TYPES);
+    }
+
+    public function getNotifications(){
+        return $this->notificationRepository->findLast(5, $this->security->getUser());
+    }
+
+    public function getNotificationsCount(){
+        return $this->notificationRepository->countNotif($this->security->getUser());
     }
 }
