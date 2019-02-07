@@ -6,6 +6,7 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Knp\Component\Pager\Paginator;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -29,14 +30,14 @@ class UserRepository extends ServiceEntityRepository
 
     public function findByRole($role)
     {
-        $role = '%"'.$role.'"%';
 
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.roles LIKE :role')
-            ->setParameter('role', $role)
-            ->getQuery()
-            ->getResult()
-        ;
+        $rsm = new  ResultSetMapping();
+
+        $role = "%'".$role."'%";
+        $em = $this->getEntityManager();
+        $query = $em->createNativeQuery("SELECT * FROM account WHERE roles::text LIKE :role", $rsm);
+        $query->setParameter('role', $role);
+        return $query->getResult();
     }
 
     public function allTeachers()

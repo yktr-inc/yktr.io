@@ -14,7 +14,7 @@ class MailerService implements MailerServiceInterface
         $this->mailer = $mailer;
     }
 
-    public function send(string $title, $recipient,string $sender, string $message,?array $config = [])
+    public function send(string $title, $recipient, string $sender, string $message, ?array $config = [])
     {
         $recipient = is_array($recipient)?$this->groupFormat($recipient):$recipient;
 
