@@ -14,4 +14,7 @@ action "Hyper Lazer Deployer" {
     "AFTER_PULL_COMMAND",
     "GITHUB_TOKEN",
   ]
+  env = {
+    CAN_T_RE_RUN = "null"
+  }
 }
