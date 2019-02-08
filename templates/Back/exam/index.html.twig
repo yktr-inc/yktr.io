@@ -1,0 +1,47 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Library</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Data</li>
+{% endblock %}
+
+{% block body %}
+    <h1>Exam index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for exam in exams %}
+            <tr>
+                <td>{{ exam.id }}</td>
+                <td>{{ exam.type }}</td>
+                <td>{{ exam.name }}</td>
+                <td>{{ exam.date ? exam.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ exam.createdAt ? exam.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ exam.updatedAt ? exam.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('exam_show', {'id': exam.id}) }}">show</a>
+                    <a href="{{ path('exam_edit', {'id': exam.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('exam_new') }}">Create new</a>
+{% endblock %}
