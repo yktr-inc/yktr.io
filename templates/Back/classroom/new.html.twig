@@ -1,6 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'Back/layouts/app.html.twig' %}
 
-{% block title %}New Classroom{% endblock %}
+{% block breadcrumb %}
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Library</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Data</li>
+{% endblock %}
 
 {% block body %}
     <h1>Create new Classroom</h1>
