@@ -1,7 +1,17 @@
 @import "../colors";
 
+.custom-date{
+  padding: 0 1em;
+  .badge{
+    padding: 0.3em 0.6em;
+  }
+}
+
 .dashboard-item{
   margin-top:50px;
+}
+.dashboard-checklist .form-check .form-check-sign .check{
+  border:0!important;
 }
 
 .nav-tabs-title{
@@ -255,13 +265,13 @@
     border: solid 1px #e6e6e6;
     border-radius: 2px;
     display: inline-block;
-    height: 100px;
-    line-height: 100px;
+    height: 70px;
+    width: 70px;
+    line-height: 70px;
     margin: 5px;
     position: relative;
     text-align: center;
     vertical-align: middle;
-    width: 100px;
   }
 
   a span {
@@ -269,7 +279,7 @@
     border-radius: 4px;
     color: #ffffff;
     display: inline-block;
-    font-size: 11px;
+    font-size: 8px;
     font-weight: 700;
     line-height: normal;
     padding: 5px 10px;
@@ -289,12 +299,12 @@
     border-radius: 4px;
     content: '';
     display: block;
-    height: 35px;
+    height: 31px;
+    width: 22px;
     left: 50%;
     margin: -17px 0 0 -12px;
     position: absolute;
-    top: 50%;
-    width: 25px;
+    top: 55%;
   }
 
   a:hover:before,
