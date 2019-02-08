@@ -1,17 +1,7 @@
 @import "../colors";
 
-.custom-date{
-  padding: 0 1em;
-  .badge{
-    padding: 0.3em 0.6em;
-  }
-}
-
 .dashboard-item{
   margin-top:50px;
-}
-.dashboard-checklist .form-check .form-check-sign .check{
-  border:0!important;
 }
 
 .nav-tabs-title{
@@ -36,7 +26,7 @@
       box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #{$primary-color};
     }
     .card-icon, .card-text, &:not(.card-header-icon):not(.card-header-text) {
-      background: linear-gradient(60deg, lighten($primary-color, 20%),#{$primary-color});
+      background: linear-gradient(60deg, lighten($primary-color, 15%),#{$primary-color});
     }
   }
   .card-header-secondary {
@@ -44,7 +34,7 @@
       box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #{$secondary-color};
     }
     .card-icon, .card-text, &:not(.card-header-icon):not(.card-header-text) {
-      background: linear-gradient(60deg, lighten($secondary-color, 20%), #{$secondary-color});
+      background: linear-gradient(60deg, lighten($secondary-color, 15%), #{$secondary-color});
     }
   }
   [class*="card-header-"] {
@@ -242,8 +232,6 @@
   color: #fff;
 }
 .card .card-header {
-  float:right;
-  padding: 7px 0px;
   border-bottom: none;
   background: transparent;
 }
@@ -257,84 +245,4 @@
   width: 56px;
   height: 56px;
   text-align: center;
-}
-
-.download{
-  a {
-    background: #ffffff;
-    border: solid 1px #e6e6e6;
-    border-radius: 2px;
-    display: inline-block;
-    height: 70px;
-    width: 70px;
-    line-height: 70px;
-    margin: 5px;
-    position: relative;
-    text-align: center;
-    vertical-align: middle;
-  }
-
-  a span {
-    background: #f2594b;
-    border-radius: 4px;
-    color: #ffffff;
-    display: inline-block;
-    font-size: 8px;
-    font-weight: 700;
-    line-height: normal;
-    padding: 5px 10px;
-    position: relative;
-    text-transform: uppercase;
-    z-index: 1;
-  }
-
-  a span:last-child {
-    margin-left: -20px;
-  }
-
-  a:before,
-  a:after {
-    background: #ffffff;
-    border: solid 3px #9fb4cc;
-    border-radius: 4px;
-    content: '';
-    display: block;
-    height: 31px;
-    width: 22px;
-    left: 50%;
-    margin: -17px 0 0 -12px;
-    position: absolute;
-    top: 55%;
-  }
-
-  a:hover:before,
-  a:hover:after {
-    background: #e2e8f0;
-  }
-
-  a:before {
-    margin: -23px 0 0 -5px;
-  }
-
-  a:hover {
-    background: #e2e8f0;
-    border-color: #9fb4cc;
-  }
-
-  a:active {
-    background: #dae0e8;
-    box-shadow: inset 0 2px 2px rgba(0, 0, 0, .25);
-  }
-
-  a span:first-child {
-    display: none;
-  }
-
-  a:hover span:first-child {
-    display: inline-block;
-  }
-
-  a:hover span:last-child {
-    display: none;
-  }
 }
