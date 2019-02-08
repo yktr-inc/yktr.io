@@ -1,0 +1,38 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('notifications') }}
+{% endblock %}
+
+{% block breadcrumb %}
+      <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Notifications</li>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-12">
+    <h1>Notifications</h1>
+        {% for notification in allNotifications %}
+        <div class="alert alert-notification col-md-12" role="alert">
+            <form method="post" action="{{ path('notification_delete', {'id': notification.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ notification.id) }}">
+                <button type="button " class="close btn"><span aria-hidden="true">&times;</span></button>
+            </form>
+            <strong>{{ notification.type|noticationsType }}</strong>
+            <p>{{ notification.content }}</p>
+            <div class="col-md-12 text-right">
+                <span class="align-middle badge badge-primary item-time">{{ notification.getCreatedAt|ago }}</span>
+            </div>
+        </div>
+        {% else %}
+            <tr>
+                <td colspan="7">No notications found</td>
+            </tr>
+        {% endfor %}
+        <div class="navigation">
+            {{ knp_pagination_render(allNotifications) }}
+        </div>
+</div>
+
+{% endblock %}
