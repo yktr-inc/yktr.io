@@ -1,0 +1,44 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">My Notifications</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Notif</li>
+{% endblock %}
+
+{% block body %}
+    <h1>Notification</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ notification.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ notification.type }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ notification.content }}</td>
+            </tr>
+            <tr>
+                <th>Viewed</th>
+                <td>{{ notification.viewed }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ notification.createdAt ? notification.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ notification.updatedAt ? notification.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('notification_index') }}">back to list</a>
+
+    {{ include('Back/notification/_delete_form.html.twig') }}
+{% endblock %}

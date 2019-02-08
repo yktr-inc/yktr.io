@@ -41,7 +41,22 @@
                                 </div>
                             </a>
                         </div>
+                        {% else %}
+                        <div class="col-md-12">
+                            <p> No notifications </p>
+                        </div>
                         {% endfor %}
+                        <div class="notifications-wrapper">
+                            <a class="content" href="{{ path('notification_index')  }}">
+                                <div class="notification-item">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div>See all notifications</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
