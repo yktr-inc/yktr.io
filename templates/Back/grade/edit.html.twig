@@ -1,0 +1,18 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Library</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Data</li>
+{% endblock %}
+
+
+{% block body %}
+    <h1>Edit Grade</h1>
+
+    {{ include('Back/grade/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('grade_index') }}">back to list</a>
+
+    {{ include('Back/grade/_delete_form.html.twig') }}
+{% endblock %}
