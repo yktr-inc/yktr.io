@@ -129,6 +129,12 @@ class User implements UserInterface
     private $notifications;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Classroom", inversedBy="users")
+     * @ORM\JoinColumn(name="classroom_id", referencedColumnName="id")
+     */
+    private $classroom;
+
+    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -399,6 +405,18 @@ class User implements UserInterface
                 $notification->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getClassroom(): ?Classroom
+    {
+        return $this->classroom;
+    }
+
+    public function setClassroom(?Classroom $classroom): self
+    {
+        $this->classroom = $classroom;
 
         return $this;
     }
