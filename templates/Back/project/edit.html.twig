@@ -1,0 +1,18 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Library</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Data</li>
+{% endblock %}
+
+
+{% block body %}
+    <h1>Edit Project</h1>
+
+    {{ include('Back/project/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('project_index') }}">back to list</a>
+
+    {{ include('Back/project/_delete_form.html.twig') }}
+{% endblock %}
