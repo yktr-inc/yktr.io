@@ -14,7 +14,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * @Route("/school/users")
+ * @Route("/dashboard/users")
  */
 class UserController extends AbstractController
 {
