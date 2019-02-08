@@ -1,11 +1,16 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item"><a href="#">Library</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data</li>
+      <li class="breadcrumb-item active" aria-current="page">Home</li>
 {% endblock %}
 
 {% block body %}
-Ouesh
+    {% include 'Back/dashboard/items/projects.html.twig' %}
+    {% include 'Back/dashboard/items/documents.html.twig' %}
+    {% include 'Back/dashboard/items/next-exams.html.twig' %}
 {% endblock %}
+

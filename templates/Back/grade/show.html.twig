@@ -1,0 +1,39 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Library</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Data</li>
+{% endblock %}
+
+
+{% block body %}
+    <h1>Grade</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ grade.id }}</td>
+            </tr>
+            <tr>
+                <th>Value</th>
+                <td>{{ grade.value }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ grade.createdAt ? grade.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ grade.updatedAt ? grade.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('grade_index') }}">back to list</a>
+
+    <a href="{{ path('grade_edit', {'id': grade.id}) }}">edit</a>
+
+    {{ include('Back/grade/_delete_form.html.twig') }}
+{% endblock %}
