@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Exam;
+use App\Entity\Classroom;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -47,4 +48,16 @@ class ExamRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findLastExams($limit, Classroom $classroom)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.classroom = :classroom')
+            ->setParameter('classroom', $classroom)
+            ->orderBy('e.createdAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

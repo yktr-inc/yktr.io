@@ -40,6 +40,10 @@ class Classroom
      */
     private $promotion;
 
+    /**
+     * @ORM\OneToMany(targetEntity="User", mappedBy="classroom")
+     */
+    private $users;
 
     /**
      * @ORM\ManyToMany(targetEntity="Project", mappedBy="classrooms")
@@ -49,6 +53,7 @@ class Classroom
     public function __construct()
     {
         $this->projects = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -103,6 +108,37 @@ class Classroom
         if ($this->projects->contains($project)) {
             $this->projects->removeElement($project);
             $project->removeClassroom($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setClassroom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            // set the owning side to null (unless already changed)
+            if ($user->getClassroom() === $this) {
+                $user->setClassroom(null);
+            }
         }
 
         return $this;
