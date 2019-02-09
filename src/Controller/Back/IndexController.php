@@ -6,6 +6,7 @@ use App\Service\ImpersonateUserList;
 use App\Repository\ExamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 class IndexController extends AbstractController
 {
@@ -22,4 +23,5 @@ class IndexController extends AbstractController
             'lastExams' => $lastExams
         ]);
     }
+
 }
