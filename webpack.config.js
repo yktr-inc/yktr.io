@@ -12,6 +12,7 @@ Encore
     .addEntry('js/app', './assets/js/app.js')
     .addStyleEntry('css/app', './assets/scss/app.scss')
     .addStyleEntry('notifications', './assets/scss/notifications.scss')
+    .addStyleEntry('login', './assets/scss/login.scss')
     .addStyleEntry('dashboard',
         [
             './assets/scss/app.scss',

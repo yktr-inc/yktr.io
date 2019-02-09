@@ -1,0 +1,17 @@
+body {
+  background: url(https://source.unsplash.com/VLaKsTkmVhk/1600x900) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.login-container{
+  top: 25vh;
+  position: relative;
+}
+
+.form-wrapper {
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+}
