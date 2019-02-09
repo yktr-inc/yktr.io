@@ -23,7 +23,7 @@ class Classroom
     private $id;
 
     /**
-     * @Assert\Range(
+     * @Assert\Length(
      *      min = 2,
      *      max = 100,
      *      minMessage = "Le nom de la classe doit faire au moins {{ limit }} caractères",

@@ -1,17 +1,20 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
 {% block breadcrumb %}
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
+      <li class="breadcrumb-item"><a href="{{ path('dashboard')}}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{ path('promotion_index')}}">Promotions</a></li>
+      <li class="breadcrumb-item active">Edit</li>
 {% endblock %}
 
 {% block body %}
-    <h1>Edit Promotion</h1>
-
-    {{ include('Back/promotion/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('promotion_index') }}">back to list</a>
-
-    {{ include('Back/promotion/_delete_form.html.twig') }}
+<div class="card m-auto w-75">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title">Edit promotion</h4>
+    </div>
+    <div class="card-body">
+      {{ include('Back/promotion/_form.html.twig', {'button_label': 'Update'}) }}
+      <a href="{{ path('promotion_index') }}">back to list</a>
+      {{ include('Back/promotion/_delete_form.html.twig') }}
+    </div>
+</div>
 {% endblock %}

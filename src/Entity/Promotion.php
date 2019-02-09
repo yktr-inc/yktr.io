@@ -21,7 +21,7 @@ class Promotion
     private $id;
 
     /**
-     *  @Assert\Range(
+     *  @Assert\Length(
      *      min = 2,
      *      max = 100,
      *      minMessage = "Le nom de la promotion doit faire au moins {{ limit }} caractères",
@@ -33,7 +33,7 @@ class Promotion
     private $title;
 
     /**
-     *  @Assert\Range(
+     *  @Assert\Length(
      *      min = 2,
      *      max = 100,
      *      minMessage = "La spécialité ne doit faire au moins {{ limit }} caractères",
@@ -134,6 +134,15 @@ class Promotion
         if (!$this->classrooms->contains($classroom)) {
             $this->classrooms[] = $classroom;
             $classroom->setPromotion($this);
+        }
+
+        return $this;
+    }
+
+    public function addClassroomBulk(Array $classrooms): self
+    {
+        foreach ($classrooms as $classroom) {
+            $this->addClassroom($classroom);
         }
 
         return $this;

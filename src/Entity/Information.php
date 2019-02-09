@@ -23,7 +23,7 @@ class Information
     private $id;
 
     /**
-     *  @Assert\Range(
+     *  @Assert\Length(
      *      min = 2,
      *      max = 100,
      *      minMessage = "Le titre de l'information doit faire au moins {{ limit }} caractères",

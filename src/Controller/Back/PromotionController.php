@@ -3,8 +3,10 @@
 namespace App\Controller\Back;
 
 use App\Entity\Promotion;
+use App\Entity\Classroom;
 use App\Form\PromotionType;
 use App\Repository\PromotionRepository;
+use App\Repository\ClassroomRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,9 +30,11 @@ class PromotionController extends AbstractController
     /**
      * @Route("/new", name="promotion_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ClassroomRepository $classroomRepository): Response
     {
         $promotion = new Promotion();
+        $promotion->addClassroomBulk($classroomRepository->findAll());
+
         $form = $this->createForm(PromotionType::class, $promotion);
         $form->handleRequest($request);
 
