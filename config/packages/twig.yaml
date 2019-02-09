@@ -10,3 +10,5 @@ twig:
 knp_paginator:
     template:
         pagination: bundles/knp/pagination.html.twig
+eschmar_time_ago:
+    format: 'Y-m-d H:i:s'
