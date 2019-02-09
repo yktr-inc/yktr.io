@@ -27,7 +27,7 @@
                     <ul class="dropdown-menu dropdown-menu-right notifications" role="menu" aria-labelledby="dLabel">
                         {% for notif in notications.getNotifications() %}
                         <div class="notifications-wrapper">
-                            <a class="content" href="#">
+                            <a class="content" href="{{ path('notification_show', {'id': notif.id}) }}">
                                 <div class="notification-item">
                                     <div class="row">
                                         <div class="col-md-12">

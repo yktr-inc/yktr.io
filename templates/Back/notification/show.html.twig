@@ -1,9 +1,11 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
 {% block breadcrumb %}
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">My Notifications</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Notif</li>
+    <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">
+        <a href="{{ path('notification_index') }}">Notifications</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ notification.type|noticationsType }}</li>
 {% endblock %}
 
 {% block body %}

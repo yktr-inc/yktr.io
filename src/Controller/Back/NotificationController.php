@@ -24,7 +24,7 @@ class NotificationController extends AbstractController
 
         $page = $request->query->getInt('page', 1);
 
-        $notifications = $notificationRepository->findBy(['user'=>$this->getUser()]);
+        $notifications = $notificationRepository->findBy(['user'=>$this->getUser()], ['createdAt' => 'DESC']);
 
         $allNotifications = $paginator->paginate($notifications, $page, 10);
 

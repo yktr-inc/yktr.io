@@ -17,7 +17,10 @@ class DBNotificationService implements DBNotificationServiceInterface
     "GRADE",
     "ATTENDANCE",
     "EXAM",
-    "PROJECT"
+    "PROJECT",
+    "INFO",
+    "SCHEDULE",
+    "FILE"
     ];
     private $objectManager;
 

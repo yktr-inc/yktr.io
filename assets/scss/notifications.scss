@@ -4,3 +4,10 @@
   background: $primary-color;
   font-size: 15px;
 }
+.notification-viewed{
+  background: #FFF;
+  color: #000 !important;
+  button, a {
+    color: #000 !important;
+  }
+}
