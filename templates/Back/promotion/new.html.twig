@@ -10,11 +10,13 @@
 {% block body %}
 <div class="card m-auto w-75">
       <div class="card-header card-header-primary">
-        <h4 class="card-title">Add a new promotion</h4>
+          <h4 class="card-title">Add a new promotion</h4>
     </div>
     <div class="card-body">
-    {{ include('Back/promotion/_form.html.twig') }}
-    <a href="{{ path('promotion_index') }}">back to list</a>
+          <div class="clear mb-2">
+        <a class="btn btn-default btn-sm" role="button" href="{{ path('promotion_index') }}">back to list</a>
+    </div>
+          {{ include('Back/promotion/_form.html.twig') }}
     </div>
 </div>
 {% endblock %}
