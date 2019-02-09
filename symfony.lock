@@ -92,6 +92,9 @@
     "egulias/email-validator": {
         "version": "2.1.7"
     },
+    "eschmar/time-ago-bundle": {
+        "version": "v1.0.0"
+    },
     "facebook/webdriver": {
         "version": "1.6.0"
     },
