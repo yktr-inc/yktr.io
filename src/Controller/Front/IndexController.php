@@ -21,13 +21,10 @@ class IndexController extends AbstractController
         Security $security)
     {
 
-        // $succeed = $notifService->notify("GRADE", $this->getUser(), "Salut à tous");
-
-        // dd($succeed);
-        //
-        $users = $userRepository->findByRole('ROLE_STUDENT');
-
-        dd($users);
+        if($this->getUser()){
+            $succeed = $notifService->notify("GRADE", $this->getUser(), "Salut à tous");
+            dd($succeed);
+        }
 
 
 
