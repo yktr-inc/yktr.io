@@ -34,7 +34,7 @@ class Project
     private $type;
 
     /**
-     *  @Assert\Range(
+     *  @Assert\Length(
      *      min = 2,
      *      max = 100,
      *      minMessage = "Le nom du projet doit faire au moins {{ limit }} caractères",

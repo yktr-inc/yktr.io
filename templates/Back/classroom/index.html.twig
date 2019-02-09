@@ -27,8 +27,8 @@
                 <td>{{ classroom.createdAt ? classroom.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ classroom.updatedAt ? classroom.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('classroom_show', {'id': classroom.id}) }}">show</a>
-                    <a href="{{ path('classroom_edit', {'id': classroom.id}) }}">edit</a>
+                    <a class="btn btn-default btn-md" role="button" href="{{ path('classroom_show', {'id': classroom.id}) }}">show</a>
+                    <a class="btn btn-error btn-md" role="button" href="{{ path('classroom_edit', {'id': classroom.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

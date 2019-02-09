@@ -6,10 +6,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PromotionRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(
+ * "code",
+ * message="This promotion already exist"
+ * )
  */
 class Promotion
 {
@@ -21,19 +25,33 @@ class Promotion
     private $id;
 
     /**
-     *  @Assert\Range(
-     *      min = 2,
+     *  @Assert\Length(
+     *      min = 1,
      *      max = 100,
-     *      minMessage = "Le nom de la promotion doit faire au moins {{ limit }} caractères",
-     *      maxMessage = "Le nom de la promotion ne peut pas faire plus de {{ limit }} caractères"
+     *      minMessage = "L'année de la promotion doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "L'année de la promotion ne peut pas faire plus de {{ limit }} caractères"
      * )
      *
      * @ORM\Column(type="string", length=50, nullable=false)
      */
-    private $title;
+    private $year;
+
 
     /**
-     *  @Assert\Range(
+     *  @Assert\Length(
+     *      min = 1,
+     *      max = 20,
+     *      minMessage = "Le code de la promotion doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Le code de la promotion ne peut pas faire plus de {{ limit }} caractères"
+     * )
+     *
+     * @ORM\Column(type="string", length=25, nullable=false, unique=true)
+     */
+    private $code;
+
+
+    /**
+     *  @Assert\Length(
      *      min = 2,
      *      max = 100,
      *      minMessage = "La spécialité ne doit faire au moins {{ limit }} caractères",
@@ -73,14 +91,14 @@ class Promotion
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getYear(): ?string
     {
-        return $this->title;
+        return $this->year;
     }
 
-    public function setTitle(string $title): self
+    public function setYear(string $year): self
     {
-        $this->title = $title;
+        $this->year = $year;
 
         return $this;
     }
@@ -139,6 +157,15 @@ class Promotion
         return $this;
     }
 
+    public function addClassroomBulk(Array $classrooms): self
+    {
+        foreach ($classrooms as $classroom) {
+            $this->addClassroom($classroom);
+        }
+
+        return $this;
+    }
+
     public function removeClassroom(Classroom $classroom): self
     {
         if ($this->classrooms->contains($classroom)) {
@@ -148,6 +175,18 @@ class Promotion
                 $classroom->setPromotion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
 
         return $this;
     }

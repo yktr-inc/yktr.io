@@ -32,7 +32,7 @@ class Exam
     private $type;
 
     /**
-     *  @Assert\Range(
+     *  @Assert\Length(
      *      min = 2,
      *      max = 100,
      *      minMessage = "Le nom de l'examen doit faire au moins {{ limit }} caractères",

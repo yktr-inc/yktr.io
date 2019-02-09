@@ -22,7 +22,7 @@ class Event
     private $id;
 
     /**
-     *  @Assert\Range(
+     *  @Assert\Length(
      *      min = 2,
      *      max = 100,
      *      minMessage = "Le titre de l'évenement doit faire au moins {{ limit }} caractères",
