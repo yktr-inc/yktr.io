@@ -24,7 +24,7 @@ class Course
     private $id;
 
     /**
-     *  @Assert\Range(
+     *  @Assert\Length(
      *      min = 2,
      *      max = 100,
      *      minMessage = "Le nom du cours doit faire au moins {{ limit }} caractères",
