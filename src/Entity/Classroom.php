@@ -45,7 +45,6 @@ class Classroom
      */
     private $users;
 
-
     /**
      * @ORM\OneToMany(targetEntity="Course", mappedBy="classroom")
      */
