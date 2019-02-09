@@ -3,10 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Entity\Classroom;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Knp\Component\Pager\Paginator;
 use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -31,12 +33,18 @@ class UserRepository extends ServiceEntityRepository
     public function findByRole($role)
     {
 
-        $rsm = new  ResultSetMapping();
-
-        $role = "%'".$role."'%";
         $em = $this->getEntityManager();
-        $query = $em->createNativeQuery("SELECT * FROM account WHERE roles::text LIKE :role", $rsm);
+
+        $rsm = new ResultSetMappingBuilder($em);
+
+        $rsm->addRootEntityFromClassMetadata(User::class, 'u');
+
+        $role = "%".$role."%";
+
+        $query = $em->createNativeQuery("SELECT u.* FROM account u WHERE u.roles::text LIKE :role", $rsm);
+
         $query->setParameter('role', $role);
+
         return $query->getResult();
     }
 
