@@ -31,7 +31,7 @@ class DBNotificationService implements DBNotificationServiceInterface
         $this->security = $security;
     }
 
-    public function notify(string $type, $recipient, string $content): ?bool
+    public function notify(string $type,User $recipient, string $content): ?bool
     {
         if(self::verifyType($type)){
 
