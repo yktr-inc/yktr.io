@@ -51,6 +51,13 @@ class Course
      */
     private $attendances;
 
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Classroom", inversedBy="courses")
+     * @ORM\JoinColumn(name="classroom_id", referencedColumnName="id")
+     */
+    private $classroom;
+
     public function __construct()
     {
         $this->attendances = new ArrayCollection();
@@ -124,6 +131,18 @@ class Course
                 $attendance->setCourse(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getClassroom(): ?Classroom
+    {
+        return $this->classroom;
+    }
+
+    public function setClassroom(?Classroom $classroom): self
+    {
+        $this->classroom = $classroom;
 
         return $this;
     }
