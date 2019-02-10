@@ -29,3 +29,8 @@ services:
     redirect.after.login:
         class: App\Listener\AfterLoginRedirection
         arguments: ['@router']
+    ownership:
+        class: App\Listener\OwnerListener
+        arguments: ['@security.token_storage']
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
