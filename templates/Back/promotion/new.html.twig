@@ -6,6 +6,14 @@
       <li class="breadcrumb-item active">New</li>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('crud') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('js/crud') }}
+{% endblock %}
+
 
 {% block body %}
 <div class="card m-auto w-75">
