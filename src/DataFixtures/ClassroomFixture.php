@@ -16,11 +16,7 @@ class ClassroomFixture extends Fixture
 
     public function load(ObjectManager $manager)
     {
-<<<<<<< HEAD
         $promotion = $this->promotionRepository->findOneBy(['year'=>'First year']);
-=======
-        $promotion = $this->promotionRepository->findOneBy(['title'=>'First year']);
->>>>>>> Adding fixtures and last exams data for dashboard (#106)
 
         $classroom = new Classroom();
 
