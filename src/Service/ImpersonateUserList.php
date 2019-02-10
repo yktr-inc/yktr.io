@@ -16,7 +16,7 @@ class ImpersonateUserList
         $userList=[];
 
         if ($this->security->isGranted('ROLE_PREVIOUS_ADMIN') || $this->security->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
-            $userList=['student','administrative'];
+            $userList=['student','administrative','teacher'];
         }
         return $userList;
     }
