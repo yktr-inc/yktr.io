@@ -37,7 +37,7 @@ class ProfileController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_index', ['id' => $this->getUser()->getId()]);
+            return $this->redirectToRoute('user_profile', ['id' => $this->getUser()->getId()]);
         }
 
         return $this->render('Back/user/edit_profile.html.twig', [
