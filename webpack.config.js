@@ -10,8 +10,11 @@ Encore
     })
     .autoProvidejQuery()
     .addEntry('js/app', './assets/js/app.js')
+    .addEntry('js/crud', './assets/js/crud.js')
     .addStyleEntry('css/app', './assets/scss/app.scss')
     .addStyleEntry('notifications', './assets/scss/notifications.scss')
+    .addStyleEntry('login', './assets/scss/login.scss')
+    .addStyleEntry('crud', './assets/scss/crud.scss')
     .addStyleEntry('dashboard',
         [
             './assets/scss/app.scss',

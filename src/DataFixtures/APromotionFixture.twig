@@ -1,0 +1,25 @@
+<?php
+
+namespace App\DataFixtures;
+
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
+use Faker;
+use App\Entity\Promotion;
+
+
+class APromotionFixture extends Fixture
+{
+
+    public function load(ObjectManager $manager)
+    {
+
+        $promotion = new Promotion();
+
+        $promotion->setYear('First year');
+        $promotion->setSpeciality('Web');
+        $manager->persist($promotion);
+
+        $manager->flush();
+    }
+}

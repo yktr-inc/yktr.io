@@ -6,7 +6,10 @@ twig:
         - 'Form/bootstrap_4_horizontal_layout.html.twig'
     globals:
         notications: "@App\\Service\\DBNotificationServiceInterface"
+        config: "@App\\Service\\ConfigServiceInterface"
 
 knp_paginator:
     template:
         pagination: bundles/knp/pagination.html.twig
+eschmar_time_ago:
+    format: 'Y-m-d H:i:s'

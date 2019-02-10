@@ -24,7 +24,7 @@ class Course
     private $id;
 
     /**
-     *  @Assert\Range(
+     *  @Assert\Length(
      *      min = 2,
      *      max = 100,
      *      minMessage = "Le nom du cours doit faire au moins {{ limit }} caractères",
@@ -50,6 +50,13 @@ class Course
      * @ORM\OneToMany(targetEntity="Attendance", mappedBy="course")
      */
     private $attendances;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Classroom", inversedBy="courses")
+     * @ORM\JoinColumn(name="classroom_id", referencedColumnName="id")
+     */
+    private $classroom;
 
     public function __construct()
     {
@@ -124,6 +131,18 @@ class Course
                 $attendance->setCourse(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getClassroom(): ?Classroom
+    {
+        return $this->classroom;
+    }
+
+    public function setClassroom(?Classroom $classroom): self
+    {
+        $this->classroom = $classroom;
 
         return $this;
     }

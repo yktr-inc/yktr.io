@@ -1,0 +1,21 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Courses</a></li>
+      <li class="breadcrumb-item active">New course</li>
+{% endblock %}
+
+
+{% block body %}
+<div class="card m-auto w-75">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title">New course</h4>
+    </div>
+    <div class="card-body">
+    {{ include('Back/course/_form.html.twig') }}
+
+    <a href="{{ path('course_index') }}">back to list</a>
+    </div>
+</div>
+{% endblock %}

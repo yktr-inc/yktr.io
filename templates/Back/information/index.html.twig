@@ -1,20 +1,25 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
 {% block breadcrumb %}
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
+      <li class="breadcrumb-item"><a href="{{ path('dashboard')}}">Home</a></li>
+      <li class="breadcrumb-item active">Informations</li>
 {% endblock %}
 
 {% block body %}
-    <h1>Information index</h1>
-
+<div class="card m-auto w-75">
+    <div class="card-header card-header-primary row">
+        <h4 class="card-title col-md-10">Informations</h4>
+        <div class="col-md-2">
+            <a class="btn btn-primary" role="button" href="{{ path('information_new') }}">Create new</a>
+        </div>
+    </div>
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Title</th>
                 <th>Content</th>
+                <th>Author</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
                 <th>PublishedAt</th>
@@ -26,13 +31,14 @@
             <tr>
                 <td>{{ information.id }}</td>
                 <td>{{ information.title }}</td>
-                <td>{{ information.content }}</td>
-                <td>{{ information.createdAt ? information.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ information.updatedAt ? information.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ information.content|raw }}</td>
+                <td>{{ information.owner.firstname }} {{ information.owner.lastname }}</td>
+                <td>{{ information.createdAt ? information.createdAt|ago : '' }}</td>
+                <td>{{ information.updatedAt ? information.updatedAt|ago : '' }}</td>
                 <td>{{ information.publishedAt ? information.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('information_show', {'id': information.id}) }}">show</a>
-                    <a href="{{ path('information_edit', {'id': information.id}) }}">edit</a>
+                    <a class="btn btn-default btn-md" role="button" href="{{ path('information_show', {'id': information.id}) }}">show</a>
+                    <a class="btn btn-warning btn-md" role="button" href="{{ path('information_edit', {'id': information.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -42,6 +48,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('information_new') }}">Create new</a>
+</div>
 {% endblock %}
