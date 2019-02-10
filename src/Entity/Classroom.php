@@ -45,6 +45,12 @@ class Classroom
      */
     private $users;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="Course", mappedBy="classroom")
+     */
+    private $courses;
+
     /**
      * @ORM\ManyToMany(targetEntity="Project", mappedBy="classrooms")
      */
@@ -54,6 +60,7 @@ class Classroom
     {
         $this->projects = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->courses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -138,6 +145,37 @@ class Classroom
             // set the owning side to null (unless already changed)
             if ($user->getClassroom() === $this) {
                 $user->setClassroom(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Course[]
+     */
+    public function getCourses(): Collection
+    {
+        return $this->courses;
+    }
+
+    public function addCourse(Course $course): self
+    {
+        if (!$this->courses->contains($course)) {
+            $this->courses[] = $course;
+            $course->setClassroom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCourse(Course $course): self
+    {
+        if ($this->courses->contains($course)) {
+            $this->courses->removeElement($course);
+            // set the owning side to null (unless already changed)
+            if ($course->getClassroom() === $this) {
+                $course->setClassroom(null);
             }
         }
 
