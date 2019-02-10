@@ -1,8 +1,13 @@
 $primary-color: #d2527f;
-$box-shadow-primary: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #{$primary-color};
-
-$secondary-color: #FFA500;
-$box-shadow-primary: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #{$secondary-color};
+$secondary-color: #2F995B;
+$tertiary-color: #FFA500;
+$quaternary-color: #3B8EA5;
 
 $validate-color:#32CD32;
+
+$box-shadow-primary: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #{$primary-color};
+$box-shadow-secondary: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #{$secondary-color};
+$box-shadow-tertiary: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #{$tertiary-color};
+$box-shadow-quaternary: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #{$quaternary-color};
+
 $box-shadow-validate: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #{$validate-color};

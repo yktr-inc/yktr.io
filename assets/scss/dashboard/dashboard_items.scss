@@ -33,7 +33,7 @@
   }
   .card-header-primary {
     .card-icon, &:not(.card-header-icon):not(.card-header-text), .card-text {
-      box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #{$primary-color};
+      box-shadow: #{$box-shadow-primary};
     }
     .card-icon, .card-text, &:not(.card-header-icon):not(.card-header-text) {
       background: linear-gradient(60deg, lighten($primary-color, 20%),#{$primary-color});
@@ -41,10 +41,26 @@
   }
   .card-header-secondary {
     .card-icon, &:not(.card-header-icon):not(.card-header-text), .card-text {
-      box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #{$secondary-color};
+      box-shadow: #{$box-shadow-secondary};;
     }
     .card-icon, .card-text, &:not(.card-header-icon):not(.card-header-text) {
       background: linear-gradient(60deg, lighten($secondary-color, 20%), #{$secondary-color});
+    }
+  }
+  .card-header-tertiary {
+    .card-icon, &:not(.card-header-icon):not(.card-header-text), .card-text {
+      box-shadow: #{$box-shadow-tertiary};
+    }
+    .card-icon, .card-text, &:not(.card-header-icon):not(.card-header-text) {
+      background: linear-gradient(60deg, lighten($tertiary-color, 20%), #{$tertiary-color});
+    }
+  }
+  .card-header-admin {
+    .card-icon, &:not(.card-header-icon):not(.card-header-text), .card-text {
+      box-shadow: #{$box-shadow-quaternary};
+    }
+    .card-icon, .card-text, &:not(.card-header-icon):not(.card-header-text) {
+      background: linear-gradient(60deg, lighten($quaternary-color, 20%), #{$quaternary-color});
     }
   }
   [class*="card-header-"] {
@@ -86,7 +102,7 @@
   }
   .nav-link.active {
     color: #333333;
-    border-color: #9c27b0;
+    border-color: #{$secondary-color};
   }
 }
 
@@ -221,11 +237,37 @@
   margin-right: 15px;
   float: left;
 }
-.card .card-header-warning .card-icon, .card .card-header-warning:not(.card-header-icon):not(.card-header-text), .card .card-header-warning .card-text {
-  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(255, 152, 0, 0.4);
+.primary{
+  .card .card-header-warning .card-icon, .card .card-header-warning:not(.card-header-icon):not(.card-header-text), .card .card-header-warning .card-text {
+    box-shadow: #{$box-shadow-primary};
+  }
+  .card .card-header-warning .card-icon, .card .card-header-warning .card-text, .card .card-header-warning:not(.card-header-icon):not(.card-header-text), .card.bg-warning, .card.card-rotate.bg-warning .front, .card.card-rotate.bg-warning .back {
+    background: linear-gradient(60deg, lighten($primary-color, 20%),#{$primary-color});
+  }
 }
-.card .card-header-warning .card-icon, .card .card-header-warning .card-text, .card .card-header-warning:not(.card-header-icon):not(.card-header-text), .card.bg-warning, .card.card-rotate.bg-warning .front, .card.card-rotate.bg-warning .back {
-  background: linear-gradient(60deg, #ffa726, #fb8c00);
+.secondary{
+  .card .card-header-warning .card-icon, .card .card-header-warning:not(.card-header-icon):not(.card-header-text), .card .card-header-warning .card-text {
+    box-shadow: #{$box-shadow-secondary};
+  }
+  .card .card-header-warning .card-icon, .card .card-header-warning .card-text, .card .card-header-warning:not(.card-header-icon):not(.card-header-text), .card.bg-warning, .card.card-rotate.bg-warning .front, .card.card-rotate.bg-warning .back {
+    background: linear-gradient(60deg, lighten($secondary-color, 20%),#{$secondary-color});
+    }
+}
+.tertiary{
+  .card .card-header-warning .card-icon, .card .card-header-warning:not(.card-header-icon):not(.card-header-text), .card .card-header-warning .card-text {
+    box-shadow: #{$box-shadow-tertiary};
+  }
+  .card .card-header-warning .card-icon, .card .card-header-warning .card-text, .card .card-header-warning:not(.card-header-icon):not(.card-header-text), .card.bg-warning, .card.card-rotate.bg-warning .front, .card.card-rotate.bg-warning .back {
+    background: linear-gradient(60deg, lighten($tertiary-color, 20%),#{$tertiary-color});
+  }
+}
+.admin{
+  .card .card-header-warning .card-icon, .card .card-header-warning:not(.card-header-icon):not(.card-header-text), .card .card-header-warning .card-text {
+    box-shadow: #{$box-shadow-quaternary};
+  }
+  .card .card-header-warning .card-icon, .card .card-header-warning .card-text, .card .card-header-warning:not(.card-header-icon):not(.card-header-text), .card.bg-warning, .card.card-rotate.bg-warning .front, .card.card-rotate.bg-warning .back {
+    background: linear-gradient(60deg, lighten($quaternary-color, 20%),#{$quaternary-color});
+  }
 }
 .card-stats .card-header.card-header-icon, .card-stats .card-header.card-header-text {
   text-align: right;
