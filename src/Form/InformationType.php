@@ -7,16 +7,30 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+
 class InformationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('content')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('publishedAt')
+            ->add('title', TextType::class )
+            ->add('content', TextareaType::class, [
+                'label' => false,
+                'attr' => [
+                    'class' => 'editable',
+                ]
+            ])
+            ->add('publishedAt', DateType::class, [
+                'widget' => 'single_text',
+                'html5' => false,
+                'data' => new \DateTime(date("Y-m")),
+                'attr' => [
+                    'class' => 'datepicker-full'
+                ]
+            ])
         ;
     }
 

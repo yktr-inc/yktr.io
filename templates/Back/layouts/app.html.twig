@@ -24,13 +24,12 @@
         </div>
     </div>
 
-    {% block javascripts %}{% endblock %}
-
     <script type="text/javascript" >
         const elem = document.getElementById('search-input');
         elem.onblur = () => {document.getElementById('search-icon').style.color = '#e0e0e0';};
         elem.onfocus = () => {document.getElementById('search-icon').style.color = "#878F99";};
     </script>
     <script type="text/javascript" src="{{ asset('build/js/app.js ') }}"></script>
+    {% block javascripts %}{% endblock %}
 </body>
 </html>

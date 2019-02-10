@@ -20,13 +20,31 @@ class PromotionType extends AbstractType
             ->add('speciality', TextType::class)
             ->add('code', TextType::class)
             ->add('startedAt', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'MM/YYYY',
+                'html5' => false,
+                'data' => new \DateTime(date("Y-m")),
+                'attr' => [
+                    'class' => 'datepicker'
+                ]
             ])
-            ->add('finishedAt', DateType::class)
+            ->add('finishedAt', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'MM/YYYY',
+                'html5' => false,
+                'data' => new \DateTime(date("Y-m")),
+                'attr' => [
+                    'class' => 'datepicker'
+                ]
+            ])
             ->add('classrooms', EntityType::class, [
                 'class' => Classroom::class,
+                'required' => false,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'expanded' => true
+                'attr' => [
+                    'class' => 'select-popup'
+                ]
             ])
         ;
     }
