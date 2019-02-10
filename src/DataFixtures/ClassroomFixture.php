@@ -16,7 +16,7 @@ class ClassroomFixture extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $promotion = $this->promotionRepository->findOneBy(['title'=>'First year']);
+        $promotion = $this->promotionRepository->findOneBy(['year'=>'First year']);
 
         $classroom = new Classroom();
 
