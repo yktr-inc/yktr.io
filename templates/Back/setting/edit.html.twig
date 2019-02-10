@@ -1,0 +1,21 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Settings</a></li>
+      <li class="breadcrumb-item active">Edit</li>
+{% endblock %}
+
+{% block body %}
+<div class="card m-auto w-75">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title">Edit "{{ setting.key }}"</h4>
+    </div>
+    <div class="card-body">
+    <div class="clear mb-2">
+      <a class="btn btn-default btn-sm" role="button" href="{{ path('setting_index') }}">back to list</a>
+    </div>
+    {{ include('Back/setting/_form.html.twig', {'button_label': 'Update'}) }}
+    </div>
+</div>
+{% endblock %}
