@@ -103,6 +103,25 @@ class UserFixtures extends Fixture
 
         $manager->persist($user);
 
+        $user = new User();
+        $encodedPassword = $this->encoder->encodePassword($user,'yktr');
+
+        $user->setUsername('teacher');
+        $user->setLastname('Geopolitique');
+        $user->setFirstname('Jean-Michel');
+        $user->setPhone('0639401203');
+        $user->setEmail('teachern@yktr.io');
+        $user->setPassword($encodedPassword);
+        $user->setRoles(array('ROLE_TEACHER'));
+        $user->setClassroom($classroom);
+
+        $user->setNumber('2');
+        $user->setStreetName('rue des champs');
+        $user->setPostalCode('75001');
+        $user->setCity('Paris');
+
+        $manager->persist($user);
+
         $manager->flush();
     }
 }
