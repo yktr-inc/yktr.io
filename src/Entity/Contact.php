@@ -39,11 +39,6 @@ class Contact
     /**
      * @ORM\Column(type="string", length=40, nullable=true)
      */
-    private $homephone;
-
-    /**
-     * @ORM\Column(type="string", length=40, nullable=true)
-     */
     private $workphone;
 
     public function getId(): ?int

@@ -32,10 +32,16 @@ class UserFixtures extends Fixture
             $user->setUsername($faker->userName);
             $user->setLastname($faker->lastName);
             $user->setFirstname($faker->firstName);
+            $user->setPhone('0639401203');
             $user->setEmail($faker->safeEmail);
             $user->setPassword($encodedPassword);
             $user->setRoles(array('ROLE_STUDENT'));
             $user->setClassroom($classroom);
+
+            $user->setNumber('1');
+            $user->setStreetName('rue de la paix');
+            $user->setPostalCode('75001');
+            $user->setCity('Paris');
 
             $manager->persist($user);
         }
@@ -46,10 +52,16 @@ class UserFixtures extends Fixture
         $user->setUsername('administrative');
         $user->setLastname('Narvalo');
         $user->setFirstname('Maximilien');
+        $user->setPhone('0639401203');
         $user->setEmail('administrative@yktr.io');
         $user->setPassword($encodedPassword);
         $user->setRoles(array('ROLE_ADMINISTRATIVE'));
         $user->setClassroom($classroom);
+
+        $user->setNumber('1');
+        $user->setStreetName('rue de la paix');
+        $user->setPostalCode('75001');
+        $user->setCity('Paris');
 
         $manager->persist($user);
 
@@ -59,10 +71,16 @@ class UserFixtures extends Fixture
         $user->setUsername('student');
         $user->setLastname('Chabert');
         $user->setFirstname('Dimitri');
+        $user->setPhone('0639401203');
         $user->setEmail('student@yktr.io');
         $user->setPassword($encodedPassword);
         $user->setRoles(array('ROLE_STUDENT'));
         $user->setClassroom($classroom);
+
+        $user->setNumber('1');
+        $user->setStreetName('rue de la paix');
+        $user->setPostalCode('75001');
+        $user->setCity('Paris');
 
         $manager->persist($user);
 
@@ -72,10 +90,16 @@ class UserFixtures extends Fixture
         $user->setUsername('admin');
         $user->setLastname('Brother');
         $user->setFirstname('Big');
+        $user->setPhone('0639401203');
         $user->setEmail('admin@yktr.io');
         $user->setPassword($encodedPassword);
         $user->setRoles(array('ROLE_SUPERADMIN'));
         $user->setClassroom($classroom);
+
+        $user->setNumber('1');
+        $user->setStreetName('rue de la paix');
+        $user->setPostalCode('75001');
+        $user->setCity('Paris');
 
         $manager->persist($user);
 

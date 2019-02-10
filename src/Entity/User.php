@@ -50,11 +50,22 @@ class User implements UserInterface
     private $email;
 
     /**
+     *  @Assert\Regex(
+     *     pattern = "/^((\+|00)33\s?|0)[67](\s?\d{2}){4}$/",
+     *     message = "Le numéro de téléphone saisi est invalide."
+     * )
+     *
+     * @ORM\Column(type="string", length=200, nullable=false)
+     */
+    private $phone;
+
+    /**
      * @Assert\Length(
      *      min = 8,
      *      max = 20,
      *      minMessage = "Le mot de passe doit faire plus de {{ limit }} caractères",
-     *      maxMessage = "Le mot de passe ne peut pas faire plus de {{ limit }} caractères"
+     *      maxMessage = "Le mot de passe ne peut pas faire plus de {{ limit }} caractères",
+     *      groups = {"Default"}
      * )
      *
      * @ORM\Column(type="string", nullable=false)
@@ -133,6 +144,31 @@ class User implements UserInterface
      * @ORM\JoinColumn(name="classroom_id", referencedColumnName="id")
      */
     private $classroom;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $number;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $streetName;
+
+    /**
+     * @Assert\Regex(
+     *     pattern = "/^((0[1-9])|([1-8][0-9])|((9[0-8])|(2A)|(2B)))[0-9]{3}$/",
+     *     message = "Le numéro de téléphone saisi est invalide."
+     * )
+     *
+     * @ORM\Column(type="string", length=10)
+     */
+    private $postalCode;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $city;
 
     /**
      * @ORM\Column(type="json")
@@ -417,6 +453,78 @@ class User implements UserInterface
     public function setClassroom(?Classroom $classroom): self
     {
         $this->classroom = $classroom;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getNumber(): ?string
+    {
+        return $this->number;
+    }
+
+    public function setNumber(string $number): self
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    public function getStreetName(): ?string
+    {
+        return $this->streetName;
+    }
+
+    public function setStreetName(string $streetName): self
+    {
+        $this->streetName = $streetName;
+
+        return $this;
+    }
+
+    public function getPostalCode(): ?string
+    {
+        return $this->postalCode;
+    }
+
+    public function setPostalCode(string $postalCode): self
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }
