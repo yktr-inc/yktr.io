@@ -1,0 +1,38 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active">Settings</li>
+{% endblock %}
+
+{% block body %}
+<div class="card m-auto w-75">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title">Settings</h4>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for setting in settings %}
+            <tr>
+                <td>{{ setting.key }}</td>
+                <td>{{ setting.value }}</td>
+                <td>
+                    <a class="btn btn-warning btn-md" role="button" href="{{ path('setting_edit', {'id': setting.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
