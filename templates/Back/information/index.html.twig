@@ -19,6 +19,7 @@
                 <th>Id</th>
                 <th>Title</th>
                 <th>Content</th>
+                <th>Author</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
                 <th>PublishedAt</th>
@@ -31,6 +32,7 @@
                 <td>{{ information.id }}</td>
                 <td>{{ information.title }}</td>
                 <td>{{ information.content|raw }}</td>
+                <td>{{ information.owner.firstname }} {{ information.owner.lastname }}</td>
                 <td>{{ information.createdAt ? information.createdAt|ago : '' }}</td>
                 <td>{{ information.updatedAt ? information.updatedAt|ago : '' }}</td>
                 <td>{{ information.publishedAt ? information.publishedAt|date('Y-m-d H:i:s') : '' }}</td>

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\DateTrait;
 use App\Entity\Traits\PublishedTrait;
+use App\Entity\Traits\OwnerTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -15,6 +16,8 @@ class Information
 {
     use DateTrait;
     use PublishedTrait;
+    use OwnerTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
