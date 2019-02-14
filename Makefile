@@ -1,6 +1,6 @@
 .PHONY: install build start run stop php
 
-all: build start install create-app-dir start
+all: build start install start
 
 install-docker-tools:
 	docker pull phpqa/php-cs-fixer \
@@ -20,12 +20,6 @@ composer-install:
 
 composer-update:
 	docker run --rm -v $$(pwd):/app composer install
-
-create-app-dir:
-	mkdir app/cache \
-	&& mkdir app/logs \
-	&& sudo chmod -R 777 app/logs \
-	&& sudo chmod -R 777 app/cache
 
 build:
 	docker-compose build
