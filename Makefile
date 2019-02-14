@@ -12,6 +12,15 @@ install:
 	docker run --rm -v $$(pwd):/app composer install \
 	&& docker-compose exec php make create-db
 
+install-prod:
+	make build \
+	&& make start \
+	&& docker run --rm -v $$(pwd):/app composer install --no-dev \
+	&& make yarn \
+	&& make yarn-build \
+	&& make create-db-prod \
+	&& make cache-clear
+
 yarn:
 	docker-compose exec php yarn install
 
@@ -70,6 +79,13 @@ create-db:
 	php bin/console doctrine:database:drop --if-exists --force \
 	&& php bin/console doctrine:database:create \
 	&& php bin/console do:sc:up --force \
+	&& php bin/console do:fi:lo --append \
+
+create-db-prod:
+	php bin/console doctrine:database:drop --if-exists --force \
+	&& php bin/console doctrine:database:create \
+	&& php bin/console doctrine:migrations:diff \
+	&& php bin/console doctrine:migrations:migrate \
 	&& php bin/console do:fi:lo --append \
 
 
