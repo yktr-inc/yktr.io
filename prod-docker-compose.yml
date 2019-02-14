@@ -32,7 +32,7 @@ services:
     - traefik
     labels:
     - "traefik.backend=yktr-prod"
-    - "traefik.frontend.rule=Host:prod.yktr.io"
+    - "traefik.frontend.rule=Host:yktr.io"
     - "trafik.enable=true"
     - "traefik.port=80"
     - "traefik.protocol=http"
