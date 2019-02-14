@@ -10,10 +10,16 @@ install-docker-tools:
 
 install:
 	docker run --rm -v $$(pwd):/app composer install \
-	&& docker-compose exec php yarn install
+	&& docker-compose exec php yarn install \
+	&& docker-compose exec php yarn build \
+	&& php bin/console do:sc:dr --force \
+	&& php bin/console do:sc:up --force
 
 yarn:
 	docker-compose exec php yarn install
+
+yarn-build:
+	docker-compose exec php yarn build
 
 composer-install:
 	docker run --rm -v $$(pwd):/app composer install
