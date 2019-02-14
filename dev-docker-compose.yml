@@ -4,11 +4,12 @@ services:
   db:
     image: postgres:10
     environment:
-      POSTGRES_DB: symfony
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
     - 53306:5432
+
   php:
     build: ./docker/php
     links:
@@ -29,6 +30,13 @@ services:
     - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
     networks:
     - traefik
+    labels:
+    - "traefik.backend=yktr-dev"
+    - "traefik.frontend.rule=Host:dev.yktr.io"
+    - "trafik.enable=true"
+    - "traefik.port=80"
+    - "traefik.protocol=http"
+    - "traefik.frontend.entryPoints=http"
 networks:
   traefik:
     external: true
