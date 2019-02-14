@@ -469,18 +469,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAddress(): ?Address
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?Address $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
     public function getNumber(): ?string
     {
         return $this->number;
