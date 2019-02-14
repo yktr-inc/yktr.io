@@ -58,7 +58,7 @@ phpcs:
 	docker run --rm -v $$(pwd)/src:/src phpqa/php-cs-fixer fix /src
 
 cache-clear:
-	docker-compose exec php app/console cache:clear
+	docker-compose exec php bin/console cache:clear
 
 dev:
 	php bin/console doctrine:database:drop --if-exists --force \
