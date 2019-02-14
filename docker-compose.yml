@@ -29,13 +29,6 @@ services:
     - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
     networks:
     - traefik
-    labels:
-    - "traefik.backend=yktr-dev"
-    - "traefik.frontend.rule=Host:yktr.io"
-    - "trafik.enable=true"
-    - "traefik.port=80"
-    - "traefik.protocol=http"
-    - "traefik.frontend.entryPoints=http"
 networks:
   traefik:
     external: true
