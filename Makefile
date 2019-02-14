@@ -61,15 +61,16 @@ cache-clear:
 	docker-compose exec php app/console cache:clear
 
 dev:
-	php bin/console do:sc:dr --force \
+	php bin/console doctrine:database:drop --if-exists --force \
+	&& php bin/console doctrine:database:create \
 	&& php bin/console do:sc:up --force \
-	&& php bin/console do:fi:lo \
+	&& php bin/console do:fi:lo --append \
 
 create-db:
 	php bin/console doctrine:database:drop --if-exists --force \
 	&& php bin/console doctrine:database:create \
 	&& php bin/console do:sc:up --force \
-	&& php bin/console do:fi:lo \
+	&& php bin/console do:fi:lo --append \
 
 
 
