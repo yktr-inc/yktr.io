@@ -1,6 +1,6 @@
 .PHONY: install build start run stop php
 
-all: build start create-cache install start
+all: build start create-cache install yarn-build yarn cache-clear
 
 install-docker-tools:
 	docker pull phpqa/php-cs-fixer \
@@ -10,9 +10,7 @@ install-docker-tools:
 
 install:
 	docker run --rm -v $$(pwd):/app composer install \
-	&& docker-compose exec php yarn install \
-	&& docker-compose exec php yarn build \
-	&& docker-compose exec php make dev
+	&& docker-compose exec php make create-db
 
 yarn:
 	docker-compose exec php yarn install
@@ -67,6 +65,13 @@ dev:
 	&& php bin/console do:sc:up --force \
 	&& php bin/console do:fi:lo \
 
+create-db:
+	php bin/console doctrine:database:create --force \
+	&& php bin/console do:sc:up --force \
+	&& php bin/console do:fi:lo \
+
 create-cache:
 	chmod -R 644 var/cache/prod \
 	&& chmod -R 644 var/cache/dev
+
+
