@@ -1,6 +1,6 @@
 .PHONY: install build start run stop php
 
-all: build start create-cache install yarn-build yarn cache-clear
+all: build start install yarn-build yarn cache-clear
 
 install-docker-tools:
 	docker pull phpqa/php-cs-fixer \
@@ -70,8 +70,5 @@ create-db:
 	&& php bin/console do:sc:up --force \
 	&& php bin/console do:fi:lo \
 
-create-cache:
-	chmod -R 644 var/cache/prod \
-	&& chmod -R 644 var/cache/dev
 
 
