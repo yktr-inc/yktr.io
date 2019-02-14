@@ -29,7 +29,10 @@ yarn:
 	yarn install
 
 yarn-build:
-	yarn build
+	docker-compose exec php yarn build
+
+composer-install:
+	docker run --rm -v $$(pwd):/app composer install
 
 composer-install:
 	composer install
