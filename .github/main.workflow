@@ -8,7 +8,7 @@ workflow "CI/CD" {
 
 action "branch-filter" {
   uses = "actions/bin/filter@master"
-  args = "branch master"
+  args = "branch release"
 }
 
 action "branch-filter-dev" {
