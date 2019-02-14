@@ -19,10 +19,11 @@ action "branch-filter-dev" {
 action "Hyper Lazer Deployer Dev" {
   needs = "branch-filter-dev"
   uses = "docker://louishrg/hyper-lazer-deployer:1.0"
-  secrets = ["RSA_PRIV", "RSA_PUB", "REMOTE", "AFTER_PULL_COMMAND", "GITHUB_TOKEN"]
+  secrets = ["RSA_PRIV", "RSA_PUB", "REMOTE", "GITHUB_TOKEN"]
   env = {
     TARGET_FOLDER = "/home/yktr/dev.yktr.io"
     REPO_GIT_URL = "-b wip git@github.com:yktr-inc/yktr.io.git"
+    AFTER_PULL_COMMAND = "sh /home/deployers/yktr-dev.sh"
   }
 }
 
@@ -31,13 +32,13 @@ action "Hyper Lazer Deployer Prod" {
   uses = "docker://louishrg/hyper-lazer-deployer:1.0"
   secrets = [
     "REMOTE",
-    "AFTER_PULL_COMMAND",
     "GITHUB_TOKEN",
     "RSA_PRIV",
     "RSA_PUB",
   ]
-   env = {
+  env = {
     TARGET_FOLDER = "/home/yktr/yktr.io"
     REPO_GIT_URL = "-b release git@github.com:yktr-inc/yktr.io.git"
+    AFTER_PULL_COMMAND = "sh /home/deployers/yktr-prod.sh"
   }
 }
