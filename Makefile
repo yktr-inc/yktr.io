@@ -1,6 +1,6 @@
 .PHONY: install build start run stop php
 
-all: build install-docker-tools install create-app-dir start
+all: build start install create-app-dir start
 
 install-docker-tools:
 	docker pull phpqa/php-cs-fixer \
