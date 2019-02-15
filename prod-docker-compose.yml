@@ -11,6 +11,7 @@ services:
     - 53307:5432
     networks:
       - traefik
+
   php-yktr-prod:
     build: ./docker/php
     links:
@@ -28,7 +29,7 @@ services:
     - db-yktr-prod
     volumes:
     - .:/var/www/yktr
-    - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    - ./docker/nginx/prod.conf:/etc/nginx/conf.d/default.conf
     networks:
     - traefik
     labels:
