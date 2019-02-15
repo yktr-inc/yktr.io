@@ -10,7 +10,7 @@ install-docker-tools:
 install-dev:
 	make build \
 	&& make start \
-	&& docker-compose exec php-yktr-dev composer-install \
+	&& docker-compose exec php-yktr-dev make composer-install \
 	&& docker-compose exec php-yktr-dev make yarn \
 	&& docker-compose exec php-yktr-dev make yarn-build \
 	&& docker-compose exec php-yktr-dev make create-db \
@@ -19,7 +19,7 @@ install-dev:
 install-prod:
 	make build \
 	&& make start \
-	&& docker-compose exec php-yktr-prod composer-install-prod \
+	&& docker-compose exec php-yktr-prod make composer-install-prod \
 	&& docker-compose exec php-yktr-prod make yarn \
 	&& docker-compose exec php-yktr-prod make yarn-build \
 	&& docker-compose exec php-yktr-prod make create-db-prod \
