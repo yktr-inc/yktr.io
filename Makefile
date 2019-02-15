@@ -22,7 +22,7 @@ install-prod:
 	&& docker-compose exec php-yktr-prod make composer-install-prod \
 	&& docker-compose exec php-yktr-prod make yarn \
 	&& docker-compose exec php-yktr-prod make yarn-build \
-	&& docker-compose exec php-yktr-prod make create-db-prod \
+	&& docker-compose exec php-yktr-prod make create-db \
 	&& docker-compose exec php-yktr-prod make cache-clear
 
 yarn:
