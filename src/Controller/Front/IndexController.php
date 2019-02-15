@@ -26,6 +26,7 @@ class IndexController extends AbstractController
             dd($succeed);
         }
 
+
         return $this->render('Front/index.html.twig');
     }
 }

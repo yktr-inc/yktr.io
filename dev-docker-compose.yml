@@ -1,29 +1,31 @@
 version: '3.4'
 
 services:
-  db:
+  db-yktr-dev:
     image: postgres:10
     environment:
-      POSTGRES_DB: symfony
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
     - 53306:5432
-  php:
+    networks:
+      - traefik
+  php-yktr-dev:
     build: ./docker/php
     links:
-    - db
+    - db-yktr-dev
     volumes:
     - ./docker/php/php.ini:/usr/local/etc/php/php.ini
     - .:/var/www/yktr
     networks:
     - traefik
 
-  web:
+  web-yktr-dev:
     image: nginx:1.15
     depends_on:
-    - php
-    - db
+    - php-yktr-dev
+    - db-yktr-dev
     volumes:
     - .:/var/www/yktr
     - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
@@ -31,7 +33,7 @@ services:
     - traefik
     labels:
     - "traefik.backend=yktr-dev"
-    - "traefik.frontend.rule=Host:yktr.io"
+    - "traefik.frontend.rule=Host:dev.yktr.io"
     - "trafik.enable=true"
     - "traefik.port=80"
     - "traefik.protocol=http"

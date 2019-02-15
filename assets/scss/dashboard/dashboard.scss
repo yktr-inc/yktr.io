@@ -106,7 +106,19 @@ $sidebar-width: 260px;
       background-position:50% 50%;
       background-repeat:no-repeat;
       background-size: 100% auto;
-      border: #{$primary-color} solid 1.2px;
+
+      &.primary{
+        border: #{$primary-color} solid 1.5px;
+      }
+      &.secondary{
+        border: #{$secondary-color} solid 1.5px;
+      }
+      &.tertiary{
+        border: #{$tertiary-color} solid 1.5px;
+      }
+      &.admin{
+        border: #{$quaternary-color} solid 1.5px;
+      }
     }
 
     .name{
@@ -129,9 +141,23 @@ $sidebar-width: 260px;
   padding: 10px 15px;
 }
 
-.sidebar li.active>a {
-  background-color: #{$primary-color};
-  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #{$primary-color};
+.sidebar li.active {
+  .primary &>a {
+    background-color: #{$primary-color};
+    box-shadow: #{$box-shadow-primary};
+  }
+  .secondary &>a{
+    background-color: #{$secondary-color};
+    box-shadow: #{$box-shadow-secondary};
+  }
+  .tertiary &>a{
+    background-color: #{$tertiary-color};
+    box-shadow: #{$box-shadow-tertiary};
+  }
+  .admin &>a{
+    background-color: #{$quaternary-color};
+    box-shadow: #{$box-shadow-quaternary};
+  }
 }
 
 /* # MAIN PANEL COMPONENT */
@@ -206,7 +232,7 @@ $sidebar-width: 260px;
   border: 1px solid #FFF;
   right: 10px;
   font-size: 10px;
-  background: #{$primary-color};
+  background: #{$secondary-color};
   color: #FFFFFF;
   min-width: 20px;
   padding: 0px 5px;
@@ -237,7 +263,7 @@ $sidebar-width: 260px;
 }
 .item-time {
   font-size: 0.8em;
-  background-color: #{$primary-color};
+  background-color: #{$secondary-color};
 }
 
 .notification-item {

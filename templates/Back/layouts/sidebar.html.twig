@@ -6,14 +6,14 @@
     </div>
     <div class="user-infos row align-items-center">
         <div class="col-3">
-            <div class="photo"></div>
+            <div class="{{ colorClass }} photo"></div>
         </div>
         <div id="name" class="col-9 text-left">
             <span>{{ app.user.firstname }} {{ app.user.lastname }}</span>
         </div>
     </div>
     <div class="sidebar-wrapper">
-        <ul class="nav">
+        <ul class="nav {{ colorClass }}">
             <li class="nav-item active">
                 <a class="nav-link" href="{{ path('dashboard') }}">
                     <i class="material-icons">dashboard</i>
