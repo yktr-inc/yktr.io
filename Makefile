@@ -22,7 +22,7 @@ install-prod:
 	&& docker-compose exec php-yktr-prod make composer-install-prod \
 	&& docker-compose exec php-yktr-prod make yarn \
 	&& docker-compose exec php-yktr-prod make yarn-build \
-	&& docker-compose exec php-yktr-prod make create-db \
+	&& docker-compose exec php-yktr-prod make create-db-prod \
 	&& docker-compose exec php-yktr-prod make cache-clear
 
 yarn:
@@ -88,9 +88,4 @@ create-db:
 create-db-prod:
 	php bin/console doctrine:database:drop --if-exists --force \
 	&& php bin/console doctrine:database:create \
-	&& php bin/console doctrine:migrations:diff \
-	&& php bin/console doctrine:migrations:migrate \
-	&& php bin/console do:fi:lo --append \
-
-
-
+	&& php bin/console do:sc:up --force

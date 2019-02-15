@@ -32,11 +32,11 @@
         "symfony/workflow": "4.1.*",
         "symfony/yaml": "4.1.*",
         "symfony/dotenv": "4.1.*",
-        "doctrine/doctrine-fixtures-bundle": "^3.1",
-        "fzaninotto/faker": "^1.8",
         "vich/uploader-bundle": "^1.8"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.1",
+        "fzaninotto/faker": "^1.8",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.9",
         "symfony/profiler-pack": "*",
