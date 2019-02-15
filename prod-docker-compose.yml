@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  db:
+  db-yktr-prod:
     image: postgres:10
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
@@ -11,24 +11,25 @@ services:
     - 53307:5432
     networks:
       - traefik
-  php:
+
+  php-yktr-prod:
     build: ./docker/php
     links:
-    - db
+    - db-yktr-prod
     volumes:
     - ./docker/php/php.ini:/usr/local/etc/php/php.ini
     - .:/var/www/yktr
     networks:
     - traefik
 
-  web:
+  web-yktr-prod:
     image: nginx:1.15
     depends_on:
-    - php
-    - db
+    - php-yktr-prod
+    - db-yktr-prod
     volumes:
     - .:/var/www/yktr
-    - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    - ./docker/nginx/prod.conf:/etc/nginx/conf.d/default.conf
     networks:
     - traefik
     labels:

@@ -5,7 +5,7 @@ RUN apk update \
     libxml2-dev freetype-dev libpng-dev libjpeg-turbo-dev g++ make autoconf \
     && docker-php-source extract \
     && docker-php-source delete \
-    && docker-php-ext-install exif gd pdo_mysql pgsql soap intl zip \
+    && docker-php-ext-install exif gd pdo_mysql pdo_pgsql pgsql soap intl zip \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && rm -rf /tmp/*
 
