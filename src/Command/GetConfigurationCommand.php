@@ -44,9 +44,9 @@ class GetConfigurationCommand extends Command
 
         $settings = $this->settingRepository->findAllAsArray();
 
-        if(empty($settings)){
+        if (empty($settings)) {
             $io->error('No settings at this time');
-        }else{
+        } else {
             $table = new Table($output);
             $table
                 ->setHeaders(['ID','Key', 'Value'])
@@ -54,10 +54,9 @@ class GetConfigurationCommand extends Command
             ;
             $table->render();
         }
-
     }
 
-    protected function settingsTable($settings){
-
+    protected function settingsTable($settings)
+    {
     }
 }

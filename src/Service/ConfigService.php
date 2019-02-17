@@ -7,7 +7,6 @@ use App\Repository\SettingRepository;
 
 class ConfigService implements ConfigServiceInterface
 {
-
     public function __construct(SettingRepository $settingRepository)
     {
         $this->settingRepository = $settingRepository;
@@ -20,7 +19,5 @@ class ConfigService implements ConfigServiceInterface
     }
     public function set(string $key, string $value): ?boolean
     {
-
     }
-
 }

@@ -18,10 +18,9 @@ class IndexController extends AbstractController
         DBNotificationServiceInterface $notifService,
         MailerServiceInterface $mailerService,
         UserRepository $userRepository,
-        Security $security)
-    {
-
-        if($this->getUser()){
+        Security $security
+    ) {
+        if ($this->getUser()) {
             $succeed = $notifService->notify("GRADE", $this->getUser(), "Salut à tous");
             dd($succeed);
         }

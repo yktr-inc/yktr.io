@@ -8,7 +8,6 @@ use Faker;
 use App\Entity\Exam;
 use App\Repository\ClassroomRepository;
 
-
 class ZExamFixtures extends Fixture
 {
     public function __construct(ClassroomRepository $classroomRepository)

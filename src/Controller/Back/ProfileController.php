@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 /**
  * @Route("/dashboard/profile")
  */
@@ -34,7 +35,6 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_profile', ['id' => $this->getUser()->getId()]);
@@ -45,5 +45,4 @@ class ProfileController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
 }

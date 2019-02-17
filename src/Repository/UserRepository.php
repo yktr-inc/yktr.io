@@ -32,7 +32,6 @@ class UserRepository extends ServiceEntityRepository
 
     public function findByRole($role)
     {
-
         $em = $this->getEntityManager();
 
         $rsm = new ResultSetMappingBuilder($em);
@@ -50,12 +49,10 @@ class UserRepository extends ServiceEntityRepository
 
     public function allTeachers()
     {
-
     }
 
     public function allAdministratives()
     {
-
     }
 
     // public function allStudents()

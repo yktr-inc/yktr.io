@@ -31,32 +31,34 @@ class DBNotificationService implements DBNotificationServiceInterface
         $this->security = $security;
     }
 
-    public function notify(string $type,User $recipient, string $content): ?bool
+    public function notify(string $type, User $recipient, string $content): ?bool
     {
-        if(self::verifyType($type)){
+        if (self::verifyType($type)) {
+            $notification = new Notification();
 
-          $notification = new Notification();
+            $notification->setType($type);
+            $notification->setContent($content);
+            $notification->setUser($recipient);
 
-          $notification->setType($type);
-          $notification->setContent($content);
-          $notification->setUser($recipient);
-
-          $this->objectManager->persist($notification);
-          $this->objectManager->flush();
-          return true;
+            $this->objectManager->persist($notification);
+            $this->objectManager->flush();
+            return true;
         }
         return false;
     }
 
-    private static function verifyType($type){
-      return in_array($type, self::NOTICATION_TYPES);
+    private static function verifyType($type)
+    {
+        return in_array($type, self::NOTICATION_TYPES);
     }
 
-    public function getNotifications(){
+    public function getNotifications()
+    {
         return $this->notificationRepository->findLast(5, $this->security->getUser());
     }
 
-    public function getNotificationsCount(){
+    public function getNotificationsCount()
+    {
         return $this->notificationRepository->countNotif($this->security->getUser());
     }
 }

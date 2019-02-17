@@ -28,7 +28,10 @@ class UserLoginType extends AbstractType
                     'placeholder' => 'Your password'
                 ]
             ])
-            ->add('submit', SubmitType::class, [
+            ->add(
+                'submit',
+                SubmitType::class,
+                [
                     'label' => 'Login',
                     'attr' => [
                         'forgotten' => true,

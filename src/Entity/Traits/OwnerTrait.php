@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\User;
 
-
 trait OwnerTrait
 {
 
@@ -28,5 +27,4 @@ trait OwnerTrait
 
         return $this;
     }
-
 }

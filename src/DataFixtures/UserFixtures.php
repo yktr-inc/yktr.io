@@ -27,7 +27,7 @@ class UserFixtures extends Fixture
 
         for ($i = 0; $i < 5; $i++) {
             $user = new User();
-            $encodedPassword = $this->encoder->encodePassword($user,$faker->password);
+            $encodedPassword = $this->encoder->encodePassword($user, $faker->password);
 
             $user->setUsername($faker->userName);
             $user->setLastname($faker->lastName);
@@ -47,7 +47,7 @@ class UserFixtures extends Fixture
         }
 
         $user = new User();
-        $encodedPassword = $this->encoder->encodePassword($user,'yktr');
+        $encodedPassword = $this->encoder->encodePassword($user, 'yktr');
 
         $user->setUsername('administrative');
         $user->setLastname('Narvalo');
@@ -66,7 +66,7 @@ class UserFixtures extends Fixture
         $manager->persist($user);
 
         $user = new User();
-        $encodedPassword = $this->encoder->encodePassword($user,'yktr');
+        $encodedPassword = $this->encoder->encodePassword($user, 'yktr');
 
         $user->setUsername('student');
         $user->setLastname('Chabert');
@@ -85,7 +85,7 @@ class UserFixtures extends Fixture
         $manager->persist($user);
 
         $user = new User();
-        $encodedPassword = $this->encoder->encodePassword($user,'yktr');
+        $encodedPassword = $this->encoder->encodePassword($user, 'yktr');
 
         $user->setUsername('admin');
         $user->setLastname('Brother');
@@ -104,7 +104,7 @@ class UserFixtures extends Fixture
         $manager->persist($user);
 
         $user = new User();
-        $encodedPassword = $this->encoder->encodePassword($user,'yktr');
+        $encodedPassword = $this->encoder->encodePassword($user, 'yktr');
 
         $user->setUsername('teacher');
         $user->setLastname('Geopolitique');

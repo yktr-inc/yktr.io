@@ -4,5 +4,5 @@ namespace App\Service;
 
 interface ColorThemeSelectorInterface
 {
-  public function getColorByRole(): ?string;
+    public function getColorByRole(): ?string;
 }

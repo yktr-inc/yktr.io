@@ -1,7 +1,6 @@
 <?php
 namespace App\Controller\Back;
 
-
 use App\Service\ImpersonateUserList;
 use App\Repository\ExamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,5 +22,4 @@ class IndexController extends AbstractController
             'lastExams' => $lastExams
         ]);
     }
-
 }

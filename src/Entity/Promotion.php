@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PromotionRepository")
  * @ORM\HasLifecycleCallbacks()
@@ -157,7 +158,7 @@ class Promotion
         return $this;
     }
 
-    public function addClassroomBulk(Array $classrooms): self
+    public function addClassroomBulk(array $classrooms): self
     {
         foreach ($classrooms as $classroom) {
             $this->addClassroom($classroom);
