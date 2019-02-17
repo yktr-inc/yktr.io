@@ -21,6 +21,11 @@ services:
     - .:/var/www/yktr
     networks:
     - traefik
+    environment:
+    - APP_ENV=${APP_ENV}
+    - APP_SECRET=${APP_SECRET}
+    - DATABASE_URL=${DATABASE_URL}
+    - MAILER_URL=${MAILER_URL}
 
   web-yktr-prod:
     image: nginx:1.15
