@@ -12,7 +12,8 @@ class ImpersonateUserList
         $this->security = $security;
     }
 
-    public function getImpersonate(){
+    public function getImpersonate()
+    {
         $userList=[];
 
         if ($this->security->isGranted('ROLE_PREVIOUS_ADMIN') || $this->security->isGranted('ROLE_ALLOWED_TO_SWITCH')) {

@@ -79,5 +79,4 @@ trait DateTrait
     {
         $this->updatedAt = new \DateTime();
     }
-
 }

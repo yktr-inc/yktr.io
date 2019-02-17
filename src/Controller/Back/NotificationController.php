@@ -21,7 +21,6 @@ class NotificationController extends AbstractController
      */
     public function index(Request $request, NotificationRepository $notificationRepository, PaginatorInterface $paginator): Response
     {
-
         $page = $request->query->getInt('page', 1);
 
         $notifications = $notificationRepository->findBy(['user'=>$this->getUser()]);

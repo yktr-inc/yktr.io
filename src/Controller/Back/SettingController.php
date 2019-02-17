@@ -47,5 +47,4 @@ class SettingController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
 }

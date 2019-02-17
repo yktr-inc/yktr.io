@@ -4,5 +4,5 @@ namespace App\Service;
 
 interface NotificationServiceInterface
 {
-  public function notify();
+    public function notify();
 }

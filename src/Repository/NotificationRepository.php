@@ -33,7 +33,8 @@ class NotificationRepository extends ServiceEntityRepository
         ;
     }
 
-    public function countNotif(User $user){
+    public function countNotif(User $user)
+    {
         return $this->createQueryBuilder('n')
         ->select('count(n.id)')
         ->andWhere('n.user = :user')

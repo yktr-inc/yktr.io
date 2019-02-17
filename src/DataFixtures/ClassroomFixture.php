@@ -9,9 +9,9 @@ use App\Repository\PromotionRepository;
 
 class ClassroomFixture extends Fixture
 {
-
-    public function __construct(PromotionRepository $promotionRepository){
-      $this->promotionRepository = $promotionRepository;
+    public function __construct(PromotionRepository $promotionRepository)
+    {
+        $this->promotionRepository = $promotionRepository;
     }
 
     public function load(ObjectManager $manager)

@@ -23,7 +23,6 @@ class UserController extends AbstractController
      */
     public function index(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
-
         $page = $request->query->getInt('page', 1);
 
         $users = $userRepository->all();
@@ -73,7 +72,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_index', ['id' => $user->getId()]);

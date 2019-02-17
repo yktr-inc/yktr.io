@@ -59,7 +59,8 @@ class SecurityController extends Controller
             return $this->redirectToRoute('app_front_security_login');
         }
         return $this->render(
-            'security/security.html.twig', [
+            'security/security.html.twig',
+            [
                 'label' => 'Sign up',
                 'title' => 'Register !',
                 'form' => $form->createView()

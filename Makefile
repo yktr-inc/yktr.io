@@ -8,7 +8,8 @@ install-docker-tools:
 	&& docker pull phpstan/phpstan
 
 install-dev:
-	make build \
+	make stop \
+	&& make build \
 	&& make start \
 	&& docker-compose exec -T php-yktr-dev make composer-install \
 	&& docker-compose exec -T php-yktr-dev make yarn \
@@ -17,7 +18,8 @@ install-dev:
 	&& docker-compose exec -T php-yktr-dev make cache-clear
 
 install-prod:
-	make build \
+	make stop \
+	&& make build \
 	&& make start \
 	&& docker-compose exec -T php-yktr-prod make composer-install-prod \
 	&& docker-compose exec -T php-yktr-prod make yarn \
