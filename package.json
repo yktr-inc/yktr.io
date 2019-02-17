@@ -38,8 +38,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn php-cs && yarn phpstan analyse src && yarn phpunit",
-      "pre-push": "yarn phpstan analyse src && yarn phpunit"
+      "pre-commit": "yarn php-cs",
+      "pre-push": "yarn php-cs"
     }
   },
   "dependencies": {
