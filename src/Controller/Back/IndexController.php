@@ -15,6 +15,7 @@ class IndexController extends AbstractController
      */
     public function dashboard(ImpersonateUserList $impersonator, ExamRepository $examRepository)
     {
+        // dd($env);
         $impersonateList = $impersonator->getImpersonate();
         $lastExams = $examRepository->findLastExams(5, $this->getUser()->getClassroom());
         return $this->render('Back/dashboard/index.html.twig', [

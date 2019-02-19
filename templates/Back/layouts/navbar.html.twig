@@ -27,12 +27,12 @@
                     <ul class="dropdown-menu dropdown-menu-right notifications" role="menu" aria-labelledby="dLabel">
                         {% for notif in notications.getNotifications() %}
                         <div class="notifications-wrapper">
-                            <a class="content" href="#">
+                            <a class="content" href="{{ notif.link }}">
                                 <div class="notification-item">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <span class="align-middle item-title">{{ notif.getType|noticationsType }}</span>
-                                            <div>{{ notif.getContent }}</div>
+                                            <div>{{ notif.content }}</div>
                                         </div>
                                         <div class="col-md-12 text-right">
                                             <span class="align-middle badge badge-primary item-time">{{ notif.getCreatedAt|ago }}</span>

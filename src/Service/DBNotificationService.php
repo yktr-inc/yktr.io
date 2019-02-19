@@ -31,13 +31,14 @@ class DBNotificationService implements DBNotificationServiceInterface
         $this->security = $security;
     }
 
-    public function notify(string $type, User $recipient, string $content): ?bool
+    public function notify(string $type, User $recipient, string $content, int $ressource): ?bool
     {
         if (self::verifyType($type)) {
             $notification = new Notification();
 
             $notification->setType($type);
             $notification->setContent($content);
+            $notification->setLink(self::generateLink($type, $ressource));
             $notification->setUser($recipient);
 
             $this->objectManager->persist($notification);
@@ -60,5 +61,22 @@ class DBNotificationService implements DBNotificationServiceInterface
     public function getNotificationsCount()
     {
         return $this->notificationRepository->countNotif($this->security->getUser());
+    }
+
+    private static function generateLink($type, $ressource)
+    {
+        switch ($type) {
+            case 'GRADE':
+                return "/dashboard/grade/".$ressource;
+            case 'ATTENDANCE':
+                return "/dashboard/attendance/".$ressource;
+            case 'EXAM':
+                return "/dashboard/exam/".$ressource;
+            case 'PROJECT':
+                return "/dashboard/project/".$ressource;
+            default:
+                return "/dashboard";
+                break;
+        }
     }
 }
