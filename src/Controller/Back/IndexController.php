@@ -10,11 +10,42 @@ use Symfony\Component\HttpFoundation\Response;
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/dashboard", methods={"GET"}, name="dashboard")
+     * @Route("/student", methods={"GET"}, name="dashboard")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function dashboard(ImpersonateUserList $impersonator, ExamRepository $examRepository)
     {
+        // dd($env);
+        $impersonateList = $impersonator->getImpersonate();
+        $lastExams = $examRepository->findLastExams(5, $this->getUser()->getClassroom());
+        return $this->render('Back/dashboard/index.html.twig', [
+            'impersonateList' => $impersonateList,
+            'lastExams' => $lastExams
+        ]);
+    }
+
+    /**
+     * @Route("/teacher", methods={"GET"}, name="dashboard_teacher")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function dashboardTeacher(ImpersonateUserList $impersonator, ExamRepository $examRepository)
+    {
+        // dd($env);
+        $impersonateList = $impersonator->getImpersonate();
+        $lastExams = $examRepository->findLastExams(5, $this->getUser()->getClassroom());
+        return $this->render('Back/dashboard/index.html.twig', [
+            'impersonateList' => $impersonateList,
+            'lastExams' => $lastExams
+        ]);
+    }
+
+    /**
+     * @Route("/school", methods={"GET"}, name="dashboard_school")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function dashboardSchool(ImpersonateUserList $impersonator, ExamRepository $examRepository)
+    {
+        // dd($env);
         $impersonateList = $impersonator->getImpersonate();
         $lastExams = $examRepository->findLastExams(5, $this->getUser()->getClassroom());
         return $this->render('Back/dashboard/index.html.twig', [

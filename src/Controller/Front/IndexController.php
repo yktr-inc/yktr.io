@@ -21,11 +21,9 @@ class IndexController extends AbstractController
         Security $security
     ) {
         if ($this->getUser()) {
-            $succeed = $notifService->notify("GRADE", $this->getUser(), "Salut à tous");
+            $succeed = $notifService->notify("GRADE", $this->getUser(), "Salut à tous", 1);
             dd($succeed);
         }
-
-
 
         return $this->render('Front/index.html.twig');
     }

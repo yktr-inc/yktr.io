@@ -37,6 +37,11 @@ class Notification
     private $user;
 
     /**
+     * @ORM\Column(type="string", nullable=false)
+     */
+    private $link;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $viewed = 0;
@@ -90,6 +95,18 @@ class Notification
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(string $link): self
+    {
+        $this->link = $link;
 
         return $this;
     }

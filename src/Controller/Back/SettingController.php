@@ -10,13 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/dashboard/setting")
- */
 class SettingController extends AbstractController
 {
     /**
-     * @Route("/", name="setting_index", methods={"GET"})
+     * @Route("/admin/setting", name="setting_index", methods={"GET"})
      */
     public function index(SettingRepository $settingRepository): Response
     {
@@ -27,7 +24,7 @@ class SettingController extends AbstractController
 
 
     /**
-     * @Route("/{id}/edit", name="setting_edit", methods={"GET","POST"})
+     * @Route("/admin/setting/{id}/edit", name="setting_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Setting $setting): Response
     {
