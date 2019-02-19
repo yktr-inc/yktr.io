@@ -22,6 +22,7 @@ Encore
             './assets/scss/dashboard/dashboard_items.scss',
             './assets/scss/dashboard/dashboard_admin.scss'
         ])
+    .addStyleEntry('errors', './assets/scss/errors.scss')
 ;
 
 module.exports = Encore.getWebpackConfig();

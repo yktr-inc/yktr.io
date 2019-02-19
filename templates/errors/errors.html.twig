@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %} : Something gone wrong.</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <div class="error-page">
+            <div>
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>
