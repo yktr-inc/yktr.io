@@ -40,25 +40,10 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/school", methods={"GET"}, name="dashboard_admin")
+     * @Route("/school", methods={"GET"}, name="dashboard_school")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function dashboardSchool(ImpersonateUserList $impersonator, ExamRepository $examRepository)
-    {
-        // dd($env);
-        $impersonateList = $impersonator->getImpersonate();
-        $lastExams = $examRepository->findLastExams(5, $this->getUser()->getClassroom());
-        return $this->render('Back/dashboard/index.html.twig', [
-            'impersonateList' => $impersonateList,
-            'lastExams' => $lastExams
-        ]);
-    }
-
-    /**
-     * @Route("/admin", methods={"GET"}, name="dashboard_superadmin")
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function dashboardAdmin(ImpersonateUserList $impersonator, ExamRepository $examRepository)
     {
         // dd($env);
         $impersonateList = $impersonator->getImpersonate();

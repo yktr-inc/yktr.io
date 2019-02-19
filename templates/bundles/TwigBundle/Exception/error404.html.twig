@@ -1,0 +1,14 @@
+{% extends 'errors/errors.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('errors') }}
+{% endblock %}
+
+{% block title %}
+    403
+{% endblock %}
+
+{% block body %}
+    <h1 data-h1="403">403</h1>
+    <p data-p="FORBIDDEN">FORBIDDEN</p>
+{% endblock %}

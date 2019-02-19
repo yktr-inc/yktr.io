@@ -10,13 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/dashboard/classroom")
- */
 class ClassroomController extends AbstractController
 {
     /**
-     * @Route("/", name="classroom_index", methods={"GET"})
+     * @Route("/school/classroom", name="classroom_index", methods={"GET"})
      */
     public function index(ClassroomRepository $classroomRepository): Response
     {
@@ -26,7 +23,7 @@ class ClassroomController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="classroom_new", methods={"GET","POST"})
+     * @Route("/school/classroom/new", name="classroom_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,7 +46,7 @@ class ClassroomController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="classroom_show", methods={"GET"})
+     * @Route("/school/classrooms/{id}", name="classroom_show", methods={"GET"})
      */
     public function show(Classroom $classroom): Response
     {
@@ -59,7 +56,7 @@ class ClassroomController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="classroom_edit", methods={"GET","POST"})
+     * @Route("/school/classrooms/{id}/edit", name="classroom_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Classroom $classroom): Response
     {
@@ -81,7 +78,7 @@ class ClassroomController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="classroom_delete", methods={"DELETE"})
+     * @Route("/school/classrooms/{id}", name="classroom_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Classroom $classroom): Response
     {

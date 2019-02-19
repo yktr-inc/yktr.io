@@ -12,13 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/dashboard/promotion")
- */
 class PromotionController extends AbstractController
 {
     /**
-     * @Route("/", name="promotion_index", methods={"GET"})
+     * @Route("/school/promotion/", name="promotion_index", methods={"GET"})
      */
     public function index(PromotionRepository $promotionRepository): Response
     {
@@ -28,7 +25,7 @@ class PromotionController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="promotion_new", methods={"GET","POST"})
+     * @Route("/school/promotion/new", name="promotion_new", methods={"GET","POST"})
      */
     public function new(Request $request, ClassroomRepository $classroomRepository): Response
     {
@@ -53,7 +50,7 @@ class PromotionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="promotion_show", methods={"GET"})
+     * @Route("/school/promotion/{id}", name="promotion_show", methods={"GET"})
      */
     public function show(Promotion $promotion): Response
     {
@@ -63,7 +60,7 @@ class PromotionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="promotion_edit", methods={"GET","POST"})
+     * @Route("/school/promotion/{id}/edit", name="promotion_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Promotion $promotion): Response
     {
@@ -85,7 +82,7 @@ class PromotionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="promotion_delete", methods={"DELETE"})
+     * @Route("/school/promotion/{id}", name="promotion_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Promotion $promotion): Response
     {

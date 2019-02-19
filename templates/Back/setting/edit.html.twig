@@ -1,8 +1,8 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
 {% block breadcrumb %}
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Settings</a></li>
+      <li class="breadcrumb-item"><a href="{{ path('dashboard_school') }}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{ path('setting_edit') }}">Settings</a></li>
       <li class="breadcrumb-item active">Edit</li>
 {% endblock %}
 
