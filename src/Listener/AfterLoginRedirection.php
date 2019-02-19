@@ -25,13 +25,13 @@ class AfterLoginRedirection implements AuthenticationSuccessHandlerInterface
         }, $roles);
 
         if (in_array('ROLE_SUPERADMIN', $rolesTab, true)) {
-            $redirection = new RedirectResponse($this->router->generate('dashboard'));
+            $redirection = new RedirectResponse($this->router->generate('dashboard_superadmin'));
         }
         if (in_array('ROLE_ADMINISTRATIVE', $rolesTab, true)) {
-            $redirection = new RedirectResponse($this->router->generate('dashboard'));
+            $redirection = new RedirectResponse($this->router->generate('dashboard_admin'));
         }
         if (in_array('ROLE_TEACHER', $rolesTab, true)) {
-            $redirection = new RedirectResponse($this->router->generate('dashboard'));
+            $redirection = new RedirectResponse($this->router->generate('dashboard_teacher'));
         }
         if (in_array('ROLE_STUDENT', $rolesTab, true)) {
             $redirection = new RedirectResponse($this->router->generate('dashboard'));
