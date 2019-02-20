@@ -1,0 +1,55 @@
+<div class="sidebar">
+    <div class="logo">
+        <span class="simple-text">
+            {{ config.get('sitename') }}
+        </span>
+    </div>
+    <div class="user-infos row align-items-center">
+        <div class="col-3">
+            <div class="{{ colorClass }} photo"></div>
+        </div>
+        <div id="name" class="col-9 text-left">
+            <span>{{ app.user.firstname }} {{ app.user.lastname }}</span>
+        </div>
+    </div>
+    <div class="sidebar-wrapper">
+        <ul class="nav {{ colorClass }}">
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'dashboard' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('dashboard_school') }}">
+                    <i class="material-icons">dashboard</i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'promotion' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('promotion_index') }}">
+                    <i class="material-icons">school</i>
+                    <p>Promotions</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'user' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('user_index') }}">
+                    <i class="material-icons">rate_review</i>
+                    <p>Students</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="#">
+                    <i class="material-icons">question_answer</i>
+                    <p>Teachers</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="#">
+                    <i class="material-icons">event_note</i>
+                    <p>Informations</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

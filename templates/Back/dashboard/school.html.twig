@@ -1,0 +1,16 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
+{% block breadcrumb %}
+      <li class="breadcrumb-item active" aria-current="page">Home</li>
+{% endblock %}
+
+{% block body %}
+    {% include 'Back/dashboard/items/options-icon.html.twig' %}
+    {% include 'Back/dashboard/items/projects.html.twig' %}
+    {% include 'Back/dashboard/items/documents.html.twig' %}
+{% endblock %}
+

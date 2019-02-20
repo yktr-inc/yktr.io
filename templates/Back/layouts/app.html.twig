@@ -13,7 +13,16 @@
     {% set colorClass = color.getColorByRole() %}
 
     <div class="main-panel">
-        {% include "Back/layouts/sidebar.html.twig" %}
+
+      {% if is_granted('ROLE_SUPERADMIN') %}
+      {% include "Back/layouts/sidebar_school.html.twig" %}
+      {% elseif is_granted('ROLE_ADMINISTRATIVE') %}
+      {% include "Back/layouts/sidebar_school.html.twig" %}
+      {% elseif is_granted('ROLE_TEACHER') %}
+      {% include "Back/layouts/sidebar_teacher.html.twig" %}
+      {% elseif is_granted('ROLE_STUDENT') %}
+      {% include "Back/layouts/sidebar_student.html.twig" %}
+      {% endif %}
 
         {% set breadcrumb = block('breadcrumb') %}
         {% embed "Back/layouts/navbar.html.twig" %}

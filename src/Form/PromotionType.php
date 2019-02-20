@@ -39,9 +39,9 @@ class PromotionType extends AbstractType
             ])
             ->add('classrooms', EntityType::class, [
                 'class' => Classroom::class,
-                'required' => false,
                 'choice_label' => 'name',
                 'multiple' => true,
+                'required' => false,
                 'attr' => [
                     'class' => 'select-popup'
                 ]

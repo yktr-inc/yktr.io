@@ -1,0 +1,66 @@
+<div class="sidebar">
+    <div class="logo">
+        <span class="simple-text">
+            {{ config.get('sitename') }}
+        </span>
+    </div>
+    <div class="user-infos row align-items-center">
+        <div class="col-3">
+            <div class="{{ colorClass }} photo"></div>
+        </div>
+        <div id="name" class="col-9 text-left">
+            <span>{{ app.user.firstname }} {{ app.user.lastname }}</span>
+        </div>
+    </div>
+    <div class="sidebar-wrapper">
+        <ul class="nav {{ colorClass }}">
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'dashboard' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('dashboard') }}">
+                    <i class="material-icons">dashboard</i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'student_course' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('student_course_index') }}">
+                    <i class="material-icons">school</i>
+                    <p>Courses</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'student_grades' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="#">
+                    <i class="material-icons">rate_review</i>
+                    <p>Grades & Attendance</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'student_projects' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="#">
+                    <i class="material-icons">question_answer</i>
+                    <p>Projets</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'student_event' ? 'active' : '') }}"
+            >                <a class="nav-link" href="#">
+                    <i class="material-icons">event_note</i>
+                    <p>Events</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'student_files' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="#">
+                    <i class="material-icons">event_note</i>
+                    <p>Files</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
