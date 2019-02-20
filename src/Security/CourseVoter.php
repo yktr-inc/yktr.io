@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Security;
 
 class CourseVoter extends Voter
 {
+    const VIEW = 'view';
     const CREATE = 'create';
     const EDIT = 'edit';
     const DELETE = 'delete';
@@ -23,7 +24,7 @@ class CourseVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-        if (!in_array($attribute, [self::CREATE, self::EDIT, self::DELETE])) {
+        if (!in_array($attribute, [self::VIEW, self::CREATE, self::EDIT, self::DELETE])) {
             return false;
         }
 
@@ -46,6 +47,8 @@ class CourseVoter extends Voter
         $course = $subject;
 
         switch ($attribute) {
+            case self::VIEW:
+                return $this->canView($course, $user);
             case self::CREATE:
                 return $this->canCreate();
             case self::EDIT:
@@ -54,7 +57,18 @@ class CourseVoter extends Voter
                 return $this->canDelete();
         }
 
-        throw new \LogicException('This code should not be reached!');
+        throw new \LogicException('Wtf Bro');
+    }
+
+    private function canView(Course $course, User $user)
+    {
+        if ($this->canEdit($course, $user) || $this->canCreate()) {
+            return true;
+        }
+        if ($this->security->isGranted('ROLE_STUDENT')) {
+            return $user->getClassroom() === $course->getTeacher();
+        }
+        return false;
     }
 
     private function canCreate()

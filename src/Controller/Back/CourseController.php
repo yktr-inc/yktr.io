@@ -53,6 +53,8 @@ class CourseController extends AbstractController
      */
     public function show(Course $course): Response
     {
+        $this->denyAccessUnlessGranted('create', $course);
+
         return $this->render('Back/course/show.html.twig', [
             'course' => $course,
         ]);
