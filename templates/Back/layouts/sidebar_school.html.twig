@@ -14,34 +14,40 @@
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav {{ colorClass }}">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path('dashboard') }}">
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'dashboard' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('dashboard_school') }}">
                     <i class="material-icons">dashboard</i>
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="#">
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'promotion' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('promotion_index') }}">
                     <i class="material-icons">school</i>
-                    <p>Courses</p>
+                    <p>Promotions</p>
                 </a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="#">
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'user' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('user_index') }}">
                     <i class="material-icons">rate_review</i>
-                    <p>Grades & Attendance</p>
+                    <p>Students</p>
                 </a>
             </li>
             <li class="nav-item ">
                 <a class="nav-link" href="#">
                     <i class="material-icons">question_answer</i>
-                    <p>Projets</p>
+                    <p>Teachers</p>
                 </a>
             </li>
             <li class="nav-item ">
                 <a class="nav-link" href="#">
                     <i class="material-icons">event_note</i>
-                    <p>Events</p>
+                    <p>Informations</p>
                 </a>
             </li>
         </ul>
