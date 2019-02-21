@@ -12,7 +12,7 @@ class SettingFixtures extends Fixture
     {
         $setting = new Setting();
         $setting->setKey('sitename');
-        $setting->setValue('my school');
+        $setting->setValue('Fabulous School');
         $manager->persist($setting);
         $manager->flush();
     }

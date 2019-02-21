@@ -11,27 +11,36 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Repository\UserRepository;
 
 class CourseType extends AbstractType
 {
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->ur = $userRepository;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $teachers = $this->ur->findByRole('ROLE_TEACHER');
+
         $builder
-            ->add('title')
-            ->add('status', ChoiceType::class, [
-                    'choices'  => [
-                        'Pending' => 'PENDING',
-                        'Active' => 'ACTIVE',
-                    ],
-            ])
-            ->add('teacher', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'email',
-            ])
-            ->add('classroom', EntityType::class, [
-                'class' => Classroom::class,
-                'choice_label' => 'name',
-            ])
+        ->add('title')
+        ->add('status', ChoiceType::class, [
+            'choices'  => [
+                'Pending' => 'PENDING',
+                'Active' => 'ACTIVE'
+            ],
+        ])
+        ->add('teacher', EntityType::class, [
+            'class' => User::class,
+            'choice_label' => 'username',
+            'choices' => $teachers
+        ])
+        ->add('classroom', EntityType::class, [
+            'class' => Classroom::class,
+            'choice_label' => 'name'
+        ])
         ;
     }
 

@@ -50,11 +50,6 @@ class Classroom
      */
     private $courses;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Project", mappedBy="classrooms")
-     */
-    private $projects;
-
     public function __construct()
     {
         $this->projects = new ArrayCollection();

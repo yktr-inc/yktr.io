@@ -5,7 +5,9 @@ namespace App\Controller\Back;
 use App\Entity\Promotion;
 use App\Entity\Classroom;
 use App\Form\PromotionType;
+use App\Form\PromotionEditType;
 use App\Repository\PromotionRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Repository\ClassroomRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,10 +19,16 @@ class PromotionController extends AbstractController
     /**
      * @Route("/school/promotion/", name="promotion_index", methods={"GET"})
      */
-    public function index(PromotionRepository $promotionRepository): Response
+    public function index(Request $request, PromotionRepository $promotionRepository, PaginatorInterface $paginator): Response
     {
+        $page = $request->query->getInt('page', 1);
+
+        $promotions = $promotionRepository->findAll();
+
+        $allPromotions = $paginator->paginate($promotions, $page, 10);
+
         return $this->render('Back/promotion/index.html.twig', [
-            'promotions' => $promotionRepository->findAll(),
+            'promotions' => $allPromotions,
         ]);
     }
 
@@ -64,7 +72,7 @@ class PromotionController extends AbstractController
      */
     public function edit(Request $request, Promotion $promotion): Response
     {
-        $form = $this->createForm(PromotionType::class, $promotion);
+        $form = $this->createForm(PromotionEditType::class, $promotion);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

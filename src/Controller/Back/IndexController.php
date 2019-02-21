@@ -6,51 +6,39 @@ use App\Repository\ExamRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class IndexController extends AbstractController
 {
     /**
      * @Route("/student", methods={"GET"}, name="dashboard")
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("!is_granted('ROLE_SUPERADMIN') or !is_granted('ROLE_ADMINISTRATIVE') or !is_granted('ROLE_TEACHER')")
      */
-    public function dashboard(ImpersonateUserList $impersonator, ExamRepository $examRepository)
+    public function dashboard(ExamRepository $examRepository)
     {
-        // dd($env);
-        $impersonateList = $impersonator->getImpersonate();
-        $lastExams = $examRepository->findLastExams(5, $this->getUser()->getClassroom());
+        // $lastExams = $examRepository->findLastExams(5, $this->getUser()->getClassroom());
         return $this->render('Back/dashboard/index.html.twig', [
-            'impersonateList' => $impersonateList,
-            'lastExams' => $lastExams
+            'lastExams' => []
         ]);
     }
 
     /**
      * @Route("/teacher", methods={"GET"}, name="dashboard_teacher")
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security(" !is_granted('ROLE_SUPERADMIN') or !is_granted('ROLE_ADMINISTRATIVE') ")
      */
-    public function dashboardTeacher(ImpersonateUserList $impersonator, ExamRepository $examRepository)
+    public function dashboardTeacher(ExamRepository $examRepository)
     {
-        // dd($env);
-        $impersonateList = $impersonator->getImpersonate();
-        $lastExams = $examRepository->findLastExams(5, $this->getUser()->getClassroom());
-        return $this->render('Back/dashboard/index.html.twig', [
-            'impersonateList' => $impersonateList,
-            'lastExams' => $lastExams
-        ]);
+        return $this->render('Back/dashboard/teacher.html.twig');
     }
 
     /**
      * @Route("/school", methods={"GET"}, name="dashboard_school")
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function dashboardSchool(ImpersonateUserList $impersonator, ExamRepository $examRepository)
     {
-        // dd($env);
         $impersonateList = $impersonator->getImpersonate();
-        $lastExams = $examRepository->findLastExams(5, $this->getUser()->getClassroom());
-        return $this->render('Back/dashboard/index.html.twig', [
-            'impersonateList' => $impersonateList,
-            'lastExams' => $lastExams
+        return $this->render('Back/dashboard/school.html.twig', [
+            'impersonateList' => $impersonateList
         ]);
     }
 }

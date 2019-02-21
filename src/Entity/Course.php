@@ -41,7 +41,7 @@ class Course
     private $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="courses")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="taughtCourses")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $teacher;
@@ -53,14 +53,27 @@ class Course
 
 
     /**
+     * @ORM\OneToMany(targetEntity="Exam", mappedBy="course")
+     */
+    private $exams;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Classroom", inversedBy="courses")
      * @ORM\JoinColumn(name="classroom_id", referencedColumnName="id")
      */
     private $classroom;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Project", mappedBy="course")
+     */
+    private $projects;
+
+
     public function __construct()
     {
         $this->attendances = new ArrayCollection();
+        $this->exams = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -143,6 +156,68 @@ class Course
     public function setClassroom(?Classroom $classroom): self
     {
         $this->classroom = $classroom;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Exam[]
+     */
+    public function getExams(): Collection
+    {
+        return $this->exams;
+    }
+
+    public function addExam(Exam $exam): self
+    {
+        if (!$this->exams->contains($exam)) {
+            $this->exams[] = $exam;
+            $exam->setCourse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExam(Exam $exam): self
+    {
+        if ($this->exams->contains($exam)) {
+            $this->exams->removeElement($exam);
+            // set the owning side to null (unless already changed)
+            if ($exam->getCourse() === $this) {
+                $exam->setCourse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Project[]
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Project $project): self
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects[] = $project;
+            $project->setCourse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Project $project): self
+    {
+        if ($this->projects->contains($project)) {
+            $this->projects->removeElement($project);
+            // set the owning side to null (unless already changed)
+            if ($project->getCourse() === $this) {
+                $project->setCourse(null);
+            }
+        }
 
         return $this;
     }

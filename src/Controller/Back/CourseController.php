@@ -4,7 +4,10 @@ namespace App\Controller\Back;
 
 use App\Entity\Course;
 use App\Form\CourseType;
+use App\Form\CourseClassroomType;
 use App\Repository\CourseRepository;
+use App\Repository\ClassroomRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,14 +27,24 @@ class CourseController extends AbstractController
 
     /**
      * @Route("/school/course/new", name="course_new", methods={"GET","POST"})
+     * @Route("/school/classroom/{id}/newCourse", name="classroom_course_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ClassroomRepository $classroomRepository, UserRepository $userRepository): Response
     {
         $course = new Course();
 
         $this->denyAccessUnlessGranted('create', $course);
 
-        $form = $this->createForm(CourseType::class, $course);
+        $classroomId = $request->attributes->get('id');
+
+        if ($request->attributes->get('id')) {
+            $form = $this->createForm(CourseClassroomType::class, $course);
+            $classroom = $classroomRepository->findOneById($classroomId);
+            $course->setClassroom($classroom);
+        } else {
+            $form = $this->createForm(CourseType::class, $course);
+        }
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

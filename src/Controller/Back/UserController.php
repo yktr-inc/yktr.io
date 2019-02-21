@@ -13,27 +13,41 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-/**
- * @Route("/dashboard/users")
- */
 class UserController extends AbstractController
 {
     /**
-     * @Route("/", name="user_index", methods="GET")
+     * @Route("/school/admin/users", name="user_index", methods="GET")
+     * @Route("/school/teachers", name="teacher_index", methods="GET")
+     * @Route("/school/students", name="student_index", methods="GET")
      */
     public function index(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
+        $routeName = $request->get('_route');
+
         $page = $request->query->getInt('page', 1);
 
-        $users = $userRepository->all();
+        switch ($routeName) {
+            case 'teacher_index':
+                $users = $userRepository->findByRole('ROLE_TEACHER', true);
+                break;
+            case 'student_index':
+                $users = $userRepository->findByRole('ROLE_STUDENT', true);;
+                break;
+            default:
+                $users = $userRepository->findAll();
+                break;
+        }
 
         $allUsers = $paginator->paginate($users, $page, 10);
 
         return $this->render('Back/user/index.html.twig', ['users' => $allUsers]);
     }
 
+
     /**
-     * @Route("/new", name="user_new", methods="GET|POST")
+     * @Route("/school/admin/user/new", name="user_new", methods="GET|POST")
+     * @Route("/school/teacher/new", name="teacher_new", methods="GET|POST")
+     * @Route("/school/student/new", name="student_new", methods="GET|POST")
      */
     public function new(Request $request): Response
     {
@@ -56,7 +70,9 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_show", methods="GET")
+     * @Route("/school/admin/user/{id}", name="user_show", methods="GET")
+     * @Route("/school/teacher/{id}", name="teacher_show", methods="GET")
+     * @Route("/school/student/{id}", name="student_show", methods="GET")
      */
     public function show(User $user): Response
     {
@@ -64,7 +80,9 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="user_edit", methods="GET|POST")
+     * @Route("/school/admin/user/{id}/edit", name="user_edit", methods="GET|POST")
+     * @Route("/school/teacher/{id}/edit", name="teacher_edit", methods="GET|POST")
+     * @Route("/school/student/{id}/edit", name="student_edit", methods="GET|POST")
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
     {
@@ -84,7 +102,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_delete", methods="DELETE")
+     * @Route("/school/admin/user/{id}", name="user_delete", methods="DELETE")
      */
     public function delete(Request $request, User $user): Response
     {

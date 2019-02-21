@@ -14,10 +14,10 @@ use Symfony\Component\Security\Core\Security;
 class DBNotificationService implements DBNotificationServiceInterface
 {
     const NOTICATION_TYPES = [
-    "GRADE",
-    "ATTENDANCE",
-    "EXAM",
-    "PROJECT"
+        "GRADE",
+        "ATTENDANCE",
+        "EXAM",
+        "PROJECT"
     ];
     private $objectManager;
 
@@ -25,27 +25,36 @@ class DBNotificationService implements DBNotificationServiceInterface
       ObjectManager $objectManager,
       NotificationRepository $notificationRepository,
       Security $security
-    ) {
+  ) {
         $this->objectManager = $objectManager;
         $this->notificationRepository = $notificationRepository;
         $this->security = $security;
     }
 
-    public function notify(string $type, User $recipient, string $content, int $ressource): ?bool
+    public function registerNotification(string $type, $recipient, string $content, int $ressource)
+    {
+        $notification = new Notification();
+        $notification->setType($type);
+        $notification->setContent($content);
+        $notification->setLink(self::generateLink($type, $ressource));
+        $notification->setUser($recipient);
+        $this->objectManager->persist($notification);
+        $this->objectManager->flush();
+    }
+
+    public function notify(string $type, $recipient, string $content, int $ressource): ?bool
     {
         if (self::verifyType($type)) {
-            $notification = new Notification();
-
-            $notification->setType($type);
-            $notification->setContent($content);
-            $notification->setLink(self::generateLink($type, $ressource));
-            $notification->setUser($recipient);
-
-            $this->objectManager->persist($notification);
-            $this->objectManager->flush();
-            return true;
+            if (!$recipient instanceof User) {
+                foreach ($recipient as $user) {
+                    $this->registerNotification($type, $user, $content, $ressource);
+                }
+            } else {
+                $this->registerNotification($type, $recipient, $content, $ressource);
+            }
         }
-        return false;
+
+        return true;
     }
 
     private static function verifyType($type)
@@ -67,15 +76,15 @@ class DBNotificationService implements DBNotificationServiceInterface
     {
         switch ($type) {
             case 'GRADE':
-                return "/dashboard/grade/".$ressource;
+                return "/student/grade/".$ressource;
             case 'ATTENDANCE':
-                return "/dashboard/attendance/".$ressource;
+                return "/student/attendance/".$ressource;
             case 'EXAM':
-                return "/dashboard/exam/".$ressource;
+                return "/student/exam/".$ressource;
             case 'PROJECT':
-                return "/dashboard/project/".$ressource;
+                return "/student/project/".$ressource;
             default:
-                return "/dashboard";
+                return "/student";
                 break;
         }
     }

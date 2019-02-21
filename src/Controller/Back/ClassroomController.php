@@ -4,7 +4,9 @@ namespace App\Controller\Back;
 
 use App\Entity\Classroom;
 use App\Form\ClassroomType;
+use App\Form\ClassroomEditType;
 use App\Repository\ClassroomRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,17 +15,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class ClassroomController extends AbstractController
 {
     /**
-     * @Route("/school/classroom", name="classroom_index", methods={"GET"})
+     * @Route("/school/classes", name="classroom_index", methods={"GET"})
      */
-    public function index(ClassroomRepository $classroomRepository): Response
+    public function index(Request $request, ClassroomRepository $classroomRepository, PaginatorInterface $paginator): Response
     {
+        $page = $request->query->getInt('page', 1);
+
+        $classrooms = $classroomRepository->findAll();
+
+        $allClassrooms = $paginator->paginate($classrooms, $page, 10);
+
         return $this->render('Back/classroom/index.html.twig', [
-            'classrooms' => $classroomRepository->findAll(),
+            'classrooms' => $allClassrooms,
         ]);
     }
 
     /**
-     * @Route("/school/classroom/new", name="classroom_new", methods={"GET","POST"})
+     * @Route("/school/class/new", name="classroom_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -46,7 +54,7 @@ class ClassroomController extends AbstractController
     }
 
     /**
-     * @Route("/school/classrooms/{id}", name="classroom_show", methods={"GET"})
+     * @Route("/school/class/{id}", name="classroom_show", methods={"GET"})
      */
     public function show(Classroom $classroom): Response
     {
@@ -56,11 +64,11 @@ class ClassroomController extends AbstractController
     }
 
     /**
-     * @Route("/school/classrooms/{id}/edit", name="classroom_edit", methods={"GET","POST"})
+     * @Route("/school/class/{id}/edit", name="classroom_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Classroom $classroom): Response
     {
-        $form = $this->createForm(ClassroomType::class, $classroom);
+        $form = $this->createForm(ClassroomEditType::class, $classroom);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -78,7 +86,7 @@ class ClassroomController extends AbstractController
     }
 
     /**
-     * @Route("/school/classrooms/{id}", name="classroom_delete", methods={"DELETE"})
+     * @Route("/school/class/{id}", name="classroom_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Classroom $classroom): Response
     {

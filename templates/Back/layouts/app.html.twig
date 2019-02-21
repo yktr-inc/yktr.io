@@ -15,7 +15,7 @@
     <div class="main-panel">
 
       {% if is_granted('ROLE_SUPERADMIN') %}
-      {% include "Back/layouts/sidebar_school.html.twig" %}
+      {% include "Back/layouts/sidebar_admin.html.twig" %}
       {% elseif is_granted('ROLE_ADMINISTRATIVE') %}
       {% include "Back/layouts/sidebar_school.html.twig" %}
       {% elseif is_granted('ROLE_TEACHER') %}

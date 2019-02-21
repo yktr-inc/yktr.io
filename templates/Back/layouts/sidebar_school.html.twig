@@ -31,23 +31,51 @@
                 </a>
             </li>
             <li class="nav-item
-                {{ (app.request.attributes.get( '_route' ) starts with 'user' ? 'active' : '') }}"
+                {{ (app.request.attributes.get( '_route' ) starts with 'classroom' ? 'active' : '') }}"
             >
-                <a class="nav-link" href="{{ path('user_index') }}">
+                <a class="nav-link" href="{{ path('classroom_index') }}">
+                    <i class="material-icons">school</i>
+                    <p>Classes</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'course' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('course_index') }}">
+                    <i class="material-icons">school</i>
+                    <p>Courses</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'student' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('student_index') }}">
                     <i class="material-icons">rate_review</i>
                     <p>Students</p>
                 </a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="#">
+             <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'teacher' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('teacher_index') }}">
                     <i class="material-icons">question_answer</i>
                     <p>Teachers</p>
                 </a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="#">
-                    <i class="material-icons">event_note</i>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'information' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('information_index') }}">
+                    <i class="material-icons">public</i>
                     <p>Informations</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'event' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('event_index') }}">
+                    <i class="material-icons">event_note</i>
+                    <p>Events</p>
                 </a>
             </li>
         </ul>

@@ -46,15 +46,22 @@ class Project
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Classroom", inversedBy="projects")
-     * @ORM\JoinTable(name="classrooms_projects")
+     *  @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Le nom du projet doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Le nom du projet ne peut pas faire plus de {{ limit }} caractères"
+     * )
+     *
+     * @ORM\Column(type="text", nullable=false)
      */
-    private $classrooms;
+    private $description;
 
-    public function __construct()
-    {
-        $this->classrooms = new ArrayCollection();
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity="Course", inversedBy="projects")
+     * @ORM\JoinColumn(name="course_id", referencedColumnName="id")
+     */
+    private $course;
 
     public function getId(): ?int
     {
@@ -85,28 +92,26 @@ class Project
         return $this;
     }
 
-    /**
-     * @return Collection|Classroom[]
-     */
-    public function getClassrooms(): Collection
+    public function getCourse(): ?Course
     {
-        return $this->classrooms;
+        return $this->course;
     }
 
-    public function addClassroom(Classroom $classroom): self
+    public function setCourse(?Course $course): self
     {
-        if (!$this->classrooms->contains($classroom)) {
-            $this->classrooms[] = $classroom;
-        }
+        $this->course = $course;
 
         return $this;
     }
 
-    public function removeClassroom(Classroom $classroom): self
+    public function getDescription(): ?string
     {
-        if ($this->classrooms->contains($classroom)) {
-            $this->classrooms->removeElement($classroom);
-        }
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
