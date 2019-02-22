@@ -4,6 +4,7 @@ namespace App\Controller\Back;
 
 use App\Entity\Course;
 use App\Entity\Exam;
+use App\Entity\Project;
 use App\Form\CourseType;
 use App\Repository\CourseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -47,6 +48,17 @@ class StudentController extends AbstractController
         return $this->render('Back/exam/student/show.html.twig', [
             'exam' => $exam,
             'course' => $exam->getCourse()
+        ]);
+    }
+
+    /**
+     * @Route("/student/project/{id}", name="student_project_show", methods={"GET"})
+     */
+    public function showProject(Project $project): Response
+    {
+        return $this->render('Back/project/student/show.html.twig', [
+            'project' => $project,
+            'course' => $project->getCourse()
         ]);
     }
 }

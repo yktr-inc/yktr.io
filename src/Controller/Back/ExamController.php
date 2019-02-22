@@ -2,17 +2,17 @@
 
 namespace App\Controller\Back;
 
-use App\Entity\Exam;
 use App\Entity\Course;
+use App\Entity\Exam;
 use App\Form\ExamType;
-use App\Repository\ExamRepository;
 use App\Repository\CourseRepository;
+use App\Repository\ExamRepository;
+use App\Service\DBNotificationServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use App\Service\DBNotificationServiceInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ExamController extends AbstractController
 {
@@ -65,9 +65,9 @@ class ExamController extends AbstractController
                 "New exam for ".$courseName,
                 $exam->getId()
             );
-            if($routeName === 'exam_new'){
+            if ($routeName === 'exam_new') {
                 return $this->redirectToRoute('exam_index');
-            }else{
+            } else {
                 return $this->redirectToRoute('teacher_course_show', ['id' => $course->getId()]);
             }
         }

@@ -13,48 +13,34 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\CRUDController;
 
-class PromotionController extends AbstractController
+class PromotionController extends CRUDController
 {
     /**
      * @Route("/school/promotion/", name="promotion_index", methods={"GET"})
      */
-    public function index(Request $request, PromotionRepository $promotionRepository, PaginatorInterface $paginator): Response
+    public function index(PromotionRepository $promotionRepository): Response
     {
-        $page = $request->query->getInt('page', 1);
-
         $promotions = $promotionRepository->findAll();
 
-        $allPromotions = $paginator->paginate($promotions, $page, 10);
+        $crud = $this->indexAction($promotions);
 
-        return $this->render('Back/promotion/index.html.twig', [
-            'promotions' => $allPromotions,
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
      * @Route("/school/promotion/new", name="promotion_new", methods={"GET","POST"})
      */
-    public function new(Request $request, ClassroomRepository $classroomRepository): Response
+    public function new(ClassroomRepository $classroomRepository): Response
     {
-        $promotion = new Promotion();
-        $promotion->addClassroomBulk($classroomRepository->findAll());
+        $crud = $this->newAction(Promotion::class);
 
-        $form = $this->createForm(PromotionType::class, $promotion);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($promotion);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('promotion_index');
+        if($crud->getType() === 'redirect'){
+            return $crud->getRedirect();
         }
 
-        return $this->render('Back/promotion/new.html.twig', [
-            'promotion' => $promotion,
-            'form' => $form->createView(),
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
@@ -70,23 +56,15 @@ class PromotionController extends AbstractController
     /**
      * @Route("/school/promotion/{id}/edit", name="promotion_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Promotion $promotion): Response
+    public function edit(Promotion $promotion): Response
     {
-        $form = $this->createForm(PromotionEditType::class, $promotion);
-        $form->handleRequest($request);
+        $crud = $this->editAction($promotion);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('promotion_index', [
-                'id' => $promotion->getId(),
-            ]);
+        if($crud->getType() === 'redirect'){
+            return $crud->getRedirect();
         }
 
-        return $this->render('Back/promotion/edit.html.twig', [
-            'promotion' => $promotion,
-            'form' => $form->createView(),
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
