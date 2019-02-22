@@ -78,5 +78,7 @@ class IndexController extends CRUDController
         $users = $userRepository->findAll();
         $infos = $this->indexAction($request, $users);
         return $this->render($infos['tpl'], $infos['args']);
+        $this->deleteAction($classroom);
+        return $this->redirectToRoute('classroom_index');
     }
 }

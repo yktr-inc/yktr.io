@@ -23,9 +23,7 @@ class PromotionController extends CRUDController
     public function index(PromotionRepository $promotionRepository): Response
     {
         $promotions = $promotionRepository->findAll();
-
         $crud = $this->indexAction($promotions);
-
         return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
@@ -36,7 +34,7 @@ class PromotionController extends CRUDController
     {
         $crud = $this->newAction(Promotion::class);
 
-        if($crud->getType() === 'redirect'){
+        if ($crud->getType() === 'redirect') {
             return $crud->getRedirect();
         }
 
@@ -60,7 +58,7 @@ class PromotionController extends CRUDController
     {
         $crud = $this->editAction($promotion);
 
-        if($crud->getType() === 'redirect'){
+        if ($crud->getType() === 'redirect') {
             return $crud->getRedirect();
         }
 
@@ -70,14 +68,9 @@ class PromotionController extends CRUDController
     /**
      * @Route("/school/promotion/{id}", name="promotion_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Promotion $promotion): Response
+    public function delete(Promotion $promotion): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$promotion->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($promotion);
-            $entityManager->flush();
-        }
-
+        $this->deleteAction($promotion);
         return $this->redirectToRoute('promotion_index');
     }
 }

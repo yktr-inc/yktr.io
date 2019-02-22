@@ -22,13 +22,12 @@ class CRUDController extends AbstractController
     {
         $request = $this->requestStack->getCurrentRequest();
 
-        $className = self::getClassName($ressource);
+        $obj = empty($options['obj']) ? new $ressource : $options['obj'];
+        $className = self::getObjectName($obj);
         $template = empty($options['template']) ? 'Back/'.$className.'/new.html.twig' : $options['template'];
         $redirect = empty($options['redirect']) ? $className.'_index' : $options['redirect'];
         $formType = empty($formType) ? 'App\\Form\\'.ucfirst($className).'Type' : $formType;
 
-
-        $obj = new $ressource;
         $form = $this->createForm($formType, $obj);
         $form->handleRequest($request);
 
@@ -55,7 +54,6 @@ class CRUDController extends AbstractController
         $template = empty($options['template']) ? 'Back/'.$className.'/edit.html.twig' : $options['template'];
         $redirect = empty($options['redirect']) ? $className.'_show' : $options['redirect'];
         $formType = empty($formType) ? 'App\\Form\\'.ucfirst($className).'Type' : $formType;
-
 
         $form = $this->createForm($formType, $obj);
         $form->handleRequest($request);
@@ -98,7 +96,6 @@ class CRUDController extends AbstractController
 
     public function indexAction($ressources, $options = [])
     {
-
         $request = $this->requestStack->getCurrentRequest();
 
         $className = self::getObjectName($ressources[0]);
@@ -111,7 +108,6 @@ class CRUDController extends AbstractController
         $args = [ $className.'s' => $paginatedObj ];
 
         return new CRUD('view', $template, $args);
-
     }
 
     private static function getObjectName($obj)

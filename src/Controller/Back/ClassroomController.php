@@ -7,27 +7,23 @@ use App\Form\ClassroomType;
 use App\Form\ClassroomEditType;
 use App\Repository\ClassroomRepository;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\CRUDController;
 
-class ClassroomController extends AbstractController
+class ClassroomController extends CRUDController
 {
     /**
      * @Route("/school/classes", name="classroom_index", methods={"GET"})
      */
-    public function index(Request $request, ClassroomRepository $classroomRepository, PaginatorInterface $paginator): Response
+    public function index(ClassroomRepository $classroomRepository): Response
     {
-        $page = $request->query->getInt('page', 1);
-
         $classrooms = $classroomRepository->findAll();
 
-        $allClassrooms = $paginator->paginate($classrooms, $page, 10);
+        $crud = $this->indexAction($classrooms);
 
-        return $this->render('Back/classroom/index.html.twig', [
-            'classrooms' => $allClassrooms,
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
@@ -35,22 +31,13 @@ class ClassroomController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $classroom = new Classroom();
-        $form = $this->createForm(ClassroomType::class, $classroom);
-        $form->handleRequest($request);
+        $crud = $this->newAction(Classroom::class);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($classroom);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('classroom_index');
+        if ($crud->getType() === 'redirect') {
+            return $crud->getRedirect();
         }
 
-        return $this->render('Back/classroom/new.html.twig', [
-            'classroom' => $classroom,
-            'form' => $form->createView(),
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
@@ -68,34 +55,21 @@ class ClassroomController extends AbstractController
      */
     public function edit(Request $request, Classroom $classroom): Response
     {
-        $form = $this->createForm(ClassroomEditType::class, $classroom);
-        $form->handleRequest($request);
+        $crud = $this->editAction($classroom);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('classroom_index', [
-                'id' => $classroom->getId(),
-            ]);
+        if ($crud->getType() === 'redirect') {
+            return $crud->getRedirect();
         }
 
-        return $this->render('Back/classroom/edit.html.twig', [
-            'classroom' => $classroom,
-            'form' => $form->createView(),
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
      * @Route("/school/class/{id}", name="classroom_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Classroom $classroom): Response
+    public function delete(Classroom $classroom): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$classroom->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($classroom);
-            $entityManager->flush();
-        }
-
+        $this->deleteAction($classroom);
         return $this->redirectToRoute('classroom_index');
     }
 }
