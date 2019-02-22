@@ -1,43 +1,45 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
 {% block breadcrumb %}
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
+<li class="breadcrumb-item"><a href="{{ path('dashboard_school') }}">Home</a></li>
+<li class="breadcrumb-item active">Classrooms</li>
 {% endblock %}
 
 {% block body %}
-    <h1>Classroom index</h1>
-
+<div class="card m-auto w-90">
+    <div class="card-header card-header-primary row">
+        <h4 class="card-title col-md-10">Classrooms</h4>
+        <div class="col-md-2">
+            <a class="btn btn-primary" role="button" href="{{ path('classroom_new') }}">Create new</a>
+        </div>
+    </div>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
+                <th>Promotion</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for classroom in classrooms %}
+            {% for classroom in classrooms %}
             <tr>
-                <td>{{ classroom.id }}</td>
                 <td>{{ classroom.name }}</td>
-                <td>{{ classroom.createdAt ? classroom.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ classroom.updatedAt ? classroom.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ classroom.promotion ? classroom.promotion.code : 'No promotion yet' }}</td>
                 <td>
-                    <a class="btn btn-default btn-md" role="button" href="{{ path('classroom_show', {'id': classroom.id}) }}">show</a>
-                    <a class="btn btn-error btn-md" role="button" href="{{ path('classroom_edit', {'id': classroom.id}) }}">edit</a>
+                    <a class="btn btn-sm btn-default" role="button" href="{{ path('classroom_show', {'id': classroom.id}) }}">show</a>
+                    <a class="btn btn-sm btn-warning" role="button" href="{{ path('classroom_edit', {'id': classroom.id}) }}">edit</a>
                 </td>
             </tr>
-        {% else %}
+            {% else %}
             <tr>
                 <td colspan="5">no records found</td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('classroom_new') }}">Create new</a>
+    <div class="navigation">
+        {{ knp_pagination_render(classrooms) }}
+    </div>
+</div>
 {% endblock %}

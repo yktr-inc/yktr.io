@@ -5,9 +5,8 @@ require('../../node_modules/trumbowyg/dist/trumbowyg.min.js');
 import icons from 'trumbowyg/dist/ui/icons.svg';
 
 $('.select-popup').select2({
-  placeholder: 'Select an option',
-  "element": HTMLOptionElement
-
+    placeholder: "Select a state",
+    allowClear: true
 });
 
 
@@ -21,6 +20,8 @@ $('.datepicker').datepicker({
 
 $('.datepicker-full').datepicker({
   todayHighlight: true,
+  format: "dd/mm/yyyy",
+
 });
 
 $.trumbowyg.svgPath = icons;

@@ -1,0 +1,51 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('student') }}
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{{ path('dashboard_teacher') }} ">Home</a></li>
+<li class="breadcrumb-item active">Courses</li>
+{% endblock %}
+
+{% block body %}
+{% for course in courses %}
+<div class="card w-90 course-card">
+
+  <div class="card-body">
+    <div class="row">
+      <h5 class="card-title col-md-8">
+        <a href="{{ path('teacher_course_show', {'id': course.id }) }}">
+          {{ course.title }}
+        </a>
+      </h5>
+      <div class="col-md-4">
+        <p>Class : {{ course.classroom.name }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        {% for exam in course.exams|slice(0, 3) %}
+          <td>{{ exam.type }} : {{ exam.name }}, {{ exam.date|date('d/m/y') }} </td>
+        {% else %}
+          No upcomings exams
+        {% endfor %}
+      </div>
+      <div class="col-md-6">
+        {% for project in course.projects %}
+          <li> Exam </li>
+        {% else %}
+          No ongoing projects
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% else %}
+<div class="card m-auto p-5 w-75">
+  No course at this moment
+</div>
+{% endfor %}
+{% endblock %}

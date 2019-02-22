@@ -23,14 +23,7 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    public function all()
-    {
-        return $this
-        ->createQueryBuilder('u')
-        ->getQuery();
-    }
-
-    public function findByRole($role)
+    public function findByRole($role, $getQuery = false)
     {
         $em = $this->getEntityManager();
 
@@ -40,20 +33,13 @@ class UserRepository extends ServiceEntityRepository
 
         $role = "%".$role."%";
 
-        $query = $em->createNativeQuery("SELECT u.* FROM account u WHERE u.roles::text LIKE :role", $rsm);
+        $query = $em->createNativeQuery("SELECT * FROM account u WHERE u.roles::text LIKE :role", $rsm);
 
         $query->setParameter('role', $role);
 
         return $query->getResult();
     }
 
-    public function allTeachers()
-    {
-    }
-
-    public function allAdministratives()
-    {
-    }
 
     // public function allStudents()
     // {

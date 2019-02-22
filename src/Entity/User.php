@@ -122,7 +122,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="Course", mappedBy="teacher")
      */
-    private $courses;
+    private $taughtCourses;
 
     /**
      * @ORM\OneToMany(targetEntity="Attendance", mappedBy="user")
@@ -181,6 +181,7 @@ class User implements UserInterface
         $this->attendances = new ArrayCollection();
         $this->grades = new ArrayCollection();
         $this->notifications = new ArrayCollection();
+        $this->taughtCourses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -257,11 +258,9 @@ class User implements UserInterface
     {
         return $this->birthdate;
     }
-
     public function setBirthdate(\DateTimeInterface $birthdate): self
     {
         $this->birthdate = $birthdate;
-
         return $this;
     }
 
@@ -285,37 +284,6 @@ class User implements UserInterface
     public function setAvatar(?File $avatar): self
     {
         $this->avatar = $avatar;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Course[]
-     */
-    public function getCourses(): Collection
-    {
-        return $this->courses;
-    }
-
-    public function addCourse(Course $course): self
-    {
-        if (!$this->courses->contains($course)) {
-            $this->courses[] = $course;
-            $course->setTeacher($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCourse(Course $course): self
-    {
-        if ($this->courses->contains($course)) {
-            $this->courses->removeElement($course);
-            // set the owning side to null (unless already changed)
-            if ($course->getTeacher() === $this) {
-                $course->setTeacher(null);
-            }
-        }
 
         return $this;
     }
@@ -398,19 +366,15 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
+    public function getRoles(): ?array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-        return array_unique($roles);
+        return $this->roles;
     }
+
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
         return $this;
     }
 
@@ -513,6 +477,37 @@ class User implements UserInterface
     public function setCity(string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Course[]
+     */
+    public function getTaughtCourses(): Collection
+    {
+        return $this->taughtCourses;
+    }
+
+    public function addTaughtCourse(Course $taughtCourse): self
+    {
+        if (!$this->taughtCourses->contains($taughtCourse)) {
+            $this->taughtCourses[] = $taughtCourse;
+            $taughtCourse->setTeacher($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTaughtCourse(Course $taughtCourse): self
+    {
+        if ($this->taughtCourses->contains($taughtCourse)) {
+            $this->taughtCourses->removeElement($taughtCourse);
+            // set the owning side to null (unless already changed)
+            if ($taughtCourse->getTeacher() === $this) {
+                $taughtCourse->setTeacher(null);
+            }
+        }
 
         return $this;
     }

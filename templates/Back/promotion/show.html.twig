@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="card m-auto w-75">
+<div class="card m-auto w-90">
     <div class="card-header card-header-primary">
         <h4 class="card-title">Promotions</h4>
     </div>
@@ -34,7 +34,7 @@
                     <td>{{ promotion.startedAt ? promotion.startedAt|date('F Y') : '' }}</td>
                 </tr>
                 <tr>
-                    <th>Start</th>
+                    <th>End</th>
                     <td>{{ promotion.finishedAt ? promotion.finishedAt|date('F Y') : '' }}</td>
                 </tr>
             </tbody>

@@ -1,38 +1,70 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
 {% block breadcrumb %}
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
+<li class="breadcrumb-item"><a href="#">Home</a></li>
+<li class="breadcrumb-item"><a href="#">Library</a></li>
+<li class="breadcrumb-item active" aria-current="page">Data</li>
 {% endblock %}
 
 {% block body %}
-    <h1>Classroom</h1>
+<div class="card m-auto w-90">
+    <div class="card-header card-header-primary row">
+        <div class="col-md-10">
+            <h4 class="card-title">{{ classroom.name}}</h4>
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-primary" role="button" href="{{ path('classroom_course_new', { 'id': classroom.id }) }}">Create new</a>
+        </div>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ classroom.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ classroom.name }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ classroom.createdAt ? classroom.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ classroom.updatedAt ? classroom.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('classroom_index') }}">back to list</a>
-
-    <a href="{{ path('classroom_edit', {'id': classroom.id}) }}">edit</a>
-
-    {{ include('Back/classroom/_delete_form.html.twig') }}
+    <div class="card-body">
+        <div class="clear mb-2">
+            <a class="btn btn-default btn-sm" role="button" href="{{ path('classroom_index') }}">back to list</a>
+        </div>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ classroom.id }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ classroom.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <a class="btn btn-warning" role="button" href="{{ path('classroom_edit', {'id': classroom.id}) }}">edit</a>
+            {{ include('Back/classroom/_delete_form.html.twig') }}
+        </div>
+        <div class="mt-2">
+            <h5> Students : </h5>
+            <ul class="list-group">
+                {% for user in classroom.users %}
+                <li class="list-group-item">
+                    {{ user.fullname }}
+                    <a class="btn btn-default btn-sm" href="{{ path('student_show', {'id': user.id}) }}">show</a>
+                    <a class="btn btn-default btn-sm" href="{{ path('student_edit', {'id': user.id}) }}">edit</a>
+                </li>
+                {% else %}
+                <li> No user in this class at this moment </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="mt-2">
+            <h5> Courses : </h5>
+            <ul class="list-group">
+                {% for course in classroom.courses %}
+                <li class="list-group-item">
+                    {{ course.title }}
+                    <a class="btn btn-default btn-sm" href="{{ path('course_show', {'id': course.id}) }}">show</a>
+                    <a class="btn btn-default btn-sm" href="{{ path('course_edit', {'id': course.id}) }}">edit</a>
+                </li>
+                {% else %}
+                No course for this class this moment
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}

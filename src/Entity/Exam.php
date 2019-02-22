@@ -44,10 +44,10 @@ class Exam
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Classroom")
-     * @ORM\JoinColumn(name="classroom_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Course", inversedBy="exams")
+     * @ORM\JoinColumn(name="course_id", referencedColumnName="id")
      */
-    private $classroom;
+    private $course;
 
     /**
      *
@@ -98,14 +98,14 @@ class Exam
         return $this;
     }
 
-    public function getClassroom(): ?Classroom
+    public function getCourse(): ?Course
     {
-        return $this->classroom;
+        return $this->course;
     }
 
-    public function setClassroom(?Classroom $classroom): self
+    public function setCourse(?Course $course): self
     {
-        $this->classroom = $classroom;
+        $this->course = $course;
 
         return $this;
     }

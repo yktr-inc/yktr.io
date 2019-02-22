@@ -1,0 +1,66 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Home</a></li>
+<li class="breadcrumb-item"><a href="{{ path('teacher_course_index') }}">Courses</a></li>
+<li class="breadcrumb-item active">{{ course.title }}</li>
+{% endblock %}
+
+{% block body %}
+<div class="card m-auto w-90">
+    <div class="card-header card-header-primary">
+            <h4 class="card-title">{{ course.title }}</h4>
+    </div>
+    <div class="card-body">
+        <div class="clear mb-2">
+            <a class="btn btn-default btn-sm" role="button" href="{{ path('teacher_course_index') }}">back to my courses</a>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mt-2">
+                    <h5> Exams <a href="{{ path('teacher_exam_new', {'id': course.id}) }}"> New </a></h5>
+                    <ul class="list-group">
+                        {% for exam in course.exams %}
+                        <li class="list-group-item">
+                            <a href="{{ path('teacher_exam_show', { 'id':exam.id }) }}">
+                                {{ exam.type|upper }} : "{{ exam.name }}" on {{ exam.date|date('d/m/y') }}
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="list-group-item"> No exam for this course at this moment </li>
+                        {% endfor %}
+                  </ul>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="mt-2">
+                    <h5> Projects <a href="{{ path('teacher_project_new', {'id': course.id}) }}"> Create </a></h5>
+                    <ul class="list-group">
+                        {% for project in course.projects %}
+                        <li class="list-group-item">
+                            {{ project.name }}
+                        </li>
+                        {% else %}
+                        <li class="list-group-item"> No project for this course at this moment </li>
+                        {% endfor %}
+                  </ul>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="mt-2">
+                    <h5> Grades </h5>
+                    <ul class="list-group">
+                        {% for grade in grades %}
+                        <li class="list-group-item">
+                            {{ grade.id }}
+                        </li>
+                        {% else %}
+                        <li class="list-group-item"> No grades for this course at this moment </li>
+                        {% endfor %}
+                  </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

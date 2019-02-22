@@ -5,10 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\DateTrait;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FileRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @Vich\Uploadable
  */
 class File
 {
@@ -22,13 +24,9 @@ class File
     private $id;
 
     /**
-     * @Assert\NotBlank(
-     *     message = "Le chemin vers le fichier ne devrait pas être vide"
-     * )
-     *
-     * @ORM\Column(type="string", nullable=false)
+     * @Vich\UploadableField(mapping="file", fileNameProperty="file")
      */
-    private $path;
+    private $file;
 
     /**
      * @Assert\Choice(
@@ -51,16 +49,20 @@ class File
         return $this->id;
     }
 
-    public function getPath(): ?string
+    public function setFile(File $devis = null)
     {
-        return $this->path;
-    }
+        $this->devisFile = $devis;
 
-    public function setPath(string $path): self
-    {
-        $this->path = $path;
+        if ($devis) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
 
         return $this;
+    }
+
+    public function getFile()
+    {
+        return $this->devisFile;
     }
 
     public function getType(): ?string

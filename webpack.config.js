@@ -15,6 +15,7 @@ Encore
     .addStyleEntry('notifications', './assets/scss/notifications.scss')
     .addStyleEntry('login', './assets/scss/login.scss')
     .addStyleEntry('crud', './assets/scss/crud.scss')
+    .addStyleEntry('student', './assets/scss/student.scss')
     .addStyleEntry('dashboard',
         [
             './assets/scss/app.scss',

@@ -52,7 +52,7 @@ class ExamRepository extends ServiceEntityRepository
     public function findLastExams($limit, Classroom $classroom)
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.classroom = :classroom')
+            ->andWhere('e.course = :course')
             ->setParameter('classroom', $classroom)
             ->orderBy('e.createdAt', 'DESC')
             ->setMaxResults($limit)

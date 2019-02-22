@@ -21,6 +21,11 @@ class UserProfileType extends AbstractType
             ->add('number', TextType::class)
             ->add('streetName', TextType::class)
             ->add('postalCode', TextType::class)
+            ->add('avatar', EntityType::class, [
+                'class' => Classroom::class,
+                'choice_label' => 'name',
+                'required' => false,
+            ])
             ->add('city', TextType::class)
         ;
     }
@@ -29,7 +34,7 @@ class UserProfileType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'validation_groups' => array('edit'),
+            'validation_groups' => ['edit'],
         ]);
     }
 }

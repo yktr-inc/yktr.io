@@ -1,0 +1,37 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{ path('student_course_index') }}">Course</a></li>
+      <li class="breadcrumb-item"><a href="{{ path('student_course_show', { 'id': course.id }) }}">{{ course.title }}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ exam.type|upper}}: {{ exam.name }} </li>
+{% endblock %}
+
+{% block body %}
+<div class="card m-auto w-90">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title">{{ exam.name }}</h4>
+    </div>
+    <div class="card-body">
+        <div class="clear mb-2">
+            <a class="btn btn-default btn-sm" role="button" href="{{ path('student_course_show', { 'id': course.id}) }}">back to list</a>
+        </div>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Type</th>
+                <td>{{ exam.type }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ exam.name }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ exam.date ? exam.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+{% endblock %}

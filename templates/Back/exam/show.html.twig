@@ -7,8 +7,14 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Exam</h1>
-
+<div class="card m-auto w-90">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title">{{ exam.name }}</h4>
+    </div>
+    <div class="card-body">
+        <div class="clear mb-2">
+            <a class="btn btn-default btn-sm" role="button" href="{{ path('exam_index') }}">back to list</a>
+        </div>
     <table class="table">
         <tbody>
             <tr>
@@ -27,14 +33,6 @@
                 <th>Date</th>
                 <td>{{ exam.date ? exam.date|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ exam.createdAt ? exam.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ exam.updatedAt ? exam.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
         </tbody>
     </table>
 
@@ -43,4 +41,6 @@
     <a href="{{ path('exam_edit', {'id': exam.id}) }}">edit</a>
 
     {{ include('Back/exam/_delete_form.html.twig') }}
+</div>
+</div>
 {% endblock %}

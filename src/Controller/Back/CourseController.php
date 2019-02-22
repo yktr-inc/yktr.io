@@ -4,48 +4,57 @@ namespace App\Controller\Back;
 
 use App\Entity\Course;
 use App\Form\CourseType;
+use App\Form\CourseClassroomType;
 use App\Repository\CourseRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ClassroomRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\CRUDController;
 
-class CourseController extends AbstractController
+class CourseController extends CRUDController
 {
     /**
      * @Route("/school/course/", name="course_index", methods={"GET"})
      */
     public function index(CourseRepository $courseRepository): Response
     {
-        return $this->render('Back/course/index.html.twig', [
-            'courses' => $courseRepository->findAll(),
-        ]);
+        $courses = $courseRepository->findAll();
+
+        $crud = $this->indexAction($courses);
+
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
      * @Route("/school/course/new", name="course_new", methods={"GET","POST"})
+     * @Route("/school/classroom/{id}/newCourse", name="classroom_course_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ClassroomRepository $classroomRepository): Response
     {
         $course = new Course();
+        $options = [];
 
         $this->denyAccessUnlessGranted('create', $course);
 
-        $form = $this->createForm(CourseType::class, $course);
-        $form->handleRequest($request);
+        $classroomId = $request->attributes->get('id');
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($course);
-            $entityManager->flush();
+        $formType = isset($classroomId) ? CourseClassroomType::class : CourseType::class;
 
-            return $this->redirectToRoute('course_index');
+        if (isset($classroomId)) {
+            $classroom = $classroomRepository->findOneById($classroomId);
+            $course->setClassroom($classroom);
+            $options['obj'] = $course;
         }
 
-        return $this->render('Back/course/new.html.twig', [
-            'course' => $course,
-            'form' => $form->createView(),
-        ]);
+        $crud = $this->newAction($course, $formType, $options);
+
+        if ($crud->getType() === 'redirect') {
+            return $crud->getRedirect();
+        }
+
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
@@ -65,21 +74,13 @@ class CourseController extends AbstractController
     {
         $this->denyAccessUnlessGranted('edit', $course);
 
-        $form = $this->createForm(CourseType::class, $course);
-        $form->handleRequest($request);
+        $crud = $this->editAction($course);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('course_index', [
-                'id' => $course->getId(),
-            ]);
+        if ($crud->getType() === 'redirect') {
+            return $crud->getRedirect();
         }
 
-        return $this->render('Back/course/edit.html.twig', [
-            'course' => $course,
-            'form' => $form->createView(),
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
@@ -89,11 +90,7 @@ class CourseController extends AbstractController
     {
         $this->denyAccessUnlessGranted('delete', $course);
 
-        if ($this->isCsrfTokenValid('delete'.$course->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($course);
-            $entityManager->flush();
-        }
+        $this->deleteAction($classroom);
 
         return $this->redirectToRoute('course_index');
     }

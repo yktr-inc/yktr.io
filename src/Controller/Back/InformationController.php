@@ -10,13 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/dashboard/information")
- */
 class InformationController extends AbstractController
 {
     /**
-     * @Route("/", name="information_index", methods={"GET"})
+     * @Route("/school/information", name="information_index", methods={"GET"})
      */
     public function index(InformationRepository $informationRepository): Response
     {
@@ -26,7 +23,7 @@ class InformationController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="information_new", methods={"GET","POST"})
+     * @Route("/school/information/new", name="information_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,7 +46,7 @@ class InformationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="information_show", methods={"GET"})
+     * @Route("/school/information/{id}", name="information_show", methods={"GET"})
      */
     public function show(Information $information): Response
     {
@@ -59,7 +56,7 @@ class InformationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="information_edit", methods={"GET","POST"})
+     * @Route("/school/information/{id}/edit", name="information_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Information $information): Response
     {
@@ -81,7 +78,7 @@ class InformationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="information_delete", methods={"DELETE"})
+     * @Route("/school/information/{id}", name="information_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Information $information): Response
     {

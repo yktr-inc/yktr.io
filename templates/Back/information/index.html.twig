@@ -6,36 +6,30 @@
 {% endblock %}
 
 {% block body %}
-<div class="card m-auto w-75">
+<div class="card m-auto w-90">
     <div class="card-header card-header-primary row">
         <h4 class="card-title col-md-10">Informations</h4>
         <div class="col-md-2">
             <a class="btn btn-primary" role="button" href="{{ path('information_new') }}">Create new</a>
         </div>
     </div>
-    <table class="table">
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Title</th>
                 <th>Content</th>
                 <th>Author</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>PublishedAt</th>
-                <th>actions</th>
+                <th>Published</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for information in information %}
             <tr>
-                <td>{{ information.id }}</td>
                 <td>{{ information.title }}</td>
                 <td>{{ information.content|raw }}</td>
                 <td>{{ information.owner.firstname }} {{ information.owner.lastname }}</td>
-                <td>{{ information.createdAt ? information.createdAt|ago : '' }}</td>
-                <td>{{ information.updatedAt ? information.updatedAt|ago : '' }}</td>
-                <td>{{ information.publishedAt ? information.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ information.publishedAt ? information.publishedAt|date('d/m/Y') : '' }}</td>
                 <td>
                     <a class="btn btn-default btn-md" role="button" href="{{ path('information_show', {'id': information.id}) }}">show</a>
                     <a class="btn btn-warning btn-md" role="button" href="{{ path('information_edit', {'id': information.id}) }}">edit</a>
@@ -43,7 +37,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">No informations found</td>
             </tr>
         {% endfor %}
         </tbody>
