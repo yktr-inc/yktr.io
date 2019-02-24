@@ -11,6 +11,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
+use App\Service\RedirectUserServiceInterface;
 
 class IndexController extends CRUDController
 {
@@ -18,13 +19,11 @@ class IndexController extends CRUDController
      * @Route("/", methods={"GET"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(
-    DBNotificationServiceInterface $notifService,
-    MailerServiceInterface $mailerService,
-    UserRepository $userRepository,
-    Security $security
-) {
-        //dd($this->getUser());
-        return $this->redirectToRoute('dashboard');
+    public function index(RedirectUserServiceInterface $redirectUser)
+    {
+        if (!is_null($redirectUser->redirect())) {
+            return $redirectUser->redirect();
+        }
+        return $this->redirectToRoute('app_front_security_login');
     }
 }
