@@ -65,7 +65,7 @@ class Project
 
 
     /**
-     * @ORM\OneToMany(targetEntity="ProjectStep", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="ProjectStep", mappedBy="project", cascade={"persist"})
      */
     private $projectSteps;
 

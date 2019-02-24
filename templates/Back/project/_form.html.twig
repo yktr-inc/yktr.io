@@ -4,7 +4,7 @@
     {{ form_row(form.description) }}
     <ul class="steps" data-prototype="{{ form_widget(form.projectSteps.vars.prototype)|e('html_attr') }}">
     {% for step in form.projectSteps %}
-        <li>{{ form_widget(step.order) }}</li>
+        <li>{{ form_widget(step.stepOrder) }}</li>
         <li>{{ form_widget(step.name) }}</li>
         <li>{{ form_widget(step.endAt) }}</li>
         <li>{{ form_widget(step.description) }}</li>

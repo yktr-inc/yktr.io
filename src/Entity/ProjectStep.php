@@ -23,7 +23,7 @@ class ProjectStep
     /**
      * @ORM\Column(type="integer", nullable=false)
      */
-    private $order;
+    private $stepOrder;
 
     /**
      * @ORM\Column(type="string")
@@ -108,6 +108,18 @@ class ProjectStep
     public function setProject(?Project $project): self
     {
         $this->project = $project;
+
+        return $this;
+    }
+
+    public function getStepOrder(): ?string
+    {
+        return $this->stepOrder;
+    }
+
+    public function setStepOrder(string $stepOrder): self
+    {
+        $this->stepOrder = $stepOrder;
 
         return $this;
     }

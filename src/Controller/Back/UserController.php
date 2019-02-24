@@ -75,7 +75,7 @@ class UserController extends CRUDController
      */
     public function edit(User $user): Response
     {
-        $crud = $this->editAction(User::class, UserEditType::class);
+        $crud = $this->editAction($user, UserEditType::class);
 
         if ($crud->getType() === 'redirect') {
             return $crud->getRedirect();

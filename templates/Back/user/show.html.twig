@@ -12,12 +12,18 @@
 <li class="breadcrumb-item active">{{ user.username }}</li>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
+
 {% block body %}
-<div class="card m-auto w-90">
-    <div class="card-header card-header-primary">
-        <h4 class="card-title">{{ user.fullname }}</h4>
-    </div>
-    <div class="card-body">
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+        <div class="card-header card-header-{{ colorClass }}">
+            <h4 class="card-title">{{ user.fullname }}</a></h4>
+        </div>
+        <div class="card-body table-responsive">
         <div class="clear mb-2">
           {% if app.request.attributes.get( '_route' ) == "user_show" %}
           <a class="btn btn-default btn-sm" role="button" href="{{ path('user_index') }}">back to list</a>
@@ -62,5 +68,6 @@
             {{ include('Back/user/_delete_form.html.twig') }}
         </div>
     </div>
+</div>
 </div>
 {% endblock %}

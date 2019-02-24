@@ -62,6 +62,8 @@ class ProjectController extends CRUDController
                 $project->getId()
             );
 
+            $this->addFlash('success', 'Project created !');
+
             if ($request->attributes->get('id')) {
                 return $this->redirectToRoute('teacher_course_index', ['id' => $course->getId()]);
             }
@@ -92,6 +94,7 @@ class ProjectController extends CRUDController
         $crud = $this->editAction($project);
 
         if ($crud->getType() === 'redirect') {
+            $this->addFlash('success', 'Project edited !');
             return $crud->getRedirect();
         }
 
@@ -104,6 +107,7 @@ class ProjectController extends CRUDController
     public function delete(Request $request, Project $project): Response
     {
         $this->deleteAction($project);
+        $this->addFlash('warning', 'Project deleted !');
         return $this->redirectToRoute('project_index');
     }
 }
