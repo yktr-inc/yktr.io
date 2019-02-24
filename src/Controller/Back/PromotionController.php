@@ -23,14 +23,14 @@ class PromotionController extends CRUDController
     public function index(PromotionRepository $promotionRepository): Response
     {
         $promotions = $promotionRepository->findAll();
-        $crud = $this->indexAction($promotions);
+        $crud = $this->indexAction($promotions, Promotion::class);
         return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
      * @Route("/school/promotion/new", name="promotion_new", methods={"GET","POST"})
      */
-    public function new(ClassroomRepository $classroomRepository): Response
+    public function new(): Response
     {
         $crud = $this->newAction(Promotion::class);
 

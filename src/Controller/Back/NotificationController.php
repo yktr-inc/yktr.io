@@ -10,26 +10,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\CRUDController;
 
 /**
  * @Route("/dashboard/notifications")
  */
-class NotificationController extends AbstractController
+class NotificationController extends CRUDController
 {
     /**
      * @Route("/", name="notification_index", methods={"GET"})
      */
-    public function index(Request $request, NotificationRepository $notificationRepository, PaginatorInterface $paginator): Response
+    public function index(NotificationRepository $notificationRepository): Response
     {
-        $page = $request->query->getInt('page', 1);
-
         $notifications = $notificationRepository->findBy(['user'=>$this->getUser()]);
 
-        $allNotifications = $paginator->paginate($notifications, $page, 10);
+        $crud = $this->indexAction($notifications, Notification::class);
 
-        return $this->render('Back/notification/index.html.twig', [
-            'allNotifications' => $allNotifications
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
@@ -45,14 +42,9 @@ class NotificationController extends AbstractController
     /**
      * @Route("/{id}", name="notification_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Notification $notification): Response
+    public function delete(Notification $notification): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$notification->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($notification);
-            $entityManager->flush();
-        }
-
+        $this->deleteAction($notification);
         return $this->redirectToRoute('notification_index');
     }
 }

@@ -41,6 +41,18 @@ class Course
     private $status;
 
     /**
+     *  @Assert\Length(
+     *      min = 2,
+     *      max = 500,
+     *      minMessage = "La description du cours doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "La description du cours ne peut pas faire plus de {{ limit }} caractères"
+     * )
+     *
+     * @ORM\Column(type="text", nullable=false)
+     */
+    private $description;
+
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="taughtCourses")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
@@ -218,6 +230,18 @@ class Course
                 $project->setCourse(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

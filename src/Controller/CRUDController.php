@@ -7,13 +7,16 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Utils\CRUD;
+use App\Service\DBNotificationServiceInterface;
 
 class CRUDController extends AbstractController
 {
     protected $requestStack;
 
-    public function __construct(PaginatorInterface $paginator, RequestStack $requestStack)
-    {
+    public function __construct(
+        PaginatorInterface $paginator,
+        RequestStack $requestStack
+    ) {
         $this->paginator = $paginator;
         $this->requestStack = $requestStack;
     }
@@ -94,11 +97,11 @@ class CRUDController extends AbstractController
         return new CRUD('view', $template, $args);
     }
 
-    public function indexAction($ressources, $options = [])
+    public function indexAction($ressources, $class, $options = [])
     {
         $request = $this->requestStack->getCurrentRequest();
 
-        $className = self::getObjectName($ressources[0]);
+        $className = self::getClassName($class);
         $perPage = empty($options['perPage']) ? 10 : $options['perPage'];
         $template = empty($options['template']) ? 'Back/'.$className.'/index.html.twig' : $options['template'];
 

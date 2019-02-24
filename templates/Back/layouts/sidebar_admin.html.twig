@@ -70,6 +70,14 @@
                     <p>Events</p>
                 </a>
             </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'setting' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('setting_index') }}">
+                    <i class="material-icons">event_note</i>
+                    <p>Settings</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

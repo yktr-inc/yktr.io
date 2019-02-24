@@ -31,8 +31,8 @@
                 <td>{{ exam.name }}</td>
             </tr>
             <tr>
-                <th>Date</th>
-                <td>{{ exam.date ? exam.date|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Description</th>
+                <td>{{ exam.description|raw }}</td>
             </tr>
         </tbody>
     </table>

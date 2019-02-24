@@ -63,6 +63,17 @@ class Project
      */
     private $course;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="ProjectStep", mappedBy="project")
+     */
+    private $projectSteps;
+
+    public function __construct()
+    {
+        $this->projectSteps = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -112,6 +123,37 @@ class Project
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjectStep[]
+     */
+    public function getProjectSteps(): Collection
+    {
+        return $this->projectSteps;
+    }
+
+    public function addProjectStep(ProjectStep $projectStep): self
+    {
+        if (!$this->projectSteps->contains($projectStep)) {
+            $this->projectSteps[] = $projectStep;
+            $projectStep->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjectStep(ProjectStep $projectStep): self
+    {
+        if ($this->projectSteps->contains($projectStep)) {
+            $this->projectSteps->removeElement($projectStep);
+            // set the owning side to null (unless already changed)
+            if ($projectStep->getProject() === $this) {
+                $projectStep->setProject(null);
+            }
+        }
 
         return $this;
     }

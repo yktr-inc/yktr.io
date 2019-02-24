@@ -1,0 +1,46 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Library</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Data</li>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('student') }}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
+{% block body %}
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+        <div class="card-header card-header-{{ colorClass }}">
+            <h4 class="card-title">Projects</h4>
+        </div>
+        <div class="card-body table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for project in projects %}
+            <tr>
+                <td>{{ project.id }}</td>
+                <td>{{ project.type }}</td>
+                <td>{{ project.name }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">No project at this moment</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+{% endblock %}

@@ -59,12 +59,14 @@ class ExamController extends AbstractController
             $entityManager->flush();
             $recipients = $exam->getCourse()->getClassroom()->getUsers();
             $courseName = $exam->getCourse()->getTitle();
+
             $notifService->notify(
                 "EXAM",
                 $recipients,
                 "New exam for ".$courseName,
                 $exam->getId()
             );
+
             if ($routeName === 'exam_new') {
                 return $this->redirectToRoute('exam_index');
             } else {
@@ -94,21 +96,13 @@ class ExamController extends AbstractController
      */
     public function edit(Request $request, Exam $exam): Response
     {
-        $form = $this->createForm(ExamType::class, $exam);
-        $form->handleRequest($request);
+        $crud = $this->editAction($exam);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('exam_index', [
-                'id' => $exam->getId(),
-            ]);
+        if ($crud->getType() === 'redirect') {
+            return $crud->getRedirect();
         }
 
-        return $this->render('Back/exam/edit.html.twig', [
-            'exam' => $exam,
-            'form' => $form->createView(),
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
@@ -116,12 +110,7 @@ class ExamController extends AbstractController
      */
     public function delete(Request $request, Exam $exam): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$exam->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($exam);
-            $entityManager->flush();
-        }
-
+        $this->deleteAction($exam);
         return $this->redirectToRoute('exam_index');
     }
 }

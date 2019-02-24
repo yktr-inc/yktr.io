@@ -12,19 +12,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Controller\CRUDController;
 
-class UserController extends AbstractController
+class UserController extends CRUDController
 {
     /**
      * @Route("/school/admin/users", name="user_index", methods="GET")
      * @Route("/school/teachers", name="teacher_index", methods="GET")
      * @Route("/school/students", name="student_index", methods="GET")
      */
-    public function index(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request, UserRepository $userRepository): Response
     {
         $routeName = $request->get('_route');
-
-        $page = $request->query->getInt('page', 1);
 
         switch ($routeName) {
             case 'teacher_index':
@@ -38,9 +37,8 @@ class UserController extends AbstractController
                 break;
         }
 
-        $allUsers = $paginator->paginate($users, $page, 10);
-
-        return $this->render('Back/user/index.html.twig', ['users' => $allUsers]);
+        $crud = $this->indexAction($users, User::class);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
 
@@ -49,24 +47,15 @@ class UserController extends AbstractController
      * @Route("/school/teacher/new", name="teacher_new", methods="GET|POST")
      * @Route("/school/student/new", name="student_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(): Response
     {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+        $crud = $this->newAction(User::class);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-
-            return $this->redirectToRoute('user_index');
+        if ($crud->getType() === 'redirect') {
+            return $crud->getRedirect();
         }
 
-        return $this->render('Back/user/new.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
@@ -84,34 +73,23 @@ class UserController extends AbstractController
      * @Route("/school/teacher/{id}/edit", name="teacher_edit", methods="GET|POST")
      * @Route("/school/student/{id}/edit", name="student_edit", methods="GET|POST")
      */
-    public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
+    public function edit(User $user): Response
     {
-        $form = $this->createForm(UserEditType::class, $user);
-        $form->handleRequest($request);
+        $crud = $this->editAction(User::class, UserEditType::class);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('user_index', ['id' => $user->getId()]);
+        if ($crud->getType() === 'redirect') {
+            return $crud->getRedirect();
         }
 
-        return $this->render('Back/user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
      * @Route("/school/admin/user/{id}", name="user_delete", methods="DELETE")
      */
-    public function delete(Request $request, User $user): Response
+    public function delete(User $user): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($user);
-            $em->flush();
-        }
-
+        $this->deleteAction($user);
         return $this->redirectToRoute('user_index');
     }
 }

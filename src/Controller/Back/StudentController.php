@@ -7,6 +7,7 @@ use App\Entity\Exam;
 use App\Entity\Project;
 use App\Form\CourseType;
 use App\Repository\CourseRepository;
+use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,6 +60,30 @@ class StudentController extends AbstractController
         return $this->render('Back/project/student/show.html.twig', [
             'project' => $project,
             'course' => $project->getCourse()
+        ]);
+    }
+
+    /**
+     * @Route("/student/projects", name="student_project_index", methods={"GET"})
+     */
+    public function indexProject(ProjectRepository $projectRepository): Response
+    {
+        $classroom = $this->getUser()->getClassroom();
+
+        return $this->render('Back/project/student/index.html.twig', [
+            'projects' => $projectRepository->findClassroomProjects('project', $classroom)
+        ]);
+    }
+
+    /**
+     * @Route("/student/tutorials", name="student_tutorial_index", methods={"GET"})
+     */
+    public function indexTutorial(ProjectRepository $projectRepository): Response
+    {
+        $classroom = $this->getUser()->getClassroom();
+
+        return $this->render('Back/project/student/index.html.twig', [
+            'projects' => $projectRepository->findClassroomProjects('tutorial', $classroom)
         ]);
     }
 }

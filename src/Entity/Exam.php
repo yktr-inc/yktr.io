@@ -44,6 +44,18 @@ class Exam
     private $name;
 
     /**
+     *  @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "La description de l'examen doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "La description de l'examen ne peut pas faire plus de {{ limit }} caractères"
+     * )
+     *
+     * @ORM\Column(type="text", nullable=false)
+     */
+    private $description;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Course", inversedBy="exams")
      * @ORM\JoinColumn(name="course_id", referencedColumnName="id")
      */
@@ -106,6 +118,18 @@ class Exam
     public function setCourse(?Course $course): self
     {
         $this->course = $course;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

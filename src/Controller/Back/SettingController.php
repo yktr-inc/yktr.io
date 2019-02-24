@@ -9,8 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\CRUDController;
 
-class SettingController extends AbstractController
+class SettingController extends CRUDController
 {
     /**
      * @Route("/admin/setting", name="setting_index", methods={"GET"})
@@ -26,22 +27,14 @@ class SettingController extends AbstractController
     /**
      * @Route("/admin/setting/{id}/edit", name="setting_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Setting $setting): Response
+    public function edit(Setting $setting): Response
     {
-        $form = $this->createForm(SettingType::class, $setting);
-        $form->handleRequest($request);
+        $crud = $this->editAction($setting);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('setting_index', [
-                'id' => $setting->getId(),
-            ]);
+        if ($crud->getType() === 'redirect') {
+            return $crud->getRedirect();
         }
 
-        return $this->render('Back/setting/edit.html.twig', [
-            'setting' => $setting,
-            'form' => $form->createView(),
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 }

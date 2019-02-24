@@ -22,7 +22,7 @@ class CourseController extends CRUDController
     {
         $courses = $courseRepository->findAll();
 
-        $crud = $this->indexAction($courses);
+        $crud = $this->indexAction($courses, Course::class);
 
         return $this->render($crud->getTemplate(), $crud->getArgs());
     }
@@ -70,7 +70,7 @@ class CourseController extends CRUDController
     /**
      * @Route("/school/course/{id}/edit", name="course_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Course $course): Response
+    public function edit(Course $course): Response
     {
         $this->denyAccessUnlessGranted('edit', $course);
 
@@ -86,11 +86,11 @@ class CourseController extends CRUDController
     /**
      * @Route("/school/course/{id}", name="course_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Course $course): Response
+    public function delete(Course $course): Response
     {
         $this->denyAccessUnlessGranted('delete', $course);
 
-        $this->deleteAction($classroom);
+        $this->deleteAction($course);
 
         return $this->redirectToRoute('course_index');
     }

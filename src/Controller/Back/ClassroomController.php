@@ -21,7 +21,7 @@ class ClassroomController extends CRUDController
     {
         $classrooms = $classroomRepository->findAll();
 
-        $crud = $this->indexAction($classrooms);
+        $crud = $this->indexAction($classrooms, Classroom::class);
 
         return $this->render($crud->getTemplate(), $crud->getArgs());
     }
@@ -53,7 +53,7 @@ class ClassroomController extends CRUDController
     /**
      * @Route("/school/class/{id}/edit", name="classroom_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Classroom $classroom): Response
+    public function edit(Classroom $classroom): Response
     {
         $crud = $this->editAction($classroom);
 

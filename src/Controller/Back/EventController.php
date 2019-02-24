@@ -6,53 +6,40 @@ use App\Entity\Event;
 use App\Form\EventType;
 use App\Repository\EventRepository;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\CRUDController;
 
 /**
  * @Route("/event")
  */
-class EventController extends AbstractController
+class EventController extends CRUDController
 {
     /**
      * @Route("/", name="event_index", methods={"GET"})
      */
-    public function index(Request $request, EventRepository $eventRepository, PaginatorInterface $paginator): Response
+    public function index(EventRepository $eventRepository): Response
     {
-        $page = $request->query->getInt('page', 1);
-
         $events = $eventRepository->findAll();
 
-        $allEvents = $paginator->paginate($events, $page, 10);
+        $crud = $this->indexAction($events);
 
-        return $this->render('Back/event/index.html.twig', [
-            'events' => $allEvents,
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
      * @Route("/new", name="event_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(): Response
     {
-        $event = new Event();
-        $form = $this->createForm(EventType::class, $event);
-        $form->handleRequest($request);
+        $crud = $this->newAction(Event::class);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($event);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('event_index');
+        if ($crud->getType() === 'redirect') {
+            return $crud->getRedirect();
         }
 
-        return $this->render('Back/event/new.html.twig', [
-            'event' => $event,
-            'form' => $form->createView(),
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
@@ -68,35 +55,23 @@ class EventController extends AbstractController
     /**
      * @Route("/{id}/edit", name="event_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Event $event): Response
+    public function edit(Event $event): Response
     {
-        $form = $this->createForm(EventType::class, $event);
-        $form->handleRequest($request);
+        $crud = $this->editAction($event);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('event_index', [
-                'id' => $event->getId(),
-            ]);
+        if ($crud->getType() === 'redirect') {
+            return $crud->getRedirect();
         }
 
-        return $this->render('Back/event/edit.html.twig', [
-            'event' => $event,
-            'form' => $form->createView(),
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
      * @Route("/{id}", name="event_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Event $event): Response
+    public function delete(Event $event): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($event);
-            $entityManager->flush();
-        }
+        $this->deleteAction($event);
 
         return $this->redirectToRoute('event_index');
     }

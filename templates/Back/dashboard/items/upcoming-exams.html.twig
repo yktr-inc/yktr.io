@@ -8,6 +8,7 @@
                 {% if lastExams is not empty %}
                 <thead>
                     <tr>
+                        <th>Name</th>
                         <th>Course</th>
                         <th>Date</th>
                     </tr>
@@ -16,9 +17,10 @@
                 <tbody>
                     {% for exam in lastExams %}
                     <tr>
-                        <td>{{ exam.getName }}</td>
+                        <td>{{ exam.name }}</td>
+                        <td>{{ exam.course.title }}</td>
                         <td>
-                            <span class="card-title">{{ exam.getDate|ago }}</span>
+                            <span class="card-title">{{ exam.getDate|date('d/m/Y') }}</span>
                         </td>
                     </tr>
                     {% else %}

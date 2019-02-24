@@ -6,6 +6,7 @@ use App\Entity\Exam;
 use App\Entity\Classroom;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 /**
  * @method Exam|null find($id, $lockMode = null, $lockVersion = null)
@@ -51,13 +52,25 @@ class ExamRepository extends ServiceEntityRepository
 
     public function findLastExams($limit, Classroom $classroom)
     {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.course = :course')
-            ->setParameter('classroom', $classroom)
-            ->orderBy('e.createdAt', 'DESC')
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult()
-        ;
+        $em = $this->getEntityManager();
+
+        $rsm = new ResultSetMappingBuilder($em);
+
+        $rsm->addRootEntityFromClassMetadata(Exam::class, 'e');
+
+        $query = $em->createNativeQuery(
+            "
+            SELECT e.* FROM exam e
+            JOIN course co ON e.course_id = co.id
+            JOIN classroom cl ON co.classroom_id = cl.id
+            WHERE cl.id = :classroom
+            ORDER BY e.date DESC
+            LIMIT ".$limit,
+        $rsm
+        );
+
+        $query->setParameter('classroom', $classroom);
+
+        return $query->getResult();
     }
 }

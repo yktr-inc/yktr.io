@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ExamType extends AbstractType
 {
@@ -29,6 +30,12 @@ class ExamType extends AbstractType
                 'data' => new \DateTime(),
                 'attr' => [
                     'class' => 'datepicker-full'
+                ]
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => false,
+                'attr' => [
+                    'class' => 'editable',
                 ]
             ])
         ;

@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Repository\UserRepository;
@@ -28,6 +29,12 @@ class CourseClassroomType extends AbstractType
         ->add('teacher', EntityType::class, [
             'class' => User::class,
             'choice_label' => 'username',
+        ])
+        ->add('description', TextareaType::class, [
+            'label' => false,
+            'attr' => [
+                'class' => 'editable',
+            ]
         ])
         ;
     }
