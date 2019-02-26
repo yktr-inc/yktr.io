@@ -36,3 +36,7 @@ services:
             - { name: doctrine.event_listener, event: prePersist }
     crud.service:
         class: App\Service\CRUDService
+
+    App\Service\FileUploader:
+      arguments:
+        $targetDirectory: '%kernel.project_dir%/public/uploads/documents'
