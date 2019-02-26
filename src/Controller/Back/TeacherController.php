@@ -121,5 +121,4 @@ class TeacherController extends AbstractController
             'course' => $project->getCourse(),
         ]);
     }
-
 }

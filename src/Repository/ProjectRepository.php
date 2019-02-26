@@ -102,7 +102,8 @@ class ProjectRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    public function findByTeacher($type, User $teacher){
+    public function findByTeacher($type, User $teacher)
+    {
         $em = $this->getEntityManager();
 
         $rsm = new ResultSetMappingBuilder($em);
