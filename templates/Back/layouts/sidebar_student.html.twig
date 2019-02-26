@@ -34,16 +34,24 @@
                 {{ (app.request.attributes.get( '_route' ) starts with 'student_grades' ? 'active' : '') }}"
             >
                 <a class="nav-link" href="#">
-                    <i class="material-icons">rate_review</i>
+                    <i class="material-icons">account_balance</i>
                     <p>Grades & Attendance</p>
                 </a>
             </li>
             <li class="nav-item
-                {{ (app.request.attributes.get( '_route' ) starts with 'student_projects' ? 'active' : '') }}"
+                {{ (app.request.attributes.get( '_route' ) starts with 'student_project' ? 'active' : '') }}"
             >
-                <a class="nav-link" href="#">
-                    <i class="material-icons">question_answer</i>
+                <a class="nav-link" href="{{ path('student_project_index') }}">
+                    <i class="material-icons">location_city</i>
                     <p>Projets</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'student_tutorial' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('student_project_index') }}">
+                    <i class="material-icons">explore</i>
+                    <p>Tutorials</p>
                 </a>
             </li>
             <li class="nav-item
@@ -57,8 +65,16 @@
                 {{ (app.request.attributes.get( '_route' ) starts with 'student_files' ? 'active' : '') }}"
             >
                 <a class="nav-link" href="#">
-                    <i class="material-icons">event_note</i>
+                    <i class="material-icons">folder_open</i>
                     <p>Files</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'student_files' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="#">
+                    <i class="material-icons">cloud</i>
+                    <p>Spaces</p>
                 </a>
             </li>
         </ul>

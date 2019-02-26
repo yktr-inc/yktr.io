@@ -14,12 +14,18 @@
 
 {% block title %}Register!{% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
 {% block body %}
-<div class="card m-auto w-90">
-  <div class="card-header card-header-primary">
-    <h4 class="card-title">Add a new user</h4>
-  </div>
-  <div class="card-body">
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+        <div class="card-header card-header-{{ colorClass }}">
+            <h4 class="card-title">Add a user</a></h4>
+        </div>
+        <div class="card-body table-responsive">
+
     <div class="clear mb-2">
      {% if app.request.attributes.get( '_route' ) == "user_new" %}
      <a class="btn btn-default btn-sm" role="button" href="{{ path('user_index') }}">back to list</a>
@@ -31,4 +37,6 @@
    </div>
    {{ include('Back/user/_form.html.twig') }}
  </div>
+</div>
+</div>
  {% endblock %}

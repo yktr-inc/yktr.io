@@ -6,16 +6,16 @@ use App\Form\UserProfileType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Controller\CRUDController;
 
 /**
- * @Route("/dashboard/profile")
+ * @Route("/profile")
  */
-class ProfileController extends AbstractController
+class ProfileController extends CRUDController
 {
 
     /**
@@ -29,20 +29,19 @@ class ProfileController extends AbstractController
     /**
      * @Route("/edit", name="user_profile_edit", methods="GET|POST")
      */
-    public function edit(Request $request, UserPasswordEncoderInterface $encoder): Response
+    public function edit(): Response
     {
-        $form = $this->createForm(UserProfileType::class, $this->getUser());
-        $form->handleRequest($request);
+        $options = [
+            'redirect' => 'user_profile',
+            'template' => 'Back/user/edit_profile.html.twig'
+        ];
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        $crud = $this->editAction($this->getUser(), UserProfileType::class, $options);
 
-            return $this->redirectToRoute('user_profile', ['id' => $this->getUser()->getId()]);
+        if ($crud->getType() === 'redirect') {
+            return $crud->getRedirect();
         }
 
-        return $this->render('Back/user/edit_profile.html.twig', [
-            'user' => $this->getUser(),
-            'form' => $form->createView(),
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 }

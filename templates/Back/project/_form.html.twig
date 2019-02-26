@@ -1,4 +1,14 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.type) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    <ul class="steps" data-prototype="{{ form_widget(form.projectSteps.vars.prototype)|e('html_attr') }}">
+    {% for step in form.projectSteps %}
+        <li>{{ form_widget(step.stepOrder) }}</li>
+        <li>{{ form_widget(step.name) }}</li>
+        <li>{{ form_widget(step.endAt) }}</li>
+        <li>{{ form_widget(step.description) }}</li>
+    {% endfor %}
+    </ul>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

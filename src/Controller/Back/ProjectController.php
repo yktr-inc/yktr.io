@@ -5,23 +5,23 @@ namespace App\Controller\Back;
 use App\Entity\Project;
 use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CourseRepository;
 use App\Service\DBNotificationServiceInterface;
+use App\Controller\CRUDController;
 
-class ProjectController extends AbstractController
+class ProjectController extends CRUDController
 {
     /**
      * @Route("/school/project", name="project_index", methods={"GET"})
      */
     public function index(ProjectRepository $projectRepository): Response
     {
-        return $this->render('Back/project/index.html.twig', [
-            'projects' => $projectRepository->findAll(),
-        ]);
+        $projects = $projectRepository->findAll();
+        $crud = $this->indexAction($projects, Project::class);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
@@ -42,6 +42,8 @@ class ProjectController extends AbstractController
             $project->setCourse($course);
         }
 
+
+
         $form = $this->createForm(ProjectType::class, $project);
 
         $form->handleRequest($request);
@@ -52,12 +54,16 @@ class ProjectController extends AbstractController
             $entityManager->flush();
             $recipients = $project->getCourse()->getClassroom()->getUsers();
             $courseName = $project->getCourse()->getTitle();
+
             $notifService->notify(
                 "PROJECT",
                 $recipients,
                 "New project for ".$courseName,
                 $project->getId()
             );
+
+            $this->addFlash('success', 'Project created !');
+
             if ($request->attributes->get('id')) {
                 return $this->redirectToRoute('teacher_course_index', ['id' => $course->getId()]);
             }
@@ -85,21 +91,14 @@ class ProjectController extends AbstractController
      */
     public function edit(Request $request, Project $project): Response
     {
-        $form = $this->createForm(ProjectType::class, $project);
-        $form->handleRequest($request);
+        $crud = $this->editAction($project);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('project_index', [
-                'id' => $project->getId(),
-            ]);
+        if ($crud->getType() === 'redirect') {
+            $this->addFlash('success', 'Project edited !');
+            return $crud->getRedirect();
         }
 
-        return $this->render('Back/project/edit.html.twig', [
-            'project' => $project,
-            'form' => $form->createView(),
-        ]);
+        return $this->render($crud->getTemplate(), $crud->getArgs());
     }
 
     /**
@@ -107,12 +106,8 @@ class ProjectController extends AbstractController
      */
     public function delete(Request $request, Project $project): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($project);
-            $entityManager->flush();
-        }
-
+        $this->deleteAction($project);
+        $this->addFlash('warning', 'Project deleted !');
         return $this->redirectToRoute('project_index');
     }
 }

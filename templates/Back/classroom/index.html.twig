@@ -5,41 +5,52 @@
 <li class="breadcrumb-item active">Classrooms</li>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
+
 {% block body %}
-<div class="card m-auto w-90">
-    <div class="card-header card-header-primary row">
-        <h4 class="card-title col-md-10">Classrooms</h4>
-        <div class="col-md-2">
-            <a class="btn btn-primary" role="button" href="{{ path('classroom_new') }}">Create new</a>
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+      <div class="row">
+        <div class="col-md-9 card-header card-header-{{ colorClass }}">
+            <h4 class="card-title">Classes</h4>
+        </div>
+        <div class="col-md-2 mt-2">
+            <a class="btn btn-primary btn-block" role="button" href="{{ path('classroom_new') }}">Create new</a>
+        </div>
+     </div>
+    <div class="card-body table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Promotion</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for classroom in classrooms %}
+                <tr>
+                    <td>{{ classroom.name }}</td>
+                    <td>{{ classroom.promotion ? classroom.promotion.code : 'No promotion yet' }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-default" role="button" href="{{ path('classroom_show', {'id': classroom.id}) }}">show</a>
+                        <a class="btn btn-sm btn-warning" role="button" href="{{ path('classroom_edit', {'id': classroom.id}) }}">edit</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation">
+            {{ knp_pagination_render(classrooms) }}
         </div>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Promotion</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for classroom in classrooms %}
-            <tr>
-                <td>{{ classroom.name }}</td>
-                <td>{{ classroom.promotion ? classroom.promotion.code : 'No promotion yet' }}</td>
-                <td>
-                    <a class="btn btn-sm btn-default" role="button" href="{{ path('classroom_show', {'id': classroom.id}) }}">show</a>
-                    <a class="btn btn-sm btn-warning" role="button" href="{{ path('classroom_edit', {'id': classroom.id}) }}">edit</a>
-                </td>
-            </tr>
-            {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <div class="navigation">
-        {{ knp_pagination_render(classrooms) }}
-    </div>
+</div>
 </div>
 {% endblock %}

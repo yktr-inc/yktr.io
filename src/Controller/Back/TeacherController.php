@@ -20,7 +20,7 @@ class TeacherController extends AbstractController
     public function courseIndex(CourseRepository $courseRepository): Response
     {
         $courses = $courseRepository->findByTeacher($this->getUser());
-        return $this->render('Back/course/teacher/index.html.twig', [
+        return $this->render('Back/course/student/index.html.twig', [
             'courses' => $courses,
         ]);
     }
@@ -30,7 +30,7 @@ class TeacherController extends AbstractController
      */
     public function showCourse(Request $request, Course $course, CourseRepository $courseRepository): Response
     {
-        return $this->render('Back/course/teacher/show.html.twig', [
+        return $this->render('Back/course/student/show.html.twig', [
             'course' => $course,
             'grades' => []
         ]);

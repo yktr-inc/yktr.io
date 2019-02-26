@@ -8,6 +8,7 @@
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('crud') }}
+    {{ encore_entry_link_tags('dashboard') }}
 {% endblock %}
 
 {% block javascripts %}
@@ -15,15 +16,17 @@
 {% endblock %}
 
 {% block body %}
-<div class="card m-auto w-90">
-      <div class="card-header card-header-primary">
-          <h4 class="card-title">Add a new promotion</h4>
-    </div>
-    <div class="card-body">
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+        <div class="card-header card-header-{{ colorClass }}">
+            <h4 class="card-title">Add a class</a></h4>
+        </div>
+        <div class="card-body table-responsive">
           <div class="clear mb-2">
         <a class="btn btn-default btn-sm" role="button" href="{{ path('promotion_index') }}">back to list</a>
     </div>
           {{ include('Back/promotion/_form.html.twig') }}
     </div>
+</div>
 </div>
 {% endblock %}

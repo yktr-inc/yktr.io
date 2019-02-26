@@ -175,6 +175,28 @@ class User implements UserInterface
      */
     private $roles = [];
 
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $resetToken;
+
+    /**
+     * @return string
+     */
+    public function getResetToken(): string
+    {
+        return $this->resetToken;
+    }
+
+    /**
+     * @param string $resetToken
+     */
+    public function setResetToken(?string $resetToken): void
+    {
+        $this->resetToken = $resetToken;
+    }
+
     public function __construct()
     {
         $this->courses = new ArrayCollection();

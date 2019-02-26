@@ -63,6 +63,22 @@ class Project
      */
     private $course;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ProjectGroup", mappedBy="project")
+     */
+    private $groups;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ProjectStep", mappedBy="project", cascade={"persist"})
+     */
+    private $projectSteps;
+
+    public function __construct()
+    {
+        $this->projectSteps = new ArrayCollection();
+        $this->groups = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -112,6 +128,68 @@ class Project
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjectStep[]
+     */
+    public function getProjectSteps(): Collection
+    {
+        return $this->projectSteps;
+    }
+
+    public function addProjectStep(ProjectStep $projectStep): self
+    {
+        if (!$this->projectSteps->contains($projectStep)) {
+            $this->projectSteps[] = $projectStep;
+            $projectStep->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjectStep(ProjectStep $projectStep): self
+    {
+        if ($this->projectSteps->contains($projectStep)) {
+            $this->projectSteps->removeElement($projectStep);
+            // set the owning side to null (unless already changed)
+            if ($projectStep->getProject() === $this) {
+                $projectStep->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjectGroup[]
+     */
+    public function getGroups(): Collection
+    {
+        return $this->groups;
+    }
+
+    public function addGroup(ProjectGroup $group): self
+    {
+        if (!$this->groups->contains($group)) {
+            $this->groups[] = $group;
+            $group->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroup(ProjectGroup $group): self
+    {
+        if ($this->groups->contains($group)) {
+            $this->groups->removeElement($group);
+            // set the owning side to null (unless already changed)
+            if ($group->getProject() === $this) {
+                $group->setProject(null);
+            }
+        }
 
         return $this;
     }

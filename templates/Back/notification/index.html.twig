@@ -12,7 +12,7 @@
 {% block body %}
 <div class="col-md-12">
     <h1>Notifications</h1>
-        {% for notification in allNotifications %}
+        {% for notification in notifications %}
         <div class="alert alert-notification col-md-12 notification-{{ colorClass }}" role="alert">
             <form method="post" action="{{ path('notification_delete', {'id': notification.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                 <input type="hidden" name="_method" value="DELETE">
@@ -33,7 +33,7 @@
             </tr>
         {% endfor %}
         <div class="navigation">
-            {{ knp_pagination_render(allNotifications) }}
+            {{ knp_pagination_render(notifications) }}
         </div>
 </div>
 {% endblock %}

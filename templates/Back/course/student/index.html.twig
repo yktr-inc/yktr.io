@@ -2,37 +2,54 @@
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('student') }}
+    {{ encore_entry_link_tags('dashboard') }}
 {% endblock %}
 
 {% block breadcrumb %}
+{% if is_granted('ROLE_TEACHER') %}
+<li class="breadcrumb-item"><a href="{{ path('dashboard_teacher') }} ">Home</a></li>
+{% else %}
 <li class="breadcrumb-item"><a href="{{ path('dashboard') }} ">Home</a></li>
+{% endif %}
 <li class="breadcrumb-item active">Courses</li>
 {% endblock %}
 
 {% block body %}
 {% for course in courses %}
-<div class="card w-90 course-card">
-
-  <div class="card-body">
-    <div class="row">
-      <h5 class="card-title col-md-8">
-        <a href="{{ path('student_course_show', {'id': course.id }) }}">
-          {{ course.title }}
-        </a>
-      </h5>
-      <div class="col-md-4">
-        <p>Teacher : {{ course.teacher.getFullname }}</p>
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+        <div class="card-header card-header-{{ colorClass }}">
+        {% if is_granted('ROLE_TEACHER') %}
+            <h4 class="card-title"><a href="{{ path('teacher_course_show',{'id': course.id}) }}">{{ course.title }}</a></h4>
+        {% else %}
+            <h4 class="card-title"><a href="{{ path('student_course_show',{'id': course.id}) }}">{{ course.title }}</a></h4>
+        {% endif %}
+        </div>
+        <div class="card-body table-responsive">
+      <div class="col-md-12 text-right">
+        {% if is_granted('ROLE_TEACHER') %}
+        <h5>{{ course.classroom.name }}</h5>
+        {% else %}
+        <h5>Teacher : {{ course.teacher.getFullname }}</h5>
+        {% endif %}
       </div>
     </div>
-    <div class="row">
+    {% if is_granted('ROLE_STUDENT') %}
+    <div class="row  p-4">
       <div class="col-md-6">
         <h6> Next exams : </h6>
           <ul class="list-group">
               {% for exam in course.exams %}
               <li class="list-group-item">
+                  {% if is_granted('ROLE_TEACHER') %}
+                  <a href="{{ path('teacher_exam_show', { 'id':exam.id }) }}">
+                      {{ exam.type|upper }} : "{{ exam.name }}" on {{ exam.date|date('d/m/y') }}
+                  </a>
+                  {% else %}
                   <a href="{{ path('student_exam_show', { 'id':exam.id }) }}">
                       {{ exam.type|upper }} : "{{ exam.name }}" on {{ exam.date|date('d/m/y') }}
                   </a>
+                  {% endif %}
               </li>
               {% else %}
               <li class="list-group-item"> No exam for this course at this moment </li>
@@ -44,9 +61,15 @@
           <ul class="list-group">
               {% for project in course.projects %}
               <li class="list-group-item">
+                  {% if is_granted('ROLE_TEACHER') %}
+                  <a href="{{ path('teacher_project_show', { 'id':project.id }) }}">
+                      {{ project.name }}
+                  </a>
+                  {% else %}
                   <a href="{{ path('student_project_show', { 'id':project.id }) }}">
                       {{ project.name }}
                   </a>
+                  {% endif %}
               </li>
               {% else %}
               <li class="list-group-item"> No exam for this course at this moment </li>
@@ -54,8 +77,9 @@
         </ul>
     </div>
   </div>
+  {% endif %}
 </div>
-
+</div>
 {% else %}
 <div class="card m-auto p-5 w-75">
   No course at this moment

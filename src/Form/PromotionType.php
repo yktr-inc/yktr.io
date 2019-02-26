@@ -22,20 +22,18 @@ class PromotionType extends AbstractType
             ->add('code', TextType::class)
             ->add('startedAt', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'MM/YYYY',
+                'format' => 'MM/yyyy',
                 'html5' => false,
-                'data' => new \DateTime(date("Y-m")),
                 'attr' => [
-                    'class' => 'datepicker'
+                    'class' => 'month'
                 ]
             ])
             ->add('finishedAt', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'MM/YYYY',
+                'format' => 'MM/yyyy',
                 'html5' => false,
-                'data' => new \DateTime(date("Y-m")),
                 'attr' => [
-                    'class' => 'datepicker'
+                    'class' => 'month'
                 ]
             ])
         ;

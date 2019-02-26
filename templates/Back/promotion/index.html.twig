@@ -1,26 +1,34 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
 {% block breadcrumb %}
-      <li class="breadcrumb-item"><a href="{{ path('dashboard_school') }}">Home</a></li>
-      <li class="breadcrumb-item active">Promotions</li>
+<li class="breadcrumb-item"><a href="{{ path('dashboard_school') }}">Home</a></li>
+<li class="breadcrumb-item active">Promotions</li>
+{% endblock %}
+
+{% block stylesheets %}
+{{ encore_entry_link_tags('dashboard') }}
 {% endblock %}
 
 {% block body %}
-<div class="card m-auto w-90">
-    <div class="card-header card-header-primary row">
-        <h4 class="card-title col-md-10">Promotions</h4>
-        <div class="col-md-2">
-            <a class="btn btn-primary" role="button" href="{{ path('promotion_new') }}">Create new</a>
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+      <div class="row">
+        <div class="col-md-9 card-header card-header-{{ colorClass }}">
+            <h4 class="card-title">Promotions</a></h4>
         </div>
-    </div>
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th{% if promotions.isSorted('code') %} class="sorted"{% endif %}>
-                {{ knp_pagination_sortable(promotions, 'Code', 'code') }}
-                </th>
-                <th{% if promotions.isSorted('year') %} class="sorted"{% endif %}>
-                {{ knp_pagination_sortable(promotions, 'Year', 'year') }}
+        <div class="col-md-2 mt-2">
+            <a class="btn btn-primary btn-block" role="button" href="{{ path('promotion_new') }}">Create new</a>
+        </div>
+      </div>
+        <div class="card-body table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th{% if promotions.isSorted('code') %} class="sorted"{% endif %}>
+                        {{ knp_pagination_sortable(promotions, 'Code', 'code') }}
+                    </th>
+                    <th{% if promotions.isSorted('year') %} class="sorted"{% endif %}>
+                    {{ knp_pagination_sortable(promotions, 'Year', 'year') }}
                 </th>
                 <th>Speciality</th>
                 <th>Start</th>
@@ -29,7 +37,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for promotion in promotions %}
+            {% for promotion in promotions %}
             <tr>
                 <td>{{ promotion.code }}</td>
                 <td>{{ promotion.year }}</td>
@@ -41,17 +49,18 @@
                     <a class="btn btn-sm btn-warning" role="button" href="{{ path('promotion_edit', {'id': promotion.id}) }}">edit</a>
                 </td>
                 <td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <div class="navigation">
-        {{ knp_pagination_render(promotions) }}
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation">
+            {{ knp_pagination_render(promotions) }}
+        </div>
     </div>
-
+</div>
 </div>
 {% endblock %}

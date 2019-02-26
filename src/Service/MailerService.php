@@ -18,15 +18,14 @@ class MailerService implements MailerServiceInterface
     {
         $recipient = is_array($recipient)?$this->groupFormat($recipient):$recipient;
 
-
-        $message = (new \Swift_Message($title))
+        $mail = (new \Swift_Message($title))
         ->setFrom($sender);
 
-        isset($config['cc'])?$message->setCc($recipient):$message->setTo($recipient);
+        isset($config['cc'])?$mail->setCc($recipient):$mail->setTo($recipient);
 
-        $message->setBody($message);
+        $mail->setBody($message);
 
-        $this->mailer->send($message);
+        $this->mailer->send($mail);
     }
 
     public function groupFormat($recipient)
