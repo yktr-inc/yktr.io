@@ -4,6 +4,7 @@ namespace App\Controller\Back;
 use App\Service\ImpersonateUserList;
 use App\Repository\ExamRepository;
 use App\Repository\ProjectRepository;
+use App\Repository\ProjectStepRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,13 +16,13 @@ class IndexController extends AbstractController
      * @Route("/student", methods={"GET"}, name="dashboard")
      * @Security("!is_granted('ROLE_SUPERADMIN') or !is_granted('ROLE_ADMINISTRATIVE') or !is_granted('ROLE_TEACHER')")
      */
-    public function dashboard(ExamRepository $examRepository, ProjectRepository $projectRepository)
+    public function dashboard(ExamRepository $examRepository, ProjectStepRepository $projectStepRepository)
     {
         $classroom = $this->getUser()->getClassroom();
 
         $lastExams = $examRepository->findLastExams(5, $classroom);
-        $lastProjects = $projectRepository->findLastProjects(5, 'project', $classroom);
-        $lastTutorials = $projectRepository->findLastProjects(5, 'tutorial', $classroom);
+        $lastProjects = $projectStepRepository->findLastProjectsSteps(5, 'project', $classroom);
+        $lastTutorials = $projectStepRepository->findLastProjectsSteps(5, 'tutorial', $classroom);
 
         return $this->render('Back/dashboard/index.html.twig', [
             'lastExams' => $lastExams,

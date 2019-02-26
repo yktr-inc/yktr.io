@@ -77,7 +77,15 @@
                     <ul class="list-group">
                         {% for project in course.projects %}
                         <li class="list-group-item">
-                            {{ project.name }}
+                        {% if is_granted('ROLE_TEACHER') %}
+                          <a href="{{ path('teacher_project_show', { 'id':project.id }) }}">
+                              {{ project.name }}
+                          </a>
+                          {% else %}
+                          <a href="{{ path('student_project_show', { 'id':project.id }) }}">
+                              {{ project.name }}
+                          </a>
+                          {% endif %}
                         </li>
                         {% else %}
                         <li class="list-group-item"> No project for this course at this moment </li>

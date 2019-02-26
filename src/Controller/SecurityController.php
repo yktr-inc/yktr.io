@@ -51,11 +51,13 @@ class SecurityController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, RedirectUserServiceInterface $redirectUser)
     {
-        if ($this->getUser() instanceof User) {
-            return $this->redirectToRoute('app_front_default_home');
+
+        if (!is_null($redirectUser->redirect())) {
+            return $redirectUser->redirect();
         }
+
         $user = new User();
         $form = $this->createForm(UserRegisterType::class, $user);
         $form->handleRequest($request);
@@ -85,8 +87,13 @@ class SecurityController extends Controller
         Request $request,
         UserPasswordEncoderInterface $encoder,
         MailerServiceInterface $mailer,
-        TokenGeneratorInterface $tokenGenerator
+        TokenGeneratorInterface $tokenGenerator,
+        RedirectUserServiceInterface $redirectUser
     ): Response {
+
+        if (!is_null($redirectUser->redirect())) {
+            return $redirectUser->redirect();
+        }
         $user = new User();
         $form = $this->createForm(UserEmailType::class, $user);
         $form->handleRequest($request);
@@ -134,8 +141,19 @@ class SecurityController extends Controller
     /**
      * @Route("/reset-password/{resetToken}", name="reset_password")
      */
-    public function resetPassword(Request $request, string $resetToken, User $user, UserPasswordEncoderInterface $passwordEncoder)
+    public function resetPassword(
+        Request $request,
+        string $resetToken,
+        User $user,
+        UserPasswordEncoderInterface $passwordEncoder,
+        RedirectUserServiceInterface $redirectUser
+    )
     {
+
+        if (!is_null($redirectUser->redirect())) {
+            return $redirectUser->redirect();
+        }
+
         $form = $this->createForm(UserPasswordType::class, $user);
         $form->handleRequest($request);
 

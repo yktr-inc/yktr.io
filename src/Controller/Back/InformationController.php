@@ -9,8 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\CRUDController;
 
-class InformationController extends AbstractController
+class InformationController extends CRUDController
 {
     /**
      * @Route("/school/information", name="information_index", methods={"GET"})
@@ -19,7 +20,7 @@ class InformationController extends AbstractController
     {
         $events = $informationRepository->findAll();
 
-        $crud = $this->indexAction($events);
+        $crud = $this->indexAction($events, Information::class);
 
         return $this->render($crud->getTemplate(), $crud->getArgs());
     }

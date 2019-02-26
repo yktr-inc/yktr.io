@@ -5,12 +5,10 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\DateTrait;
 use Symfony\Component\Validator\Constraints as Assert;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FileRepository")
  * @ORM\HasLifecycleCallbacks()
- * @Vich\Uploadable
  */
 class File
 {
@@ -24,8 +22,9 @@ class File
     private $id;
 
     /**
-     * @Vich\UploadableField(mapping="file", fileNameProperty="file")
+     * @ORM\Column(type="string", nullable=false)
      */
+
     private $file;
 
     /**

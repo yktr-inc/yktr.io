@@ -1,27 +1,26 @@
 require('../../node_modules/select2/dist/js/select2.min.js');
-require('../../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js');
 require('../../node_modules/trumbowyg/dist/trumbowyg.min.js');
 
+const flatpickr = require("flatpickr");
+
 import icons from 'trumbowyg/dist/ui/icons.svg';
+
+flatpickr(".month", {
+    dateFormat: "m/Y",
+    allowInput: true,
+    altInput: true,
+});
+
+flatpickr(".full-datepicker", {
+    dateFormat: "d/m/Y H:i",
+    enableTime: true,
+    allowInput: true,
+    time_24hr: true
+});
 
 $('.select-popup').select2({
     placeholder: "Select a state",
     allowClear: true
-});
-
-
-$('.datepicker').datepicker({
-  format: "mm/yyyy",
-  startView: 1,
-  minViewMode: 1,
-  maxViewMode: 3,
-  todayHighlight: true
-});
-
-$('.datepicker-full').datepicker({
-  todayHighlight: true,
-  format: "dd/mm/yyyy",
-
 });
 
 $.trumbowyg.svgPath = icons;
@@ -29,8 +28,8 @@ $('.editable').trumbowyg();
 
 
 // setup an "add a tag" link
-var $addTagLink = $('<a href="#" class="add_tag_link">Add a tag</a>');
-var $newLinkLi = $('<li></li>').append($addTagLink);
+var $addTagLink = $('<a href="#" class="btn btn-sm btn-primary">Add a step</a>');
+var $newLinkLi = $('<li class="list"></li>').append($addTagLink);
 
 jQuery(document).ready(function() {
     // Get the ul that holds the collection of tags
@@ -49,7 +48,6 @@ jQuery(document).ready(function() {
         // add a new tag form (see code block below)
         addTagForm($collectionHolder, $newLinkLi);
     });
-
 
 });
 
@@ -70,9 +68,17 @@ function addTagForm($collectionHolder, $newLinkLi) {
     var $newFormLi = $('<li></li>').append(newForm);
 
     // also add a remove button, just for this example
-    $newFormLi.append('<a href="#" class="remove-tag">x</a>');
+    $newFormLi.append('<a href="#" class="btn btn-sm btn-danger remove-tag">Remove step</a>');
 
     $newLinkLi.before($newFormLi);
+
+    $('.full-datepicker').flatpickr({
+    dateFormat: "d/m/Y H:i",
+    enableTime: true,
+    allowInput: true,
+    altInput: true,
+    time_24hr: true
+});
 
     // handle the removal, just for this example
     $('.remove-tag').click(function(e) {

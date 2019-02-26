@@ -24,7 +24,7 @@
                 <div class="tab-pane active" id="profile">
                     <table class="table">
                         <tbody>
-                        {% for project in lastProjects %}
+                        {% for step in lastProjects %}
                         <tr>
                             <td>
                                 <div class="form-check">
@@ -36,11 +36,11 @@
                                     </label>
                                 </div>
                             </td>
-                            <td>{{ project.name }}</td>
-                            <td>{{ project.course.title }}</td>
+                            <td>{{ step.name }}</td>
+                            <td>{{ step.project.course.title }}</td>
                             <td class="td-actions text-right text-align-center">
                                 <div class="custom-date">
-                                    <span class="card-title">{{ project.createdAt|date('d/m/Y') }}</span>
+                                    <span class="card-title">{{ step.endAt|date('d/m/Y H:i') }}</span>
                                 </div>
                             </td>
                         </tr>

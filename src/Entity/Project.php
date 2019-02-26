@@ -63,6 +63,10 @@ class Project
      */
     private $course;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ProjectGroup", mappedBy="project")
+     */
+    private $groups;
 
     /**
      * @ORM\OneToMany(targetEntity="ProjectStep", mappedBy="project", cascade={"persist"})
@@ -72,6 +76,7 @@ class Project
     public function __construct()
     {
         $this->projectSteps = new ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -152,6 +157,37 @@ class Project
             // set the owning side to null (unless already changed)
             if ($projectStep->getProject() === $this) {
                 $projectStep->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjectGroup[]
+     */
+    public function getGroups(): Collection
+    {
+        return $this->groups;
+    }
+
+    public function addGroup(ProjectGroup $group): self
+    {
+        if (!$this->groups->contains($group)) {
+            $this->groups[] = $group;
+            $group->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroup(ProjectGroup $group): self
+    {
+        if ($this->groups->contains($group)) {
+            $this->groups->removeElement($group);
+            // set the owning side to null (unless already changed)
+            if ($group->getProject() === $this) {
+                $group->setProject(null);
             }
         }
 

@@ -16,8 +16,17 @@ use App\Repository\UserRepository;
 
 class CourseClassroomType extends AbstractType
 {
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->ur = $userRepository;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+        $teachers = $this->ur->findByRole('ROLE_TEACHER');
+
         $builder
         ->add('title')
         ->add('status', ChoiceType::class, [
@@ -29,6 +38,7 @@ class CourseClassroomType extends AbstractType
         ->add('teacher', EntityType::class, [
             'class' => User::class,
             'choice_label' => 'username',
+            'choices' => $teachers
         ])
         ->add('description', TextareaType::class, [
             'label' => false,

@@ -71,6 +71,14 @@
                 </a>
             </li>
             <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'event' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('event_index') }}">
+                    <i class="material-icons">cloud</i>
+                    <p>Files</p>
+                </a>
+            </li>
+            <li class="nav-item
                 {{ (app.request.attributes.get( '_route' ) starts with 'setting' ? 'active' : '') }}"
             >
                 <a class="nav-link" href="{{ path('setting_index') }}">

@@ -35,7 +35,7 @@ class CourseType extends AbstractType
         ])
         ->add('teacher', EntityType::class, [
             'class' => User::class,
-            'choice_label' => 'username',
+            'choice_label' => 'fullname',
             'choices' => $teachers
         ])
         ->add('classroom', EntityType::class, [
