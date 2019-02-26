@@ -73,29 +73,27 @@
             <h5 class="card-title">Projects</h5>
         </div>
         <div class="card-body table-responsive">
-                <div class="mt-2">
-                    <ul class="list-group">
-                        {% for project in course.projects %}
-                        <li class="list-group-item">
-                        {% if is_granted('ROLE_TEACHER') %}
-                          <a href="{{ path('teacher_project_show', { 'id':project.id }) }}">
-                              {{ project.name }}
-                          </a>
-                          {% else %}
-                          <a href="{{ path('student_project_show', { 'id':project.id }) }}">
-                              {{ project.name }}
-                          </a>
-                          {% endif %}
-                        </li>
-                        {% else %}
-                        <li class="list-group-item"> No project for this course at this moment </li>
-                        {% endfor %}
-                  </ul>
-                </div>
+            <ul class="list-group">
+                {% for project in course.projects %}
+                <li class="list-group-item">
+                    {% if is_granted('ROLE_TEACHER') %}
+                    <a href="{{ path('teacher_project_show', { 'id':project.id }) }}">
+                        {{ project.type|upper }} : "{{ project.name }}"
+                    </a>
+                    {% else %}
+                    <a href="{{ path('student_project_show', { 'id':project.id }) }}">
+                        {{ project.type|upper }} : "{{ project.name }}"
+                    </a>
+                    {% endif %}
+                </li>
+                {% else %}
+                <li class="list-group-item"> No project for this course at this moment </li>
+                {% endfor %}
+            </ul>
+        </div>
         {% if is_granted('ROLE_TEACHER') %}
         <a class="btn btn-error btn-sm" href="{{ path('teacher_project_new', { 'id': course.id }) }}">Add new</a>
         {% endif %}
-        </div>
     </div>
 </div>
 <div class="col-lg-6">

@@ -14,7 +14,7 @@ use Doctrine\ORM\Query\ResultSetMappingBuilder;
  * @method ProjectStep[]    findAll()
  * @method ProjectStep[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProjectStepRepository  extends ServiceEntityRepository
+class ProjectStepRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
@@ -66,7 +66,9 @@ class ProjectStepRepository  extends ServiceEntityRepository
             WHERE p.type = :type
             AND cl.id = :classroom
             ORDER BY ps.end_at ASC
-            LIMIT ".$limit ,$rsm );
+            LIMIT ".$limit,
+            $rsm
+        );
 
         $query->setParameter('classroom', $classroom);
         $query->setParameter('type', $type);

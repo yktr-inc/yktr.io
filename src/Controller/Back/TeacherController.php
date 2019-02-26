@@ -4,9 +4,11 @@ namespace App\Controller\Back;
 
 use App\Entity\Course;
 use App\Entity\Exam;
+use App\Entity\Project;
 use App\Form\CourseType;
 use App\Form\ExamType;
 use App\Repository\CourseRepository;
+use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +22,7 @@ class TeacherController extends AbstractController
     public function courseIndex(CourseRepository $courseRepository): Response
     {
         $courses = $courseRepository->findByTeacher($this->getUser());
-        return $this->render('Back/course/student/index.html.twig', [
+        return $this->render('Back/course/teacher/index.html.twig', [
             'courses' => $courses,
         ]);
     }
@@ -85,4 +87,39 @@ class TeacherController extends AbstractController
 
         return $this->redirectToRoute('teacher_course_show', ['id' => $course]);
     }
+
+    /**
+     * @Route("/teacher/projects", name="teacher_project_index", methods={"GET"})
+     */
+    public function projectIndex(ProjectRepository $projectRepository): Response
+    {
+        $projects = $projectRepository->findByTeacher('project', $this->getUser());
+        return $this->render('Back/project/teacher/index.html.twig', [
+            'projects' => $projects,
+        ]);
+    }
+
+    /**
+     * @Route("/teacher/project/{id}", name="teacher_project_show", methods={"GET"})
+     */
+    public function projectShow(Project $project): Response
+    {
+        return $this->render('Back/project/teacher/show.html.twig', [
+            'project' => $project,
+            'course' => $project->getCourse(),
+        ]);
+    }
+
+    /**
+     * @Route("/teacher/project/{id}/groups", name="teacher_project_groups", methods={"GET"})
+     */
+    public function showProjectGroups(Project $project): Response
+    {
+        return $this->render('Back/project/teacher/show_groups.html.twig', [
+            'project' => $project,
+            'groups' => $project->getGroups(),
+            'course' => $project->getCourse(),
+        ]);
+    }
+
 }

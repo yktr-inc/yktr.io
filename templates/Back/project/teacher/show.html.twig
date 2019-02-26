@@ -1,17 +1,9 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
 {% block breadcrumb %}
-{% if is_granted('ROLE_TEACHER') %}
-<li class="breadcrumb-item"><a href="{{ path('dashboard_teacher') }} ">Home</a></li>
-<li class="breadcrumb-item"><a href="{{ path('teacher_course_index') }}">Courses</a></li>
-<li class="breadcrumb-item"><a href="{{ path('teacher_course_show', { 'id': course.id }) }}">{{ course.title }}</a></li>
-<li class="breadcrumb-item active">{{ project.name }}</li>
-{% else %}
-<li class="breadcrumb-item"><a href="{{ path('dashboard') }} ">Home</a></li>
-<li class="breadcrumb-item"><a href="{{ path('student_course_index') }}">Courses</a></li>
-<li class="breadcrumb-item"><a href="{{ path('student_course_show', { 'id': course.id }) }}">{{ course.title }}</a></li>
-<li class="breadcrumb-item active">{{ project.name }}</li>
-{% endif %}
+<li class="breadcrumb-item"><a href="#">Home</a></li>
+<li class="breadcrumb-item"><a href="#">Library</a></li>
+<li class="breadcrumb-item active" aria-current="page">Data</li>
 {% endblock %}
 
 {% block stylesheets %}
@@ -26,16 +18,12 @@
             <h4 class="card-title">{{ project.name }}</h4>
         </div>
         <div class="col-md-2 mt-2">
-            <a class="btn btn-primary btn-block" role="button" href="{{ path('student_project_groups', { 'id': project.id}) }}">Project groups</a>
+            <a class="btn btn-primary btn-block" role="button" href="{{ path('teacher_project_groups', { 'id': project.id}) }}">Project groups</a>
         </div>
      </div>
         <div class="card-body table-responsive">
             <div class="clear mb-2">
-                {% if is_granted('ROLE_TEACHER') %}
                 <a class="btn btn-default btn-sm" role="button" href="{{ path('teacher_course_show', { 'id': course.id }) }}">back to list</a>
-                {% else %}
-                <a class="btn btn-default btn-sm" role="button" href="{{ path('student_course_show', { 'id': course.id }) }}">back to list</a>
-                {% endif %}
             </div>
             <p>Project Type : {{ project.type }}</p>
             <p>Description : {{ project.description|raw }} </p>

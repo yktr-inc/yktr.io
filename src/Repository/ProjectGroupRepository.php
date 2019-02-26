@@ -70,7 +70,7 @@ class ProjectGroupRepository extends ServiceEntityRepository
         $query->setParameter('user', $user);
         $query->setParameter('project', $project);
         $res =  $query->getResult();
-        if(isset($res[0])){
+        if (isset($res[0])) {
             return $res[0];
         }
         return $res;

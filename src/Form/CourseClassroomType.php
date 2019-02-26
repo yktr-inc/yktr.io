@@ -16,7 +16,6 @@ use App\Repository\UserRepository;
 
 class CourseClassroomType extends AbstractType
 {
-
     public function __construct(UserRepository $userRepository)
     {
         $this->ur = $userRepository;
@@ -24,7 +23,6 @@ class CourseClassroomType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $teachers = $this->ur->findByRole('ROLE_TEACHER');
 
         $builder

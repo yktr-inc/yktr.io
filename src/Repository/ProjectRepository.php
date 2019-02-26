@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Project;
+use App\Entity\User;
 use App\Entity\Classroom;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -96,6 +97,28 @@ class ProjectRepository extends ServiceEntityRepository
         );
 
         $query->setParameter('classroom', $classroom);
+        $query->setParameter('type', $type);
+
+        return $query->getResult();
+    }
+
+    public function findByTeacher($type, User $teacher){
+        $em = $this->getEntityManager();
+
+        $rsm = new ResultSetMappingBuilder($em);
+
+        $rsm->addRootEntityFromClassMetadata(Project::class, 'p');
+
+        $query = $em->createNativeQuery(
+            "
+            SELECT p.* FROM project p
+            JOIN course co ON p.course_id = co.id
+            WHERE co.user_id = :user
+            AND p.type = :type",
+        $rsm
+        );
+
+        $query->setParameter('user', $teacher);
         $query->setParameter('type', $type);
 
         return $query->getResult();
