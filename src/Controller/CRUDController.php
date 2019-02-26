@@ -32,8 +32,8 @@ class CRUDController extends AbstractController
         $formType = empty($formType) ? 'App\\Form\\'.ucfirst($className).'Type' : $formType;
 
         $form = $this->createForm($formType, $obj);
-        $form->handleRequest($request);
 
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($obj);

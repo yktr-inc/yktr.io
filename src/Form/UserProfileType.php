@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Form\FileType;
+use App\Entity\File;
 
 class UserProfileType extends AbstractType
 {
@@ -29,6 +31,7 @@ class UserProfileType extends AbstractType
                 'required' => false,
             ])
             ->add('city', TextType::class)
+            ->add('avatar', FileType::class)
         ;
     }
 
