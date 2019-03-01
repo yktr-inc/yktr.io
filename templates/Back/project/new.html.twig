@@ -8,6 +8,7 @@
 
 {% block stylesheets %}
 {{ encore_entry_link_tags('crud') }}
+{{ encore_entry_link_tags('dashboard') }}
 {% endblock %}
 
 {% block javascripts %}
@@ -15,15 +16,21 @@
 {% endblock %}
 
 {% block body %}
-<div class="card m-auto w-90">
-  <div class="card-header card-header-primary">
-    <h4 class="card-title">Add a new project</h4>
-  </div>
-  <div class="card-body">
-    <div class="clear mb-2">
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+        <div class="card-header card-header-{{ colorClass }}">
+            <h4 class="card-title">New project</a></h4>
+        </div>
+        <div class="card-body table-responsive">
+          <div class="clear mb-2">
+      {% if is_granted('ROLE_TEACHER') %}
+      <a class="btn btn-default btn-sm" role="button" href="{{ path('teacher_project_index') }}">back to list</a>
+      {% else %}
       <a class="btn btn-default btn-sm" role="button" href="{{ path('project_index') }}">back to list</a>
+      {% endif %}
     </div>
     {{ include('Back/project/_form.html.twig') }}
   </div>
+</div>
 </div>
 {% endblock %}

@@ -3,17 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Traits\DateTrait;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FileRepository")
- * @ORM\HasLifecycleCallbacks()
  */
 class File
 {
-    use DateTrait;
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -22,68 +19,41 @@ class File
     private $id;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string")
+     * @Assert\File(maxSize="6000000")
      */
-
     private $file;
 
     /**
-     * @Assert\Choice(
-     *     choices={"video", "image", "audio", "pdf", "file" },
-     *     message="Le type de fichierr est incorrect."
-     * )
-     *
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $type;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-    */
-    private $owner;
+    private $originalName;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setFile(File $devis = null)
-    {
-        $this->devisFile = $devis;
-
-        if ($devis) {
-            $this->updatedAt = new \DateTimeImmutable();
-        }
-
-        return $this;
-    }
-
     public function getFile()
     {
-        return $this->devisFile;
+        return $this->file;
     }
 
-    public function getType(): ?string
+    public function setFile($file = null)
     {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
+        $this->file = $file;
 
         return $this;
     }
 
-    public function getOwner(): ?User
+    public function getOriginalName(): ?string
     {
-        return $this->owner;
+        return $this->originalName;
     }
 
-    public function setOwner(?User $owner): self
+    public function setOriginalName(string $originalName): self
     {
-        $this->owner = $owner;
+        $this->originalName = $originalName;
 
         return $this;
     }

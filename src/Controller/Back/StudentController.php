@@ -85,20 +85,18 @@ class StudentController extends AbstractController
      */
     public function newProjectGroups(Project $project, ProjectGroupRepository $pgr): Response
     {
-
         $userGroup = $pgr->findUserProjectGroup($project, $this->getUser());
 
-        if(empty($userGroup)){
-          $projectGroup = new ProjectGroup;
-          $projectGroup->addStudent($this->getUser());
-          $projectGroup->setProject($project);
-          $em = $this->getDoctrine()->getManager();
-          $em->persist($projectGroup);
-          $em->flush();
+        if (empty($userGroup)) {
+            $projectGroup = new ProjectGroup;
+            $projectGroup->addStudent($this->getUser());
+            $projectGroup->setProject($project);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($projectGroup);
+            $em->flush();
         }
 
         return $this->redirectToRoute('student_project_groups', ['id' => $project->getId()]);
-
     }
 
     /**
@@ -120,11 +118,11 @@ class StudentController extends AbstractController
     {
         $userGroup = $pgr->findUserProjectGroup($project, $this->getUser());
 
-        if(!empty($userGroup)){
+        if (!empty($userGroup)) {
             $userGroup->removeStudent($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
-            if($userGroup->getStudents()->isEmpty()){
-              $entityManager->remove($userGroup);
+            if ($userGroup->getStudents()->isEmpty()) {
+                $entityManager->remove($userGroup);
             }
             $entityManager->flush();
         }
@@ -141,10 +139,10 @@ class StudentController extends AbstractController
 
         $userGroup = $pgr->findUserProjectGroup($project, $this->getUser());
 
-        if(empty($userGroup)){
-          $projectGroup->addStudent($this->getUser());
-          $entityManager = $this->getDoctrine()->getManager();
-          $entityManager->flush();
+        if (empty($userGroup)) {
+            $projectGroup->addStudent($this->getUser());
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
         }
 
         return $this->redirectToRoute('student_project_groups', ['id' => $project->getId()]);

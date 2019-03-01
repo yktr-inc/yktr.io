@@ -298,12 +298,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAvatar(): ?File
+    public function getAvatar()
     {
         return $this->avatar;
     }
 
-    public function setAvatar(?File $avatar): self
+    public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
 

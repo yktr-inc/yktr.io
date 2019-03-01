@@ -36,6 +36,7 @@ class ProfileController extends CRUDController
             'template' => 'Back/user/edit_profile.html.twig'
         ];
 
+
         $crud = $this->editAction($this->getUser(), UserProfileType::class, $options);
 
         if ($crud->getType() === 'redirect') {

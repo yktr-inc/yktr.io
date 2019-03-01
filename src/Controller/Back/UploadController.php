@@ -2,14 +2,14 @@
 
 namespace App\Controller\Back;
 
-use App\Entity\Document;
+use App\Entity\File;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use App\Service\FileUploader;
-use App\Form\DocumentType;
+use App\Form\FileType;
 
 class UploadController extends AbstractController
 {
@@ -18,8 +18,8 @@ class UploadController extends AbstractController
      */
     public function new(Request $request, FileUploader $fileUploader)
     {
-        $document = new Document();
-        $form = $this->createForm(DocumentType::class, $document);
+        $document = new File();
+        $form = $this->createForm(FileType::class, $document);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

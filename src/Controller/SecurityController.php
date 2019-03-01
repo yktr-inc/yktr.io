@@ -53,7 +53,6 @@ class SecurityController extends Controller
      */
     public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, RedirectUserServiceInterface $redirectUser)
     {
-
         if (!is_null($redirectUser->redirect())) {
             return $redirectUser->redirect();
         }
@@ -90,7 +89,6 @@ class SecurityController extends Controller
         TokenGeneratorInterface $tokenGenerator,
         RedirectUserServiceInterface $redirectUser
     ): Response {
-
         if (!is_null($redirectUser->redirect())) {
             return $redirectUser->redirect();
         }
@@ -147,9 +145,7 @@ class SecurityController extends Controller
         User $user,
         UserPasswordEncoderInterface $passwordEncoder,
         RedirectUserServiceInterface $redirectUser
-    )
-    {
-
+    ) {
         if (!is_null($redirectUser->redirect())) {
             return $redirectUser->redirect();
         }

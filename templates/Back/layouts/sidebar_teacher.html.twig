@@ -30,9 +30,11 @@
                     <p>Courses</p>
                 </a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="#">
-                    <i class="material-icons">question_answer</i>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'teacher_project' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('teacher_project_index') }}">
+                    <i class="material-icons">location_city</i>
                     <p>Projets</p>
                 </a>
             </li>
