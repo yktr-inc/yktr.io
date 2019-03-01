@@ -31,7 +31,6 @@ class UserProfileType extends AbstractType
                 'required' => false,
             ])
             ->add('city', TextType::class)
-            ->add('avatar', FileType::class)
         ;
     }
 
