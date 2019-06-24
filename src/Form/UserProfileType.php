@@ -2,19 +2,18 @@
 
 namespace App\Form;
 
-use App\Entity\User;
 use App\Entity\Classroom;
+use App\Entity\File;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Form\FileType;
-use App\Entity\File;
 
 class UserProfileType extends AbstractType
 {
@@ -25,10 +24,8 @@ class UserProfileType extends AbstractType
             ->add('number', TextType::class)
             ->add('streetName', TextType::class)
             ->add('postalCode', TextType::class)
-            ->add('avatar', EntityType::class, [
-                'class' => Classroom::class,
-                'choice_label' => 'name',
-                'required' => false,
+            ->add('avatar', FileType::class, [
+                'data_class' => File::class
             ])
             ->add('city', TextType::class)
         ;

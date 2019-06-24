@@ -16,6 +16,14 @@
 
 {% block body %}
 {% for course in courses %}
+<div class="col-lg-2 m-auto">
+    <div class="custom-select" style="width:200px;">
+      <select>
+        <option value="2018">2018-2019</option>
+        <option value="2019">2019-2020</option>
+      </select>
+    </div>
+</div>
 <div class="col-lg-11 m-auto">
     <div class="card dashboard-item dashboard-small-list">
         <div class="card-header card-header-{{ colorClass }}">
@@ -37,7 +45,7 @@
     {% if is_granted('ROLE_STUDENT') %}
     <div class="row  p-4">
       <div class="col-md-6">
-        <h6> Next exams : </h6>
+        <h5> Next exams : </h5>
           <ul class="list-group">
               {% for exam in course.exams %}
               <li class="list-group-item">
@@ -57,7 +65,7 @@
         </ul>
       </div>
       <div class="col-md-6">
-        <h6> Next projects : </h6>
+        <h5> Next projects : </h5>
           <ul class="list-group">
               {% for project in course.projects %}
               <li class="list-group-item">

@@ -14,6 +14,16 @@
     <table class="table">
         <tbody>
             <tr>
+                <th>Avatar</th>
+                <td>
+                    {% if app.user.avatar.file is defined %}
+                        <img class="avatar-sm" src="/public/uploads/documents/{{ app.user.avatar.file }}">
+                    {% else %}
+                        No avatar found
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>

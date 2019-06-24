@@ -6,9 +6,9 @@ use App\Entity\Traits\DateTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model\SoftDeletable\SoftDeletable;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Knp\DoctrineBehaviors\Model\SoftDeletable\SoftDeletable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -105,7 +105,7 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToOne(targetEntity="File")
-     * @ORM\JoinColumn(name="avatar", referencedColumnName="id")
+     * @ORM\JoinColumn(name="avatar", referencedColumnName="id", nullable=true)
      */
     private $avatar;
 

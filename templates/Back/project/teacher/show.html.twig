@@ -30,6 +30,21 @@
         </div>
     </div>
 </div>
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+        <div class="row">
+        <div class="card-header card-header-{{ colorClass }} col-md-12">
+            <h6 class="card-title">Manage this project</h6>
+        </div>
+        </div>
+        <div class="card-body table-responsive">
+            <a class="btn btn-default btn-sm" role="button">Delete the project</a>
+            <a class="btn btn-default btn-sm" role="button">Edit project</a>
+            <a class="btn btn-default btn-sm" href="{{ path('teacher_project_new', { 'id': course.id }) }}" role="button">Add files</a>
+            <a class="btn btn-default btn-sm" role="button">Manage files</a>
+        </div>
+    </div>
+</div>
 {% for step in project.projectSteps|sort %}
 <div class="col-lg-11 m-auto">
     <div class="card dashboard-item dashboard-small-list">

@@ -21,7 +21,7 @@
         <tbody>
         {% for setting in settings %}
             <tr>
-                <td>{{ setting.key }}</td>
+                <td>{{ setting.label }}</td>
                 <td>{{ setting.value }}</td>
                 <td>
                     <a class="btn btn-warning btn-md" role="button" href="{{ path('setting_edit', {'id': setting.id}) }}">edit</a>
@@ -29,7 +29,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td class="text-center" colspan="4">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

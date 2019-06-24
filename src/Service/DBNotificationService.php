@@ -17,7 +17,8 @@ class DBNotificationService implements DBNotificationServiceInterface
         "GRADE",
         "ATTENDANCE",
         "EXAM",
-        "PROJECT"
+        "PROJECT",
+        "INFORMATION"
     ];
     private $objectManager;
 
@@ -83,6 +84,8 @@ class DBNotificationService implements DBNotificationServiceInterface
                 return "/student/exam/".$ressource;
             case 'PROJECT':
                 return "/student/project/".$ressource;
+            case 'INFORMATION':
+                return "/information/".$ressource;
             default:
                 return "/student";
                 break;

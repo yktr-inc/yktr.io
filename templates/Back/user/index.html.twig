@@ -16,6 +16,14 @@
 {% endblock %}
 
 {% block body %}
+    <div class="col-lg-2 m-auto">
+        <div class="custom-select" style="width:200px;">
+          <select>
+            <option value="2018">2018-2019</option>
+            <option value="2019">2019-2020</option>
+          </select>
+        </div>
+    </div>
     <div class="col-lg-11 m-auto">
         <div class="card dashboard-item dashboard-small-list">
           <div class="row">
@@ -87,7 +95,7 @@
     </tr>
     {% else %}
     <tr>
-        <td colspan="9">no records found</td>
+        <td class="text-center" colspan="9">no records found</td>
     </tr>
     {% endfor %}
 </tbody>

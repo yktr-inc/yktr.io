@@ -3,7 +3,9 @@
 namespace App\Controller\Back;
 
 use App\Entity\Project;
+use App\Entity\File;
 use App\Form\ProjectType;
+use App\Form\FileType;
 use App\Repository\ProjectRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -109,5 +111,46 @@ class ProjectController extends CRUDController
         $this->deleteAction($project);
         $this->addFlash('warning', 'Project deleted !');
         return $this->redirectToRoute('project_index');
+    }
+
+    /**
+     * @Route("/teacher/project/{id}/add-file", name="teacher_project_new", methods={"GET", "POST"})
+     */
+    public function newProjectFileTeacher(
+        Request $request,
+        Project $project,
+        DBNotificationServiceInterface $notifService
+    ): Response {
+
+        $file = new File();
+
+        $form = $this->createForm(FileType::class, $file);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($project);
+            $entityManager->flush();
+
+            $notifService->notify(
+                "PROJECT",
+                $recipients,
+                "New project for ".$courseName,
+                $project->getId()
+            );
+
+            $this->addFlash('success', 'Project created !');
+
+            if ($request->attributes->get('id')) {
+                return $this->redirectToRoute('teacher_course_index', ['id' => $course->getId()]);
+            }
+            return $this->redirectToRoute('project_index');
+        }
+
+        return $this->render('Back/file/new.html.twig', [
+            'project' => $project,
+            'form' => $form->createView(),
+        ]);
     }
 }

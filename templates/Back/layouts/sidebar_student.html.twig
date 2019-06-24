@@ -6,7 +6,11 @@
     </div>
     <div class="user-infos row align-items-center">
         <div class="col-3">
-            <div class="{{ colorClass }} photo"></div>
+            <div class="{{ colorClass }}">
+                {% if app.user.avatar.file is defined %}
+                    <img class="avatar-sm" src="/public/uploads/documents/{{ app.user.avatar.file }}">
+                {% endif %}
+            </div>
         </div>
         <div id="name" class="col-9 text-left">
             <span>{{ app.user.firstname }} {{ app.user.lastname }}</span>
@@ -44,21 +48,6 @@
                 <a class="nav-link" href="{{ path('student_project_index') }}">
                     <i class="material-icons">location_city</i>
                     <p>Projets</p>
-                </a>
-            </li>
-            <li class="nav-item
-                {{ (app.request.attributes.get( '_route' ) starts with 'student_tutorial' ? 'active' : '') }}"
-            >
-                <a class="nav-link" href="{{ path('student_project_index') }}">
-                    <i class="material-icons">explore</i>
-                    <p>Tutorials</p>
-                </a>
-            </li>
-            <li class="nav-item
-                {{ (app.request.attributes.get( '_route' ) starts with 'student_event' ? 'active' : '') }}"
-            >                <a class="nav-link" href="#">
-                    <i class="material-icons">event_note</i>
-                    <p>Events</p>
                 </a>
             </li>
             <li class="nav-item

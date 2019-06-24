@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}File{% endblock %}
+
+{% block body %}
+    <h1>File</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ file.id }}</td>
+            </tr>
+            <tr>
+                <th>File</th>
+                <td>{{ file.file }}</td>
+            </tr>
+            <tr>
+                <th>OriginalName</th>
+                <td>{{ file.originalName }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('file_index') }}">back to list</a>
+
+    <a href="{{ path('file_edit', {'id': file.id}) }}">edit</a>
+
+    {{ include('Back/file/_delete_form.html.twig') }}
+{% endblock %}

@@ -33,7 +33,9 @@ class ProfileController extends CRUDController
     {
         $options = [
             'redirect' => 'user_profile',
-            'template' => 'Back/user/edit_profile.html.twig'
+            'template' => 'Back/user/edit_profile.html.twig',
+            'files' => 'user_profile',
+            'accessor' => 'getAvatar'
         ];
 
 

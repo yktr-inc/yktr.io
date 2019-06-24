@@ -6,7 +6,11 @@
     </div>
     <div class="user-infos row align-items-center">
         <div class="col-3">
-            <div class="{{ colorClass }} photo"></div>
+            <div class="{{ colorClass }}">
+                {% if app.user.avatar.file is defined %}
+                    <img class="avatar-sm" src="/public/uploads/documents/{{ app.user.avatar.file }}">
+                {% endif %}
+            </div>
         </div>
         <div id="name" class="col-9 text-left">
             <span>{{ app.user.firstname }} {{ app.user.lastname }}</span>

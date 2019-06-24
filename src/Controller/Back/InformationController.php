@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Controller\CRUDController;
+use App\Service\DBNotificationServiceInterface;
+use App\Repository\UserRepository;
 
 class InformationController extends CRUDController
 {
@@ -28,11 +30,23 @@ class InformationController extends CRUDController
     /**
      * @Route("/school/information/new", name="information_new", methods={"GET","POST"})
      */
-    public function new(): Response
+    public function new(DBNotificationServiceInterface $notifService, UserRepository $userRepository): Response
     {
         $crud = $this->newAction(Information::class);
 
         if ($crud->getType() === 'redirect') {
+
+            $newObj = $crud->getArgs()['obj'];
+
+            $recipients = $userRepository->findAll();
+
+            $notifService->notify(
+                "INFORMATION",
+                $recipients,
+                "New information".$newObj->getTitle(),
+                $newObj->getId()
+            );
+
             return $crud->getRedirect();
         }
 
@@ -40,7 +54,7 @@ class InformationController extends CRUDController
     }
 
     /**
-     * @Route("/school/information/{id}", name="information_show", methods={"GET"})
+     * @Route("/information/{id}", name="information_show", methods={"GET"})
      */
     public function show(Information $information): Response
     {

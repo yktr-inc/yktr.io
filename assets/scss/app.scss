@@ -106,7 +106,7 @@ $sidebar-width: 260px;
       border-radius:50%;
       height: 50px;
       width: 50px;
-      background-image: url(https://picsum.photos/200);
+      background-image: url(https://images.ecosia.org/c30opzhfH94mp1rD1RuhXdE5_yI=/0x390/smart/http%3A%2F%2Flaoblogger.com%2Fimages%2Fplaceholder-image-person-4.jpg);
       background-position:50% 50%;
       background-repeat:no-repeat;
       background-size: 100% auto;
@@ -339,3 +339,12 @@ Input Search Bar
     width: 90% !important;
 }
 
+.avatar{
+  max-width: 100px;
+  border-radius: 50%;
+}
+
+.avatar-sm{
+  max-width: 60px;
+  border-radius: 50%;
+}

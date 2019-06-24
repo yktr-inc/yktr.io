@@ -42,6 +42,19 @@
         </div>
     </div>
 </div>
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+      <div class="row">
+        <div class="col-md-11 card-header card-header-{{ colorClass }}">
+            <h6 class="card-title">My project group</h6>
+        </div>
+     </div>
+    {% if(1 is empty) %}
+        <div class="card-body table-responsive">
+        </div>
+    {% endif %}
+    </div>
+</div>
 {% for step in project.projectSteps|sort %}
 <div class="col-lg-11 m-auto">
     <div class="card dashboard-item dashboard-small-list">

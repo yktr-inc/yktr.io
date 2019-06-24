@@ -22,6 +22,11 @@ class Setting
     protected $key;
 
     /**
+     * @ORM\Column(type="string", nullable=false)
+     */
+    protected $label;
+
+    /**
      * @ORM\Column(type="string", length=150, nullable=false)
     */
     protected $value;
@@ -51,6 +56,26 @@ class Setting
     public function setValue(string $value): self
     {
         $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * @param mixed $label
+     *
+     * @return self
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
 
         return $this;
     }

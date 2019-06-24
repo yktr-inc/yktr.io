@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Request;
-use Knp\Component\Pager\PaginatorInterface;
-use App\Utils\CRUD;
 use App\Service\DBNotificationServiceInterface;
+use App\Service\FileUploader;
+use App\Utils\CRUD;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class CRUDController extends AbstractController
 {
@@ -15,10 +17,12 @@ class CRUDController extends AbstractController
 
     public function __construct(
         PaginatorInterface $paginator,
-        RequestStack $requestStack
+        RequestStack $requestStack,
+        FileUploader $fileUploader
     ) {
         $this->paginator = $paginator;
         $this->requestStack = $requestStack;
+        $this->fileUploader = $fileUploader;
     }
 
     public function newAction($ressource, $formType = '', $options = [])
@@ -41,7 +45,7 @@ class CRUDController extends AbstractController
 
             $redirect = $this->redirectToRoute($redirect);
 
-            return new CRUD('redirect', null, null, $redirect);
+            return new CRUD('redirect', null, [ 'obj' => $obj ], $redirect);
         }
 
         $args = [ $className => $obj, 'form' => $form->createView() ];
@@ -57,12 +61,23 @@ class CRUDController extends AbstractController
         $template = empty($options['template']) ? 'Back/'.$className.'/edit.html.twig' : $options['template'];
         $redirect = empty($options['redirect']) ? $className.'_show' : $options['redirect'];
         $formType = empty($formType) ? 'App\\Form\\'.ucfirst($className).'Type' : $formType;
+        $fileKey = empty($options['files']) ? false : $options['files'];
+        $fileRelationAccessor = empty($options['accessor']) ? false : $options['accessor'];
 
         $form = $this->createForm($formType, $obj);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+
+            if($fileKey)
+            {
+                $getMethod = 'getAvatar';
+                $file = $obj->$fileRelationAccessor($fileKey);
+                $newFile = $this->fileUploader->upload($file);
+
+            }
+            $obj->setAvatar($newFile);
+            $this->getDoctrine()->getManager()->flush($obj);
 
             $redirect =  $this->redirectToRoute($redirect, [
                 'id' => $obj->getId(),

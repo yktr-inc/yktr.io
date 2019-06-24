@@ -51,10 +51,12 @@
                     <th>Lastname</th>
                     <td>{{ user.lastname }}</td>
                 </tr>
+                {% if app.request.attributes.get( '_route' ) == "student_show" %}
                 <tr>
                     <th>Current class</th>
                     <td>{{ user.classroom ? user.classroom.name : 'No classroom' }}</td>
                 </tr>
+                {% endif %}
             </tbody>
         </table>
         <div class="text-center">
