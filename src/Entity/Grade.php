@@ -41,6 +41,14 @@ class Grade
      */
     private $value;
 
+    /**
+     * Assert\NotBlank(
+     *     message = "La note doit avoir un type"
+     * )
+     * @ORM\Column(type="string", nullable=false)
+     */
+    private $type;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +94,18 @@ class Grade
     public function setCourse($course)
     {
         $this->course = $course;
+
+        return $this;
+    }
+
+    public function getType(): ?String
+    {
+        return $this->type;
+    }
+
+    public function setType(?String $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

@@ -11,16 +11,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/dashboard/grades")
+ * @Route("/grades")
  */
 class GradeController extends AbstractController
 {
     /**
-     * @Route("/", name="grade_index", methods={"GET"})
+     * @Route("/student", name="student_grade_index", methods={"GET"})
      */
     public function index(GradeRepository $gradeRepository): Response
     {
-        return $this->render('Back/grade/index.html.twig', [
+        return $this->render('Back/grade/student.html.twig', [
             'grades' => $gradeRepository->findAll(),
         ]);
     }
