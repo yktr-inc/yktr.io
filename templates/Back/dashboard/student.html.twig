@@ -9,9 +9,66 @@
 {% endblock %}
 
 {% block body %}
-    {% include 'Back/dashboard/items/options-icon.html.twig' %}
-    {% include 'Back/dashboard/items/projects.html.twig' %}
-    {% include 'Back/dashboard/items/documents.html.twig' %}
-    {% include 'Back/dashboard/items/upcoming-exams.html.twig' %}
+    <div class="col" style="margin-top:-26px;">
+        <div class="row">
+            <div class="col">
+                {% include 'Back/dashboard/items/documents.html.twig' %}
+            </div>
+            <div class="col">
+                {% include 'Back/dashboard/items/upcoming-exams.html.twig' %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {% include 'Back/dashboard/items/projects.html.twig' %}
+            </div>
+        </div>
+    </div>
+    <div class="col" style="margin-right:10px;">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 ml-3">
+                <h6 class="m-0 font-weight-bold text-primary">Notes</h6>
+            </div>
+            <div class="card-body mb-2">
+                <div class="text-center">
+                    <img class="img-fluid px-3 px-sm-4 mb-4" style="width: 15rem;margin-top:-20px;margin-bottom:-40px;" src="https://pershingai.com/wp-content/uploads/2019/04/Flat-color-Modern-Isometric-Illustration-design-Online-Learning.png" alt="">
+                </div>
+                <p>You have been added to a new <a style="color:#a96dad;" target="_blank" rel="nofollow" href="/school/space/">Space</a>. Exchange with others students, teachers, share information and documents with them. Need help for projects or courses ? See our <a style="color:#a96dad;" target="_blank" rel="nofollow" href="#">FAQ</a> zone. </p>
+                <a style="color:#a96dad;" target="_blank" rel="nofollow" href="#">Go to your new Space →</a>
+            </div>
+        </div>
+        <div class="row pb-5">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header py-3 ml-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Important</h6>
+                    </div>
+                    <div class="card-body mb-2">
+                        <div class="text-center">
+                            <img class="img-fluid px-3 px-sm-4 mb-4" style="width: 20rem;margin-top:-20px;" src="https://cdn.dribbble.com/users/77598/screenshots/5919494/dribbble.png" alt="">
+                        </div>
+                        <p>Someone has recently added <a target="_blank" rel="nofollow" href="/school/courses">courses</a> to you. You may want to see details, description and documents for this new <a style="color:#a96dad;" target="_blank" rel="nofollow" href="/school/courses">courses</a>.</p>
+                        <a style="color:#a96dad;" target="_blank" rel="nofollow" href="/student/courses">Go to see my courses →</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="ml-3 card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Rappel</h6>
+                    </div>
+                    <div class="card-body">
+                        <p>A teacher has added a Grade for one of your exams. Go to the <a style="color:#a96dad;" target="_blank" rel="nofollow" href="/school/grades/">Grade & Attendances</a> section to see all of your grades.</p>
+                        <button style="background: #a96dad;" type="button" class="btn btn-primary mt-3 btn-sm">My grades</button>
+                        <button type="button" class="btn btn-light mt-3 btn-sm">More Information</button>
+                        <div class="text-center mt-4">
+                            <img class="img-fluid px-3 px-sm-4 mb-4" style="width: 15rem;" src="https://kit8.net/images/thumbnails/580/435/detailed/3/Man_computer@2x.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
