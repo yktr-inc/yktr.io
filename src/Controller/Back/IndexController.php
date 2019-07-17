@@ -24,7 +24,7 @@ class IndexController extends AbstractController
         $lastProjects = $projectStepRepository->findLastProjectsSteps(5, 'project', $classroom);
         $lastTutorials = $projectStepRepository->findLastProjectsSteps(5, 'tutorial', $classroom);
 
-        return $this->render('Back/dashboard/index.html.twig', [
+        return $this->render('Back/dashboard/student.html.twig', [
             'lastExams' => $lastExams,
             'lastProjects' => $lastProjects,
             'lastTutorials' => $lastTutorials,
