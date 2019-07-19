@@ -77,7 +77,7 @@
             <li class="nav-item
                 {{ (app.request.attributes.get( '_route' ) starts with 'event' ? 'active' : '') }}"
             >
-                <a class="nav-link" href="{{ path('event_index') }}">
+                <a class="nav-link" href="{# path('event_index') #}">
                     <i class="material-icons">event_note</i>
                     <p>Events</p>
                 </a>

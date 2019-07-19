@@ -9,6 +9,121 @@
 {% endblock %}
 
 {% block body %}
-    {% include 'Back/dashboard/items/options-icon.html.twig' %}
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 ml-3">
+                <h6 class="m-0 font-weight-bold text-primary">Notes</h6>
+            </div>
+            <div class="card-body mb-2">
+                <div class="text-center">
+                    <img class="img-fluid px-3 px-sm-4 mb-4" style="width: 23rem;margin-top:-40px;margin-bottom:-40px;" src="https://cdn.dribbble.com/users/1568450/screenshots/4962077/voicera_gyciui_geras_4-01.png" alt="">
+                </div>
+                <p>It seems that you don't have much <a target="_blank" rel="nofollow" href="/school/course/">courses</a> planned this week. It would be interesting to think of adding courses for this week. Add courses in the left menu. Need help ? See our <a target="_blank" rel="nofollow" href="#">FAQ</a> zone. </p>
+                <a target="_blank" rel="nofollow" href="#">Add courses for your students →</a>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row shadow">
+                <div class="col-6 card">
+                    <div class="card-header py-3 ml-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Important</h6>
+                    </div>
+                    <div class="card-body mb-2">
+                        <div class="text-center">
+                            <img class="img-fluid px-3 px-sm-4 mb-4" style="width: 20rem;margin-top:-40px;" src="https://www.365talents.com/wp-content/uploads/2017/11/undraw_businessman_97x4-580x500.png" alt="">
+                        </div>
+                        <p>Someone has recently added <a target="_blank" rel="nofollow" href="/school/teachers">teachers</a> to your school. These teachers don't have courses now. You may want to reviews details and add theme <a target="_blank" rel="nofollow" href="/school/courses">courses</a>.</p>
+                        <a target="_blank" rel="nofollow" href="#">Add courses for your teachers →</a>
+                    </div>
+                </div>
+                <div class="col-6 card">
+                    <div class="ml-3 card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">School Information</h6>
+                    </div>
+                    <div class="card-body">
+                        <p>Add this moment, your school only have 1 <a target="_blank" rel="nofollow" href="/school/promotion/">Promotion</a>. To fully unlock school management, you might want to had a promotion. </p>
+                        <button type="button" class="btn btn-primary mt-3 btn-sm">Add a Promotion</button>
+                        <button type="button" class="btn btn-light mt-3 btn-sm">More Information</button>
+                        <div class="text-center mt-4">
+                            <img class="img-fluid px-3 px-sm-4 mb-4" style="width: 15rem;" src="https://cdn.dribbble.com/users/144388/screenshots/3452670/coder-society-illustration-dribbble.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 mb-4">
+        <div class="row">
+            <div class="col-xl-6">
+                <div style="border-left: .25rem solid #f6c23e!important;" class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Courses this Week</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Total : 2</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="material-icons" style="font-size: 60px; margin-left:-40px; color:#cacaca;">school</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div style="border-left: .25rem solid #f6c23e!important;" class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Teachers on Site</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <span>Today : 1</span>
+                                    <span class="ml-4">This week : 2</span>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="material-icons" style="font-size: 60px; margin-left:-40px; color:#cacaca;">face</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-xl-6">
+                <div style="border-left: .25rem solid #f6c23e!important;" class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Events this Week</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Total : 1</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="material-icons" style="font-size: 60px; margin-left:-40px; color:#cacaca;">calendar_today</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div style="border-left: .25rem solid #f6c23e!important;" class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Students on Site</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <span>Today : 68</span>
+                                    <span class="ml-4">This week : 68</span>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="material-icons" style="font-size: 60px; margin-left:-40px; color:#cacaca;">account_circle</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 

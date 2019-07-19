@@ -9,6 +9,121 @@
 {% endblock %}
 
 {% block body %}
-    {% include 'Back/dashboard/items/options-icon.html.twig' %}
+    <div class="col-lg-6 mb-4">
+        <!-- Illustrations -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 ml-3">
+                <h6 class="m-0 font-weight-bold text-primary">Project</h6>
+            </div>
+            <div class="card-body mb-2">
+                <div class="text-center">
+                    <img class="img-fluid px-3 px-sm-4 mb-4" style="width: 23rem;margin-top:-40px;margin-bottom:-40px;" src="https://img.freepik.com/free-vector/flat-isometric-vector-design_68094-97.jpg?size=626&ext=jpg" alt="">
+                </div>
+                <p>It seems that you don't have planned a <a target="_blank" rel="nofollow" href="/teacher/projects/">project</a> for one of your course. Add your project as soon a possible. Add project in the left menu. Need help ? See our <a target="_blank" rel="nofollow" href="#">FAQ</a> zone. </p>
+                <a target="_blank" rel="nofollow" href="#">Add project for your courses →</a>
+            </div>
+        </div>
+
+        <!-- Approach -->
+        <div class="row">
+            <div class="col-xl-6">
+                <div style="border-left: .25rem solid #2f995b!important;" class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Courses this Week</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Total : 2</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="material-icons" style="font-size: 60px; margin-left:-40px; color:#cacaca;">school</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div style="border-left: .25rem solid #2f995b!important;" class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Courses Handled</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    Total: 1
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="material-icons" style="font-size: 60px; margin-left:-40px; color:#cacaca;">face</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-xl-6">
+                <div style="border-left: .25rem solid #2f995b!important;" class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Planned Exams</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <span>Today : 0</span>
+                                    <span class="ml-4">This week : 1</span>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="material-icons" style="font-size: 60px; margin-left:-40px; color:#cacaca;">rate_review</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div style="border-left: .25rem solid #2f995b!important;" class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Project Deadlines</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <span>Today : 0</span>
+                                    <span class="ml-4">This week : 1</span>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="material-icons" style="font-size: 60px; margin-left:-40px; color:#cacaca;">date_range</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 mb-4">
+        <div class="col-6 card">
+            <div class="card-header py-3 ml-3">
+                <h6 class="m-0 font-weight-bold text-primary">Important</h6>
+            </div>
+            <div class="card-body mb-2">
+                <div class="text-center">
+                    <img class="img-fluid px-3 px-sm-4 mb-4" style="width: 15rem;margin-top:-40px;" src="https://www.pnetform.com/wp-content/uploads/2018/11/WebDesignDevelopmentVector.png" alt="">
+                </div>
+                <p>Someone has recently added <a target="_blank" rel="nofollow" href="/school/courses">courses</a> to you. You may want to reviews details and add description and documents for this <a target="_blank" rel="nofollow" href="/school/courses">courses</a>.</p>
+                <a target="_blank" rel="nofollow" href="#">Add information to your courses →</a>
+            </div>
+        </div>
+        <div class="col-6 card">
+            <div class="ml-3 card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Rappel</h6>
+            </div>
+            <div class="card-body">
+                <p>Hou have done an <a target="_blank" rel="nofollow" href="/school/exams/">Exam</a> last week. Please, enter notes in the dedicated part your espace once corrected.</p>
+                <button type="button" class="btn btn-primary mt-3 btn-sm">Add Notes</button>
+                <button type="button" class="btn btn-light mt-3 btn-sm">More Information</button>
+                <div class="text-center mt-4">
+                    <img class="img-fluid px-3 px-sm-4 mb-4" style="width: 15rem;" src="https://cdn.dribbble.com/users/144388/screenshots/3452670/coder-society-illustration-dribbble.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
