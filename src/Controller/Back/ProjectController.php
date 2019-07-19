@@ -51,6 +51,7 @@ class ProjectController extends CRUDController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $project->setType('project');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();
@@ -114,7 +115,7 @@ class ProjectController extends CRUDController
     }
 
     /**
-     * @Route("/teacher/project/{id}/add-file", name="teacher_project_new", methods={"GET", "POST"})
+     * @Route("/teacher/project/{id}/add-file", name="teacher_project_new_file", methods={"GET", "POST"})
      */
     public function newProjectFileTeacher(
         Request $request,

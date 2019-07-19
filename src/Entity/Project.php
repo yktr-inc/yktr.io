@@ -69,9 +69,12 @@ class Project
     private $groups;
 
     /**
-     * @ORM\OneToMany(targetEntity="ProjectStep", mappedBy="project", cascade={"persist"})
+     *
+     * @Assert\Date
+     *
+     * @ORM\Column(type="datetime", nullable=false)
      */
-    private $projectSteps;
+    private $deadline;
 
     public function __construct()
     {
@@ -190,6 +193,26 @@ class Project
                 $group->setProject(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDeadline()
+    {
+        return $this->deadline;
+    }
+
+    /**
+     * @param mixed $deadline
+     *
+     * @return self
+     */
+    public function setDeadline($deadline)
+    {
+        $this->deadline = $deadline;
 
         return $this;
     }

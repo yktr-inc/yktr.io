@@ -2,8 +2,7 @@
 
 {% block breadcrumb %}
       <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
+      <li class="breadcrumb-item active" aria-current="page">Projects</li>
 {% endblock %}
 
 {% block stylesheets %}
@@ -12,13 +11,20 @@
 {% endblock %}
 
 {% block body %}
-<div class="col-lg-2 m-auto">
-    <div class="custom-select" style="width:200px;">
-      <select>
-        <option value="2018">2018-2019</option>
-        <option value="2019">2019-2020</option>
+<div class="col-lg-3 m-auto">
+    <div class="select_mate" data-mate-select="active" >
+    <select name="" onchange="" onclick="return false;" id="">
+    <option value=""  >2018-2019</option>
+    <option value="1">2019-2020</option>
       </select>
+    <p class="selecionado_opcion"  onclick="open_select(this)" ></p><span onclick="open_select(this)" class="icon_select_mate" ><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
+        <path d="M0-.75h24v24H0z" fill="none"/>
+    </svg></span>
+    <div class="cont_list_select_mate">
+      <ul class="cont_select_int">  </ul>
     </div>
+      </div>
 </div>
 <div class="col-lg-11 m-auto">
     <div class="card dashboard-item dashboard-small-list">

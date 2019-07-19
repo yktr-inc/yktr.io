@@ -53,9 +53,15 @@
             <ul class="list-group">
                 {% for exam in course.exams %}
                 <li class="list-group-item">
+                    {% if is_granted('ROLE_STUDENT') %}
                     <a href="{{ path('student_exam_show', { 'id':exam.id }) }}">
                         {{ exam.type|upper }} : "{{ exam.name }}" on {{ exam.date|date('d/m/y') }}
                     </a>
+                    {% else %}
+                    <a href="{{ path('teacher_exam_show', { 'id':exam.id }) }}">
+                        {{ exam.type|upper }} : "{{ exam.name }}" on {{ exam.date|date('d/m/y') }}
+                    </a>
+                    {% endif %}
                 </li>
                 {% else %}
                 <li class="list-group-item"> No exam for this course at this moment </li>
@@ -102,17 +108,21 @@
             <h5 class="card-title">Grades</h5>
         </div>
         <div class="card-body table-responsive">
+        {% if is_granted('ROLE_TEACHER') %}
+            <a href="#" class="btn btn-sm btn-block"> Add new grades </a>
+        {% elseif is_granted('ROLE_STUDENT') %}
                 <div class="mt-2">
                     <ul class="list-group">
-                        {% for project in course.projects %}
+                        {% for grade in course.grades %}
                         <li class="list-group-item">
-                            {{ project.name }}
+                            {{ grade.value }}
                         </li>
                         {% else %}
-                        <li class="list-group-item"> No project for this course at this moment </li>
+                        <li class="list-group-item"> No grade for this course at this moment </li>
                         {% endfor %}
                   </ul>
                 </div>
+        {% endif %}
         </div>
     </div>
 </div>

@@ -55,21 +55,4 @@
     {% endif %}
     </div>
 </div>
-{% for step in project.projectSteps|sort %}
-<div class="col-lg-11 m-auto">
-    <div class="card dashboard-item dashboard-small-list">
-        <div class="row">
-        <div class="card-header card-header-{{ colorClass }} col-md-9">
-            <h6 class="card-title">Step {{ step.stepOrder }} : {{ step.name }}</a></h6>
-        </div>
-        <div class="col-md-2 mt-2">
-            <h5> Due date : {{step.endAt|date('d/m/y h:i') }} </h5>
-        </div>
-        </div>
-        <div class="card-body table-responsive">
-            {{ step.description|raw }}
-        </div>
-    </div>
-</div>
-{% endfor %}
 {% endblock %}

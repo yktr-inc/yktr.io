@@ -28,6 +28,12 @@ class Grade
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Course", inversedBy="grades")
+     * @ORM\JoinColumn(name="course_id", referencedColumnName="id")
+     */
+    private $course;
+
+    /**
      * Assert\NotBlank(
      *     message = "La note ne peut pas être vide"
      * )
@@ -60,6 +66,26 @@ class Grade
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCourse()
+    {
+        return $this->course;
+    }
+
+    /**
+     * @param mixed $course
+     *
+     * @return self
+     */
+    public function setCourse($course)
+    {
+        $this->course = $course;
 
         return $this;
     }

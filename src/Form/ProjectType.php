@@ -12,19 +12,23 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class ProjectType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', ChoiceType::class, [
-                'choices'  => [
-                    'Project' => 'project',
-                    'Tutorial' => 'tutorial'
-                ],
-            ])
             ->add('name', TextType::class)
+            ->add('deadline', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'DD/MM/YYYY',
+                'html5' => false,
+                'data' => new \DateTime(),
+                'attr' => [
+                    'class' => 'datepicker-full'
+                ]
+            ])
             ->add('description', TextareaType::class, [
                 'attr' => [
                     'class' => 'editable',

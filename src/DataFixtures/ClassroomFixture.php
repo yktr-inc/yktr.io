@@ -24,6 +24,12 @@ class ClassroomFixture extends Fixture
         $classroom->setPromotion($promotion);
         $manager->persist($classroom);
 
+        $classroom = new Classroom();
+
+        $classroom->setName('Classroom 2');
+        $classroom->setPromotion($promotion);
+        $manager->persist($classroom);
+
         $manager->flush();
     }
 }

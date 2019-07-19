@@ -80,6 +80,10 @@ class Course
      */
     private $projects;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Grade", mappedBy="course")
+     */
+    private $grades;
 
     public function __construct()
     {
@@ -242,6 +246,26 @@ class Course
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGrades()
+    {
+        return $this->grades;
+    }
+
+    /**
+     * @param mixed $grades
+     *
+     * @return self
+     */
+    public function setGrades($grades)
+    {
+        $this->grades = $grades;
 
         return $this;
     }
