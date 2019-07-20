@@ -24,7 +24,7 @@ class StudentController extends AbstractController
     {
         $courses = $this->getUser()->getClassroom()->getCourses()->filter(
           function ($entry) {
-              return $entry->getStatus() === 'ACTIVE';
+              return $entry->getStatus() === 'on-going';
           }
         );
         return $this->render('Back/course/student/index.html.twig', [

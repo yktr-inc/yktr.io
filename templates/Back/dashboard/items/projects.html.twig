@@ -10,6 +10,11 @@
                                 <i class="material-icons align-middle">movie_filter</i> Project
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tutorial" data-toggle="tab">
+                                <i class="material-icons align-top">live_tv</i> Tutorials
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -19,7 +24,7 @@
                 <div class="tab-pane active" id="profile">
                     <table class="table">
                         <tbody>
-                        {% for step in lastProjects %}
+                        {% for project in lastProjects %}
                         <tr>
                             <td>
                                 <div class="form-check">
@@ -31,11 +36,11 @@
                                     </label>
                                 </div>
                             </td>
-                            <td>{{ step.name }}</td>
-                            <td>{{ step.project.course.title }}</td>
+                            <td>{{ project.name }}</td>
+                            <td>{{ project.course.title }}</td>
                             <td class="td-actions text-right text-align-center">
                                 <div class="custom-date">
-                                    <span class="card-title">{{ step.endAt|date('d/m/Y H:i') }}</span>
+                                    <span class="card-title">{{ project.deadline|date('d/m/Y H:i') }}</span>
                                 </div>
                             </td>
                         </tr>
@@ -45,7 +50,7 @@
                     </tbody>
                     </table>
                 </div>
-                <div class="tab-pane" id="messages">
+                <div class="tab-pane" id="tutorial">
                     <table class="table">
                         <tbody>
                         {% for tutorial in lastTutorials %}
