@@ -29,7 +29,7 @@ class ExamType extends AbstractType
                 'html5' => false,
                 'data' => new \DateTime(),
                 'attr' => [
-                    'class' => 'datepicker-full'
+                    'class' => 'month'
                 ]
             ])
             ->add('description', TextareaType::class, [
