@@ -25,11 +25,11 @@ class ExamType extends AbstractType
             ->add('name', TextType::class)
             ->add('date', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'dd-MM-yyyy',
+                'format' => 'dd-mm-yyyy',
                 'html5' => false,
                 'data' => new \DateTime(),
                 'attr' => [
-                    'class' => 'month'
+                    'class' => 'full-datepicker'
                 ]
             ])
             ->add('description', TextareaType::class, [

@@ -28,7 +28,7 @@ class InformationType extends AbstractType
                 'html5' => false,
                 'data' => new \DateTime(date("Y-m")),
                 'attr' => [
-                    'class' => 'month'
+                    'class' => 'full-datepicker'
                 ]
             ])
         ;

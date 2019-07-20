@@ -22,7 +22,7 @@ class ProjectType extends AbstractType
                 'html5' => false,
                 'data' => new \DateTime(),
                 'attr' => [
-                    'class' => 'month'
+                    'class' => 'full-datepicker'
                 ]
             ])
             ->add('description', TextareaType::class, [

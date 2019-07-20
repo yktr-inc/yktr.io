@@ -32,7 +32,7 @@ class TeacherController extends AbstractController
      */
     public function showCourse(Request $request, Course $course, CourseRepository $courseRepository): Response
     {
-        return $this->render('Back/course/student/show.html.twig', [
+        return $this->render('Back/course/teacher/show.html.twig', [
             'course' => $course,
             'grades' => []
         ]);
