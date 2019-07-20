@@ -21,7 +21,7 @@ class GradeController extends AbstractController
     public function index(GradeRepository $gradeRepository): Response
     {
         return $this->render('Back/grade/student.html.twig', [
-            'grades' => $gradeRepository->findAll(),
+            'grades' => $gradeRepository->findOneBy(['id'=>1])
         ]);
     }
 

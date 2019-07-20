@@ -21,21 +21,35 @@ class CourseFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $classroom = $this->classroomRepository->findOneBy(['name'=>'Classroom 1']);
-        $teacher = $this->userRepository->findOneBy(['username'=>'teacher']);
+        $teacher = $this->userRepository->findOneBy(['username'=>'mandrieu']);
 
         $faker = Faker\Factory::create('fr_FR');
 
-        for ($i = 0; $i < 4; $i++) {
-            $course = new Course();
+        $course = new Course();
+        $course->setStatus('on-going');
+        $course->setClassroom($classroom);
+        $course->setTeacher($teacher);
+        $course->setTitle('Projet Annuel');
+        $course->setDescription($faker->text);
+        $manager->persist($course);
 
-            $course->setStatus('on-going');
-            $course->setClassroom($classroom);
-            $course->setTeacher($teacher);
-            $course->setTitle($faker->sentence(3));
-            $course->setDescription($faker->text);
+        $teacher = $this->userRepository->findOneBy(['username'=>'amorin']);
 
-            $manager->persist($course);
-        }
+        $course = new Course();
+        $course->setStatus('on-going');
+        $course->setClassroom($classroom);
+        $course->setTeacher($teacher);
+        $course->setTitle('Symfony');
+        $course->setDescription($faker->text);
+        $manager->persist($course);
+
+        $course = new Course();
+        $course->setStatus('on-going');
+        $course->setClassroom($classroom);
+        $course->setTeacher($teacher);
+        $course->setTitle('PHP avancé');
+        $course->setDescription($faker->text);
+        $manager->persist($course);
 
         $manager->flush();
     }

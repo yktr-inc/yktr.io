@@ -19,7 +19,8 @@ class APromotionFixture extends Fixture
         $promotion->setStartedAt(new \DateTime());
         $promotion->setFinishedAt(new \DateTime());
         $manager->persist($promotion);
-        $manager->flush();
+
+        $promotion = new Promotion();
 
         $promotion->setYear('Second year');
         $promotion->setCode('329OZE');

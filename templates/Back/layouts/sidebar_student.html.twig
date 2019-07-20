@@ -7,9 +7,7 @@
     <div class="user-infos row align-items-center">
         <div class="col-3">
             <div class="{{ colorClass }}">
-                {% if app.user.avatar.file is defined %}
-                    <img class="avatar-sm" src="/public/uploads/documents/{{ app.user.avatar.file }}">
-                {% endif %}
+                <img class="avatar-sm" src="https://media.licdn.com/dms/image/C4D03AQHfrdfgu4kKbQ/profile-displayphoto-shrink_200_200/0?e=1568851200&v=beta&t=nO0YwoDqXRFe3r51umkVlTHBXLJtid0SIvrraNCH5LA">
             </div>
         </div>
         <div id="name" class="col-9 text-left">
@@ -37,7 +35,7 @@
             <li class="nav-item
                 {{ (app.request.attributes.get( '_route' ) starts with 'student_grade_index' ? 'active' : '') }}"
             >
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/grades/student">
                     <i class="material-icons">account_balance</i>
                     <p>Grades & Attendance</p>
                 </a>

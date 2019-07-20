@@ -27,6 +27,7 @@ class GradesFixture extends Fixture implements DependentFixtureInterface
         $grade1->setUser($user);
         $grade1->setCourse($course);
         $grade1->setValue(random_int(0, 20));
+        $grade1->setCoefficient(random_int(1, 4));
         $grade1->setType('cc1');
         $manager->persist($grade1);
 
@@ -34,6 +35,7 @@ class GradesFixture extends Fixture implements DependentFixtureInterface
         $grade2->setUser($user);
         $grade2->setCourse($course);
         $grade2->setValue(random_int(0, 20));
+        $grade2->setCoefficient(random_int(1, 4));
         $grade2->setType('cc2');
         $manager->persist($grade2);
 
@@ -41,6 +43,7 @@ class GradesFixture extends Fixture implements DependentFixtureInterface
         $grade3->setUser($user);
         $grade3->setCourse($course);
         $grade3->setValue(random_int(0, 20));
+        $grade3->setCoefficient(random_int(1, 4));
         $grade3->setType('exam');
         $manager->persist($grade3);
 
@@ -50,6 +53,7 @@ class GradesFixture extends Fixture implements DependentFixtureInterface
         $grade1->setUser($user);
         $grade1->setCourse($course);
         $grade1->setValue(random_int(0, 20));
+        $grade1->setCoefficient(random_int(1, 4));
         $grade1->setType('cc1');
         $manager->persist($grade1);
 
@@ -57,6 +61,7 @@ class GradesFixture extends Fixture implements DependentFixtureInterface
         $grade2->setUser($user);
         $grade2->setCourse($course);
         $grade2->setValue(random_int(0, 20));
+        $grade2->setCoefficient(random_int(1, 4));
         $grade2->setType('cc2');
         $manager->persist($grade2);
 
@@ -64,6 +69,7 @@ class GradesFixture extends Fixture implements DependentFixtureInterface
         $grade3->setUser($user);
         $grade3->setCourse($course);
         $grade3->setValue(random_int(0, 20));
+        $grade3->setCoefficient(random_int(1, 4));
         $grade3->setType('exam');
         $manager->persist($grade3);
 
@@ -73,6 +79,7 @@ class GradesFixture extends Fixture implements DependentFixtureInterface
         $grade1->setUser($user);
         $grade1->setCourse($course);
         $grade1->setValue(random_int(0, 20));
+        $grade1->setCoefficient(random_int(1, 4));
         $grade1->setType('cc1');
         $manager->persist($grade1);
 
@@ -80,6 +87,7 @@ class GradesFixture extends Fixture implements DependentFixtureInterface
         $grade2->setUser($user);
         $grade2->setCourse($course);
         $grade2->setValue(random_int(0, 20));
+        $grade2->setCoefficient(random_int(1, 4));
         $grade2->setType('cc2');
         $manager->persist($grade2);
 
@@ -87,6 +95,7 @@ class GradesFixture extends Fixture implements DependentFixtureInterface
         $grade3->setUser($user);
         $grade3->setCourse($course);
         $grade3->setValue(random_int(0, 20));
+        $grade3->setCoefficient(random_int(1, 4));
         $grade3->setType('exam');
         $manager->persist($grade3);
 

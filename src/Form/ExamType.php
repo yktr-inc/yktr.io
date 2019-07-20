@@ -25,7 +25,7 @@ class ExamType extends AbstractType
             ->add('name', TextType::class)
             ->add('date', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'DD/MM/YYYY',
+                'format' => 'dd-MM-yyyy',
                 'html5' => false,
                 'data' => new \DateTime(),
                 'attr' => [

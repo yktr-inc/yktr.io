@@ -74,9 +74,9 @@ class CRUDController extends AbstractController
                 $getMethod = 'getAvatar';
                 $file = $obj->$fileRelationAccessor($fileKey);
                 $newFile = $this->fileUploader->upload($file);
+                $obj->setAvatar($newFile);
 
             }
-            $obj->setAvatar($newFile);
             $this->getDoctrine()->getManager()->flush($obj);
 
             $redirect =  $this->redirectToRoute($redirect, [

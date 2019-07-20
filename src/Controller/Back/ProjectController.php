@@ -44,8 +44,6 @@ class ProjectController extends CRUDController
             $project->setCourse($course);
         }
 
-
-
         $form = $this->createForm(ProjectType::class, $project);
 
         $form->handleRequest($request);
