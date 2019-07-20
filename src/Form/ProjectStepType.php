@@ -24,7 +24,7 @@ class ProjectStepType extends AbstractType
                 'format' => 'dd/MM/yyyy H:i',
                 'html5' => false,
                 'attr' => [
-                    'class' => 'full-datepicker'
+                    'class' => 'month'
                 ]
             ])
         ;

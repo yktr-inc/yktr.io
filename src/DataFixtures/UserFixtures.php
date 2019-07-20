@@ -49,12 +49,12 @@ class UserFixtures extends Fixture
         $user = new User();
         $encodedPassword = $this->encoder->encodePassword($user, 'yktr');
 
-        $user->setUsername('hknorr');
+        $user->setUsername('htronc');
         $user->setLastname('Hugo');
         $user->setFirstname('Knorr');
         $user->setPassword($faker->phoneNumber);
         $user->setPhone($faker->phoneNumber);
-        $user->setEmail('hknorr@yktr.io');
+        $user->setEmail('htronc@yktr.io');
         $user->setPassword($encodedPassword);
         $user->setRoles(array('ROLE_STUDENT'));
         $user->setClassroom($classroom);
