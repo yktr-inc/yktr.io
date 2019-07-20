@@ -51,7 +51,7 @@ class UserFixtures extends Fixture
 
         $user->setUsername('htronc');
         $user->setLastname('Hugo');
-        $user->setFirstname('Knorr');
+        $user->setFirstname('Tronc');
         $user->setPassword($faker->phoneNumber);
         $user->setPhone($faker->phoneNumber);
         $user->setEmail('htronc@yktr.io');

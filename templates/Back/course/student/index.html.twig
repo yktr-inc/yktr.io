@@ -15,89 +15,93 @@
 {% endblock %}
 
 {% block body %}
-<div class="col-lg-3 m-auto">
-    <div class="select_mate" data-mate-select="active" >
-    <select name="" onchange="" onclick="return false;" id="">
-    <option value=""  >2018-2019</option>
-    <option value="1">2019-2020</option>
-      </select>
-    <p class="selecionado_opcion"  onclick="open_select(this)" ></p><span onclick="open_select(this)" class="icon_select_mate" ><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
-        <path d="M0-.75h24v24H0z" fill="none"/>
-    </svg></span>
-    <div class="cont_list_select_mate">
-      <ul class="cont_select_int">  </ul>
-    </div>
-      </div>
-</div>
-{% for course in courses %}
-<div class="col-lg-11 m-auto">
-    <div class="card dashboard-item dashboard-small-list">
-        <div class="card-header card-header-{{ colorClass }}">
-        {% if is_granted('ROLE_TEACHER') %}
-            <h4 class="card-title"><a href="{{ path('teacher_course_show',{'id': course.id}) }}">{{ course.title }}</a></h4>
-        {% else %}
-            <h4 class="card-title"><a href="{{ path('student_course_show',{'id': course.id}) }}">{{ course.title }}</a></h4>
-        {% endif %}
+{% if courses is not empty %}
+    <div class="col-3">
+        {% include 'Back/dashboard/items/documents.html.twig' %}
+        <div class="card shadow mt-5 ml-3 mr-3">
+            <div class="card-header py-3 ml-3">
+                <h6 class="m-0 font-weight-bold text-primary">Course Planner</h6>
+            </div>
+            <div class="card-body mb-2">
+                <div class="text-center">
+                    <img class="img-fluid px-3 px-sm-4 mb-4" style="width: 19rem;margin-top:-20px;margin-bottom:-40px;" src="https://us.123rf.com/450wm/simmmax/simmmax1904/simmmax190400028/123640786-stock-vector-online-digital-library-isometric-online-book-shop-e-learning-ebook-vector-illustration-.jpg?ver=6" alt="">
+                </div>
+                <p>Here are all your Courses for this year. You can see all projects and exams for each Course. If there is a problem or a mistake, please report it to your administrative.</p>
+                <a style="color:#a96dad;" target="_blank" rel="nofollow" href="#">Go to your Dashboard →</a>
+            </div>
         </div>
-        <div class="card-body table-responsive">
-      <div class="col-md-12 text-right">
-        {% if is_granted('ROLE_TEACHER') %}
-        <h5>{{ course.classroom.name }}</h5>
-        {% else %}
-        <h5>Teacher : {{ course.teacher.getFullname }}</h5>
-        {% endif %}
-      </div>
     </div>
-    {% if is_granted('ROLE_STUDENT') %}
-    <div class="row  p-4">
-      <div class="col-md-6">
-        <h5> Next exams : </h5>
-          <ul class="list-group">
-              {% for exam in course.exams %}
-              <li class="list-group-item">
-                  {% if is_granted('ROLE_TEACHER') %}
-                  <a href="{{ path('teacher_exam_show', { 'id':exam.id }) }}">
-                      {{ exam.type|upper }} : "{{ exam.name }}" on {{ exam.date|date('d/m/y') }}
-                  </a>
-                  {% else %}
-                  <a href="{{ path('student_exam_show', { 'id':exam.id }) }}">
-                      {{ exam.type|upper }} : "{{ exam.name }}" on {{ exam.date|date('d/m/y') }}
-                  </a>
-                  {% endif %}
-              </li>
-              {% else %}
-              <li class="list-group-item"> No exam for this course at this moment </li>
-              {% endfor %}
-        </ul>
-      </div>
-      <div class="col-md-6">
-        <h5> Next projects : </h5>
-          <ul class="list-group">
-              {% for project in course.projects %}
-              <li class="list-group-item">
-                  {% if is_granted('ROLE_TEACHER') %}
-                  <a href="{{ path('teacher_project_show', { 'id':project.id }) }}">
-                      {{ project.name }}
-                  </a>
-                  {% else %}
-                  <a href="{{ path('student_project_show', { 'id':project.id }) }}">
-                      {{ project.name }}
-                  </a>
-                  {% endif %}
-              </li>
-              {% else %}
-              <li class="list-group-item"> No exam for this course at this moment </li>
-              {% endfor %}
-        </ul>
+    <div class="col-9 row">
+    {% for course in courses %}
+        <div class="col-4">
+            <div class="card dashboard-item dashboard-small-list">
+                <div class="card-header card-header-{{ colorClass }}">
+                    {% if is_granted('ROLE_TEACHER') %}
+                        <h4 class="card-title"><a href="{{ path('teacher_course_show',{'id': course.id}) }}">{{ course.title }}</a></h4>
+                    {% else %}
+                        <h4 class="card-title"><a href="{{ path('student_course_show',{'id': course.id}) }}">{{ course.title }}</a></h4>
+                    {% endif %}
+                </div>
+                <div class="card-body table-responsive">
+                    <div class="col-md-12 text-right">
+                        {% if is_granted('ROLE_TEACHER') %}
+                            <h5>{{ course.classroom.name }}</h5>
+                        {% else %}
+                            <h5>Teacher : {{ course.teacher.getFullname }}</h5>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if is_granted('ROLE_STUDENT') %}
+                    <div class="row  p-4">
+                        <div class="col-md-6">
+                            <h5> Next exams : </h5>
+                            <ul class="list-group">
+                                {% for exam in course.exams %}
+                                    <li class="list-group-item">
+                                        {% if is_granted('ROLE_TEACHER') %}
+                                            <a href="{{ path('teacher_exam_show', { 'id':exam.id }) }}">
+                                                {{ exam.type|upper }} : "{{ exam.name }}" on {{ exam.date|date('d/m/y') }}
+                                            </a>
+                                        {% else %}
+                                            <a href="{{ path('student_exam_show', { 'id':exam.id }) }}">
+                                                {{ exam.type|upper }} : "{{ exam.name }}" on {{ exam.date|date('d/m/y') }}
+                                            </a>
+                                        {% endif %}
+                                    </li>
+                                {% else %}
+                                    <li class="list-group-item"> No exam for this course at this moment </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5> Next projects : </h5>
+                            <ul class="list-group">
+                                {% for project in course.projects %}
+                                    <li class="list-group-item">
+                                        {% if is_granted('ROLE_TEACHER') %}
+                                            <a href="{{ path('teacher_project_show', { 'id':project.id }) }}">
+                                                {{ project.name }}
+                                            </a>
+                                        {% else %}
+                                            <a href="{{ path('student_project_show', { 'id':project.id }) }}">
+                                                {{ project.name }}
+                                            </a>
+                                        {% endif %}
+                                    </li>
+                                {% else %}
+                                    <li class="list-group-item"> No exam for this course at this moment </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
     </div>
-  </div>
-  {% endif %}
-</div>
-</div>
 {% else %}
 <div class="card m-auto p-5 w-75">
   No course at this moment
 </div>
-{% endfor %}
+{% endif %}
 {% endblock %}
