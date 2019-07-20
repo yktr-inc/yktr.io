@@ -5,17 +5,10 @@ const flatpickr = require("flatpickr");
 
 import icons from 'trumbowyg/dist/ui/icons.svg';
 
-flatpickr(".month", {
-    dateFormat: "m/Y",
-    allowInput: true,
-    altInput: true,
-});
-
 flatpickr(".full-datepicker", {
-    dateFormat: "d/m/Y H:i",
-    enableTime: true,
+    dateFormat: "d/m/Y",
     allowInput: true,
-    time_24hr: true
+    time_24hr: false
 });
 
 $('.select-popup').select2({
@@ -71,14 +64,6 @@ function addTagForm($collectionHolder, $newLinkLi) {
     $newFormLi.append('<a href="#" class="btn btn-sm btn-danger remove-tag">Remove step</a>');
 
     $newLinkLi.before($newFormLi);
-
-    $('.full-datepicker').flatpickr({
-    dateFormat: "d/m/Y H:i",
-    enableTime: true,
-    allowInput: true,
-    altInput: true,
-    time_24hr: true
-});
 
     // handle the removal, just for this example
     $('.remove-tag').click(function(e) {

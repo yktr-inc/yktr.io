@@ -26,7 +26,7 @@ class PromotionEditType extends AbstractType
                 'html5' => false,
                 'data' => new \DateTime(date("Y-m")),
                 'attr' => [
-                    'class' => 'datepicker month'
+                    'class' => 'datepicker'
                 ]
             ])
             ->add('finishedAt', DateType::class, [
@@ -35,7 +35,7 @@ class PromotionEditType extends AbstractType
                 'html5' => false,
                 'data' => new \DateTime(date("Y-m")),
                 'attr' => [
-                    'class' => 'datepicker month'
+                    'class' => 'datepicker'
                 ]
             ])
             ->add('classrooms', EntityType::class, [

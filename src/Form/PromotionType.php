@@ -25,7 +25,7 @@ class PromotionType extends AbstractType
                 'format' => 'MM/yyyy',
                 'html5' => false,
                 'attr' => [
-                    'class' => 'month'
+                    'class' => 'full-datepicker'
                 ]
             ])
             ->add('finishedAt', DateType::class, [
@@ -33,7 +33,7 @@ class PromotionType extends AbstractType
                 'format' => 'MM/yyyy',
                 'html5' => false,
                 'attr' => [
-                    'class' => 'month'
+                    'class' => 'full-datepicker'
                 ]
             ])
         ;

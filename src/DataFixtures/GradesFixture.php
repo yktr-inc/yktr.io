@@ -20,8 +20,8 @@ class GradesFixture extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        $user = $this->userRepository->findOneBy(['id'=>random_int(1, 10)]);
-        $course = $this->courseRepository->findOneBy(['id'=>1]);
+        $user = $this->userRepository->findOneBy(['username'=>"htronc"]);
+        $course = $this->courseRepository->findOneBy(['title'=>'Symfony']);
 
         $grade1 = new Grade();
         $grade1->setUser($user);
@@ -47,7 +47,7 @@ class GradesFixture extends Fixture implements DependentFixtureInterface
         $grade3->setType('exam');
         $manager->persist($grade3);
 
-        $course = $this->courseRepository->findOneBy(['id'=>2]);
+        $course = $this->courseRepository->findAll()[2];
 
         $grade1 = new Grade();
         $grade1->setUser($user);
@@ -73,7 +73,7 @@ class GradesFixture extends Fixture implements DependentFixtureInterface
         $grade3->setType('exam');
         $manager->persist($grade3);
 
-        $course = $this->courseRepository->findOneBy(['id'=>3]);
+        $course = $this->courseRepository->findAll()[2];
 
         $grade1 = new Grade();
         $grade1->setUser($user);

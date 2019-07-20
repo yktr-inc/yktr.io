@@ -30,7 +30,7 @@ class CourseFixtures extends Fixture implements DependentFixtureInterface
         $course->setClassroom($classroom);
         $course->setTeacher($teacher);
         $course->setTitle('Projet Annuel');
-        $course->setDescription($faker->text);
+        $course->setDescription($faker->realText(800));
         $manager->persist($course);
 
         $teacher = $this->userRepository->findOneBy(['username'=>'amorin']);
@@ -40,7 +40,7 @@ class CourseFixtures extends Fixture implements DependentFixtureInterface
         $course->setClassroom($classroom);
         $course->setTeacher($teacher);
         $course->setTitle('Symfony');
-        $course->setDescription($faker->text);
+        $course->setDescription($faker->realText(800));
         $manager->persist($course);
 
         $course = new Course();
@@ -48,7 +48,7 @@ class CourseFixtures extends Fixture implements DependentFixtureInterface
         $course->setClassroom($classroom);
         $course->setTeacher($teacher);
         $course->setTitle('PHP avancé');
-        $course->setDescription($faker->text);
+        $course->setDescription($faker->realText(800));
         $manager->persist($course);
 
         $manager->flush();

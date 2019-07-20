@@ -21,7 +21,7 @@ class EventType extends AbstractType
                 'html5' => false,
                 'data' => new \DateTime(),
                 'attr' => [
-                    'class' => 'month'
+                    'class' => 'full-datepicker'
                 ]
             ])
         ;
