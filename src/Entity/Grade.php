@@ -43,6 +43,14 @@ class Grade
 
     /**
      * Assert\NotBlank(
+     *     message = "Le coefficient ne peut pas être vide"
+     * )
+     * @ORM\Column(type="float", nullable=false)
+     */
+    private $coefficient;
+
+    /**
+     * Assert\NotBlank(
      *     message = "La note doit avoir un type"
      * )
      * @ORM\Column(type="string", nullable=false)
@@ -106,6 +114,18 @@ class Grade
     public function setType(?String $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getCoefficient(): ?Int
+    {
+        return $this->type;
+    }
+
+    public function setCoefficient(?Int $coeff): self
+    {
+        $this->coefficient = $coeff;
 
         return $this;
     }

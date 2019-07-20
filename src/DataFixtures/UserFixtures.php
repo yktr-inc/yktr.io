@@ -32,16 +32,16 @@ class UserFixtures extends Fixture
             $user->setUsername($faker->userName);
             $user->setLastname($faker->lastName);
             $user->setFirstname($faker->firstName);
-            $user->setPhone('0639401203');
+            $user->setPhone($faker->phoneNumber);
             $user->setEmail($faker->safeEmail);
             $user->setPassword($encodedPassword);
             $user->setRoles(array('ROLE_STUDENT'));
             $user->setClassroom($classroom);
 
-            $user->setNumber('1');
-            $user->setStreetName('rue de la paix');
-            $user->setPostalCode('75001');
-            $user->setCity('Paris');
+            $user->setNumber($faker->buildingNumber);
+            $user->setStreetName($faker->streetName);
+            $user->setPostalCode($faker->postcode);
+            $user->setCity($faker->city);
 
             $manager->persist($user);
         }
@@ -49,92 +49,77 @@ class UserFixtures extends Fixture
         $user = new User();
         $encodedPassword = $this->encoder->encodePassword($user, 'yktr');
 
-        $user->setUsername('administrative');
-        $user->setLastname('Narvalo');
-        $user->setFirstname('Maximilien');
-        $user->setPhone('0639401203');
-        $user->setEmail('administrative@yktr.io');
+        $user->setUsername('hknorr');
+        $user->setLastname('Hugo');
+        $user->setFirstname('Knorr');
+        $user->setPassword($faker->phoneNumber);
+        $user->setPhone($faker->phoneNumber);
+        $user->setEmail('hknorr@yktr.io');
+        $user->setPassword($encodedPassword);
+        $user->setRoles(array('ROLE_STUDENT'));
+        $user->setClassroom($classroom);
+
+        $user->setNumber($faker->buildingNumber);
+        $user->setStreetName($faker->streetName);
+        $user->setPostalCode($faker->postcode);
+        $user->setCity($faker->city);
+
+        $manager->persist($user);
+
+        $user = new User();
+        $encodedPassword = $this->encoder->encodePassword($user, 'yktr');
+
+        $user->setUsername('eleclerq');
+        $user->setLastname('Leclerq');
+        $user->setFirstname('Elena');
+        $user->setPassword($faker->phoneNumber);
+        $user->setPhone($faker->phoneNumber);
+        $user->setEmail('eleclerq@yktr.io');
         $user->setPassword($encodedPassword);
         $user->setRoles(array('ROLE_ADMINISTRATIVE'));
 
-        $user->setNumber('1');
-        $user->setStreetName('rue de la paix');
-        $user->setPostalCode('75001');
-        $user->setCity('Paris');
+        $user->setNumber($faker->buildingNumber);
+        $user->setStreetName($faker->streetName);
+        $user->setPostalCode($faker->postcode);
+        $user->setCity($faker->city);
 
         $manager->persist($user);
 
         $user = new User();
         $encodedPassword = $this->encoder->encodePassword($user, 'yktr');
 
-        $user->setUsername('student');
-        $user->setLastname('Chabert');
-        $user->setFirstname('Dimitri');
-        $user->setPhone('0639401203');
-        $user->setEmail('student@yktr.io');
-        $user->setPassword($encodedPassword);
-        $user->setRoles(array('ROLE_STUDENT'));
-        $user->setClassroom($classroom);
-
-        $user->setNumber('1');
-        $user->setStreetName('rue de la paix');
-        $user->setPostalCode('75001');
-        $user->setCity('Paris');
-
-        $manager->persist($user);
-
-        $user = new User();
-        $encodedPassword = $this->encoder->encodePassword($user, 'yktr');
-
-        $user->setUsername('student2');
-        $user->setLastname('Martin');
-        $user->setFirstname('Vanessa');
-        $user->setPhone('0639401203');
-        $user->setEmail('student2@yktr.io');
-        $user->setPassword($encodedPassword);
-        $user->setRoles(array('ROLE_STUDENT'));
-        $user->setClassroom($classroom);
-
-        $user->setNumber('1');
-        $user->setStreetName('rue de la paix');
-        $user->setPostalCode('75001');
-        $user->setCity('Paris');
-
-        $manager->persist($user);
-
-        $user = new User();
-        $encodedPassword = $this->encoder->encodePassword($user, 'yktr');
-
-        $user->setUsername('admin');
-        $user->setLastname('Brother');
-        $user->setFirstname('Big');
-        $user->setPhone('0639401203');
-        $user->setEmail('admin@yktr.io');
-        $user->setPassword($encodedPassword);
-        $user->setRoles(array('ROLE_SUPERADMIN'));
-
-        $user->setNumber('1');
-        $user->setStreetName('rue de la paix');
-        $user->setPostalCode('75001');
-        $user->setCity('Paris');
-
-        $manager->persist($user);
-
-        $user = new User();
-        $encodedPassword = $this->encoder->encodePassword($user, 'yktr');
-
-        $user->setUsername('teacher');
-        $user->setLastname('Geopolitique');
-        $user->setFirstname('Jean-Michel');
-        $user->setPhone('0639401203');
-        $user->setEmail('teachern@yktr.io');
+        $user->setUsername('mandrieu');
+        $user->setLastname('Andrieu');
+        $user->setFirstname('Mickael');
+        $user->setPassword($faker->phoneNumber);
+        $user->setPhone($faker->phoneNumber);
+        $user->setEmail('mandrieu@yktr.io');
         $user->setPassword($encodedPassword);
         $user->setRoles(array('ROLE_TEACHER'));
 
-        $user->setNumber('2');
-        $user->setStreetName('rue des champs');
-        $user->setPostalCode('75001');
-        $user->setCity('Paris');
+        $user->setNumber($faker->buildingNumber);
+        $user->setStreetName($faker->streetName);
+        $user->setPostalCode($faker->postcode);
+        $user->setCity($faker->city);
+
+        $manager->persist($user);
+
+        $user = new User();
+        $encodedPassword = $this->encoder->encodePassword($user, 'yktr');
+
+        $user->setUsername('amorin');
+        $user->setLastname('Adrien');
+        $user->setFirstname('Morin');
+        $user->setPassword($faker->phoneNumber);
+        $user->setPhone($faker->phoneNumber);
+        $user->setEmail('amorin@yktr.io');
+        $user->setPassword($encodedPassword);
+        $user->setRoles(array('ROLE_TEACHER'));
+
+        $user->setNumber($faker->buildingNumber);
+        $user->setStreetName($faker->streetName);
+        $user->setPostalCode($faker->postcode);
+        $user->setCity($faker->city);
 
         $manager->persist($user);
 
