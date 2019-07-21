@@ -113,13 +113,30 @@
         {% elseif is_granted('ROLE_STUDENT') %}
                 <div class="mt-2">
                     <ul class="list-group">
-                        {% for grade in course.grades %}
+                        {% if grades[0]|default %}
                         <li class="list-group-item">
-                            {{ grade.value }}
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Coefficient</th>
+                                    <th>Grade</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for type,grade in grades[0] %}
+                                <tr>
+                                    <th>{{ type }}</th>
+                                    <th>{{ grade.coeff }}</th>
+                                    <th>{{ grade.val }}</th>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
                         </li>
                         {% else %}
                         <li class="list-group-item"> No grade for this course at this moment </li>
-                        {% endfor %}
+                        {% endif %}
                   </ul>
                 </div>
         {% endif %}

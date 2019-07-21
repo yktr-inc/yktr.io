@@ -7,6 +7,7 @@ use App\Entity\Exam;
 use App\Entity\Project;
 use App\Entity\ProjectGroup;
 use App\Repository\CourseRepository;
+use App\Repository\GradeRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\ProjectGroupRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,11 +43,30 @@ class StudentController extends AbstractController
     /**
      * @Route("/student/course/{id}", name="student_course_show", methods={"GET"})
      */
-    public function courseShow(Request $request, Course $course, CourseRepository $courseRepository): Response
+    public function courseShow(Course $course, GradeRepository $gradeRepository): Response
     {
+        $grades = $gradeRepository->findBy(['course' => $course, 'user' => $this->getUser()]);
+
+        $gradesByCourse = [];
+        $allCourses = [];
+        foreach ($grades as $grade){
+            if(!in_array($grade->getCourse()->getTitle(), $allCourses)){
+                array_push($allCourses, $grade->getCourse()->getTitle());
+            }
+        }
+        foreach ($allCourses as $c){
+            $gradesForCourse = [];
+            foreach ($grades as $grade){
+                if($grade->getCourse()->getTitle() == $c){
+                    $gradesForCourse[$grade->getType()] = ['val'=>$grade->getValue(), 'coeff'=>$grade->getCoefficient()];
+                }
+            }
+            array_push($gradesByCourse, $gradesForCourse);
+        }
+
         return $this->render('Back/course/student/show.html.twig', [
             'course' => $course,
-            'grades' => []
+            'grades' => $gradesByCourse
         ]);
     }
 

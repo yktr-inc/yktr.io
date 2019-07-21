@@ -5,14 +5,17 @@ namespace App\Controller\Back;
 use App\Entity\Course;
 use App\Entity\Exam;
 use App\Entity\Project;
-use App\Form\CourseType;
+use App\Entity\Grade;
+use App\Form\CourseGradeType;
 use App\Form\ExamType;
 use App\Repository\CourseRepository;
 use App\Repository\ProjectRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class TeacherController extends AbstractController
 {
@@ -35,6 +38,49 @@ class TeacherController extends AbstractController
         return $this->render('Back/course/teacher/show.html.twig', [
             'course' => $course,
             'grades' => []
+        ]);
+    }
+
+    /**
+     * @Route("/teacher/course/{id}/grades/add", name="teacher_add_grade", methods={"GET"})
+     */
+    public function teacher(Course $course, UserRepository $userRepository): Response
+    {
+        $classroom = $course->getClassroom();
+        $students = $userRepository->findBy(['classroom'=>$classroom]);
+
+        return $this->render('Back/grade/teacher/new.html.twig', [
+            'course' => $course,
+            'students' => $students
+        ]);
+    }
+
+    /**
+     * @Route("/teacher/course/{id}/grades/submit", name="grade_submit", methods={"POST"})
+     */
+    public function edit(ObjectManager $manager, Request $request, Course $course, UserRepository $userRepository): Response
+    {
+        $parameters = $request->request->all();
+        $type = $parameters['grade_type'];
+        $coefficient = $parameters['grade_coefficient'];
+        unset($parameters['grade_type']);
+
+        foreach ($parameters as $username => $value){
+            $user = $userRepository->findOneBy(['username'=>$username]);
+
+            $grade = new Grade();
+            $grade->setUser($user);
+            $grade->setCourse($course);
+            $grade->setValue($value);
+            $grade->setCoefficient($coefficient);
+            $grade->setType(strtolower ($type));
+            $manager->persist($grade);
+        }
+
+        $manager->flush();
+
+        return $this->redirectToRoute('teacher_course_show', [
+            'id' => $course->getId(),
         ]);
     }
 
