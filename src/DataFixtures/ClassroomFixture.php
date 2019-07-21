@@ -20,13 +20,13 @@ class ClassroomFixture extends Fixture
 
         $classroom = new Classroom();
 
-        $classroom->setName('Classroom 1');
+        $classroom->setName('Classe IW1');
         $classroom->setPromotion($promotion);
         $manager->persist($classroom);
 
         $classroom = new Classroom();
 
-        $classroom->setName('Classroom 2');
+        $classroom->setName('Classe IW2');
         $classroom->setPromotion($promotion);
         $manager->persist($classroom);
 

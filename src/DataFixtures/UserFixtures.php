@@ -21,7 +21,7 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $classroom = $this->classroomRepository->findOneBy(['name'=>'Classroom 1']);
+        $classroom = $this->classroomRepository->findOneBy(['name'=>'Classe IW1']);
 
         $faker = Faker\Factory::create('fr_FR');
 
