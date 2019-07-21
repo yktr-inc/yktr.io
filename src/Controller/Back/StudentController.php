@@ -6,7 +6,6 @@ use App\Entity\Course;
 use App\Entity\Exam;
 use App\Entity\Project;
 use App\Entity\ProjectGroup;
-use App\Form\CourseType;
 use App\Repository\CourseRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\ProjectGroupRepository;
@@ -14,9 +13,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\FileUploader;
+use App\Form\GroupDocumentType;
 
 class StudentController extends AbstractController
 {
+    private $fileUploader;
+
+    public function __construct(FileUploader $fileUploader) {
+        $this->fileUploader = $fileUploader;
+    }
+
     /**
      * @Route("/student/courses", name="student_course_index", methods={"GET"})
      */
@@ -55,13 +62,28 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/student/project/{id}", name="student_project_show", methods={"GET"})
+     * @Route("/student/project/{id}", name="student_project_show", methods={"GET","POST"})
      */
-    public function showProject(Project $project): Response
+    public function showProject(Request $request, Project $project, ProjectGroupRepository $pgr): Response
     {
+        $userGroup = $pgr->findUserProjectGroup($project, $this->getUser());
+
+        $form = $this->createForm(GroupDocumentType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $newFile = $this->fileUploader->upload($form['document']->getData());
+            $userGroup->setDocument($newFile);
+            $this->getDoctrine()->getManager()->flush($userGroup);
+        }
+
         return $this->render('Back/project/student/show.html.twig', [
+            'form' => $form->createView(),
             'project' => $project,
-            'course' => $project->getCourse()
+            'groups' => $project->getGroups(),
+            'course' => $project->getCourse(),
+            'userGroup' => $userGroup
         ]);
     }
 

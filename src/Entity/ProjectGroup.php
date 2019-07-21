@@ -24,6 +24,11 @@ class ProjectGroup
      */
     private $project;
 
+    /**
+     * @ORM\OneToOne(targetEntity="File")
+     * @ORM\JoinColumn(name="document", referencedColumnName="id", nullable=true)
+     */
+    private $document;
 
     /**
      * @ORM\ManyToMany(targetEntity="User")
@@ -78,6 +83,18 @@ class ProjectGroup
         if ($this->students->contains($student)) {
             $this->students->removeElement($student);
         }
+
+        return $this;
+    }
+
+    public function getDocument()
+    {
+        return $this->document;
+    }
+
+    public function setDocument($document)
+    {
+        $this->document = $document;
 
         return $this;
     }
