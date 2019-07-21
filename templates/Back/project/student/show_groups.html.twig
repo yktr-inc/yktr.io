@@ -1,9 +1,10 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
 {% block breadcrumb %}
-<li class="breadcrumb-item"><a href="#">Home</a></li>
-<li class="breadcrumb-item"><a href="#">Library</a></li>
-<li class="breadcrumb-item active" aria-current="page">Data</li>
+    <li class="breadcrumb-item"><a href="{{ path('dashboard_teacher') }} ">Home</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('teacher_course_index') }}">Courses</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('teacher_course_show', { 'id': course.id }) }}">{{ course.title }}</a></li>
+    <li class="breadcrumb-item active">Groups</li>
 {% endblock %}
 
 {% block stylesheets %}
@@ -18,7 +19,7 @@
         </div>
         <div class="card-body table-responsive">
             <div class="clear mb-2">
-                <a class="btn btn-default btn-sm" role="button" href="{{ path('student_project_show', { 'id': project.id }) }}">back to list</a>
+                <a class="btn btn-default btn-sm" role="button" href="{{ path('student_project_show', { 'id': project.id }) }}">Back to Project resume</a>
             </div>
             <table class="table">
                 <tbody>
