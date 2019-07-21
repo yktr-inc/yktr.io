@@ -120,7 +120,7 @@ class Grade
 
     public function getCoefficient(): ?Int
     {
-        return $this->type;
+        return $this->coefficient;
     }
 
     public function setCoefficient(?Int $coeff): self

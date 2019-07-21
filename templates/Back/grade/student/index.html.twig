@@ -2,8 +2,7 @@
 
 {% block breadcrumb %}
       <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
+      <li class="breadcrumb-item"><a>Grades & Attendances</a></li>
 {% endblock %}
 
 
@@ -162,7 +161,6 @@
                     <thead>
                     <tr class="row100 head">
                         <th class="cell100 column1">Course</th>
-                        <th class="cell100 column2">Coefficient</th>
                         <th class="cell100 column3">CC1</th>
                         <th class="cell100 column4">CC2</th>
                         <th class="cell100 column5">Exam</th>
@@ -174,13 +172,16 @@
             <div class="table100-body p-0 js-pscroll">
                 <table>
                     <tbody>
+                    {% for title,grade in grades %}
                     <tr class="row100 body">
-                        <td class="cell100 column1">Like a butterfly</td>
-                        <td class="cell100 column2">Boxing</td>
-                        <td class="cell100 column3">9:00 AM - 11:00 AM</td>
-                        <td class="cell100 column4">Aaron Chapman</td>
-                        <td class="cell100 column5">10</td>
+                        <td class="cell100 column1">{{ title }}</td>
+                        <td class="cell100 column3">{{ grade.cc1.val|default('') }}</td>
+                        <td class="cell100 column4">{{ grade.cc2.val|default('') }}</td>
+                        <td class="cell100 column5">{{ grade.exam.val|default('') }}</td>
                     </tr>
+                    {% else %}
+                        <tr class="row100 body">No Grades at the moment.</tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
