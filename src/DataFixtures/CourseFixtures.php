@@ -20,7 +20,7 @@ class CourseFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        $classroom = $this->classroomRepository->findOneBy(['name'=>'Classroom 1']);
+        $classroom = $this->classroomRepository->findOneBy(['name'=>'Classe IW1']);
         $teacher = $this->userRepository->findOneBy(['username'=>'mandrieu']);
 
         $faker = Faker\Factory::create('fr_FR');
