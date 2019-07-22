@@ -49,7 +49,7 @@ action "Hyper Lazer Deployer Dev" {
   }
 }
 
-workflow "New workflow" {
+workflow "Code Quality" {
   on = "push"
   resolves = ["PHP Spec"]
 }
@@ -61,5 +61,5 @@ action "Php cs fixer" {
 action "PHP Spec" {
   uses = "docker://phpspec/phpspec"
   needs = ["Php cs fixer"]
-  args = "run --config=phpspec.yml"
+  args = "-v ${pwd}:app run --config=phpspec.yml"
 }
