@@ -62,5 +62,5 @@ action "PHP-CS-Fixer" {
 action "PHP Spec" {
   uses = "docker://phpspec/phpspec"
   needs = ["PHP-CS-Fixer"]
-  args = "--config=phpspec.yml"
+  args = "run --config=phpspec.yml"
 }
