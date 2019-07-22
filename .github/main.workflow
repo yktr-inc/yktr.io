@@ -47,6 +47,19 @@ action "Hyper Lazer Deployer Dev" {
     REPO_GIT_URL = "-b wip git@github.com:yktr-inc/yktr.io.git"
     AFTER_PULL_COMMAND = "sh /home/deployers/yktr-dev.sh"
   }
-  }
+}
 
+workflow "New workflow" {
+  on = "push"
+  resolves = ["PHP Spec"]
+}
 
+action "Php cs fixer" {
+  uses = "docker://oskarstark/php-cs-fixer-ga"
+}
+
+action "PHP Spec" {
+  uses = "docker://phpspec/phpspec"
+  needs = ["Php cs fixer"]
+  args = "run --config=phpspec.yml"
+}
