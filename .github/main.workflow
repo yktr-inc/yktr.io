@@ -56,11 +56,11 @@ workflow "Code Quality" {
 
 action "PHP-CS-Fixer" {
   uses = "docker://oskarstark/php-cs-fixer-ga"
-  args = "--config=.php_cs --diff --dry-run"
+  args = "--config=.php_cs"
 }
 
 action "PHP Spec" {
   uses = "docker://phpspec/phpspec"
   needs = ["PHP-CS-Fixer"]
-  args = "run --config=phpspec.yml -v"
+  args = "--config=phpspec.yml"
 }
