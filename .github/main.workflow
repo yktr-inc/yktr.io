@@ -51,7 +51,7 @@ action "Hyper Lazer Deployer Dev" {
 
 workflow "Code Quality" {
   on = "push"
-  resolves = ["PHP Spec"]
+  resolves = ["PHP Spec", "PHP-CS-Fixer"]
 }
 
 action "PHP-CS-Fixer" {
@@ -61,6 +61,5 @@ action "PHP-CS-Fixer" {
 
 action "PHP Spec" {
   uses = "docker://phpspec/phpspec"
-  needs = ["PHP-CS-Fixer"]
   args = "run --config=phpspec.yml"
 }
