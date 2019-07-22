@@ -56,7 +56,7 @@ workflow "Code Quality" {
 
 action "Php cs fixer" {
   uses = "docker://oskarstark/php-cs-fixer-ga"
-  args = "fix /src --dry-run"
+  args = "--dry-run"
 }
 
 action "PHP Spec" {
