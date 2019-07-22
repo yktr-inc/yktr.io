@@ -61,5 +61,4 @@ class CourseFixtures extends Fixture implements DependentFixtureInterface
             ClassroomFixture::class,
         );
     }
-
 }

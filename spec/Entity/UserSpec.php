@@ -210,12 +210,12 @@ class UserSpec extends ObjectBehavior
     }
     public function it_has_a_roles_setter()
     {
-        $this->setRoles();
+        $this->setRoles(['ROLE_STUDENT']);
     }
 
     public function it_has_a_roles()
     {
-        $value = ;
+        $value = ['ROLE_STUDENT'];
         $this->setRoles($value);
         $this->getRoles()->shouldReturn($value);
     }

@@ -120,7 +120,6 @@ class ProjectController extends CRUDController
         Project $project,
         DBNotificationServiceInterface $notifService
     ): Response {
-
         $file = new File();
 
         $form = $this->createForm(FileType::class, $file);

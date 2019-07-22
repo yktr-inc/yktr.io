@@ -68,9 +68,7 @@ class CRUDController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            if($fileKey)
-            {
+            if ($fileKey) {
                 $getMethod = 'getAvatar';
                 $file = $obj->$fileRelationAccessor($fileKey);
                 $newFile = $this->fileUploader->upload($file);

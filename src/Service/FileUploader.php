@@ -17,7 +17,7 @@ class FileUploader
         $this->objectManager = $objectManager;
     }
 
-   public function upload(UploadedFile $file)
+    public function upload(UploadedFile $file)
     {
         try {
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
@@ -27,7 +27,6 @@ class FileUploader
             $this->objectManager->persist($fileToSave);
             $this->objectManager->flush($fileToSave);
             return $fileToSave;
-
         } catch (FileException $e) {
             throw $e;
         }

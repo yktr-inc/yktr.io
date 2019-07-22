@@ -7,6 +7,7 @@
     "phpstan": "make phpstan",
     "phpunit": "make phpunit",
     "php-cs": "make phpcs-dry",
+    "phpspec": "make phpspec",
     "dev-server": "encore dev-server",
     "dev": "encore dev",
     "watch": "encore dev --watch",
@@ -38,8 +39,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn php-cs",
-      "pre-push": "yarn php-cs"
+      "pre-commit": "yarn php-cs && yarn phpspec",
+      "pre-push": "yarn php-cs && yarn phpspec"
     }
   },
   "dependencies": {

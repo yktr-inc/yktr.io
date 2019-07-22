@@ -24,15 +24,15 @@ class GradeController extends AbstractController
         $allGrades = $gradeRepository->findBy(['user' => $this->getUser()]);
         $gradesByCourse = [];
         $allCourses = [];
-        foreach ($allGrades as $grade){
-            if(!in_array($grade->getCourse()->getTitle(), $allCourses)){
+        foreach ($allGrades as $grade) {
+            if (!in_array($grade->getCourse()->getTitle(), $allCourses)) {
                 array_push($allCourses, $grade->getCourse()->getTitle());
             }
         }
-        foreach ($allCourses as $c){
+        foreach ($allCourses as $c) {
             $gradesForCourse = [];
-            foreach ($allGrades as $grade){
-                if($grade->getCourse()->getTitle() == $c){
+            foreach ($allGrades as $grade) {
+                if ($grade->getCourse()->getTitle() == $c) {
                     $gradesForCourse[$grade->getType()] = ['val'=>$grade->getValue()];
                 }
             }

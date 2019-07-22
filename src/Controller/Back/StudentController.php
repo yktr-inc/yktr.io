@@ -21,7 +21,8 @@ class StudentController extends AbstractController
 {
     private $fileUploader;
 
-    public function __construct(FileUploader $fileUploader) {
+    public function __construct(FileUploader $fileUploader)
+    {
         $this->fileUploader = $fileUploader;
     }
 
@@ -31,9 +32,9 @@ class StudentController extends AbstractController
     public function courseIndex(CourseRepository $courseRepository): Response
     {
         $courses = $this->getUser()->getClassroom()->getCourses()->filter(
-          function ($entry) {
-              return $entry->getStatus() === 'on-going';
-          }
+            function ($entry) {
+                return $entry->getStatus() === 'on-going';
+            }
         );
         return $this->render('Back/course/student/index.html.twig', [
             'courses' => $courses,
@@ -49,15 +50,15 @@ class StudentController extends AbstractController
 
         $gradesByCourse = [];
         $allCourses = [];
-        foreach ($grades as $grade){
-            if(!in_array($grade->getCourse()->getTitle(), $allCourses)){
+        foreach ($grades as $grade) {
+            if (!in_array($grade->getCourse()->getTitle(), $allCourses)) {
                 array_push($allCourses, $grade->getCourse()->getTitle());
             }
         }
-        foreach ($allCourses as $c){
+        foreach ($allCourses as $c) {
             $gradesForCourse = [];
-            foreach ($grades as $grade){
-                if($grade->getCourse()->getTitle() == $c){
+            foreach ($grades as $grade) {
+                if ($grade->getCourse()->getTitle() == $c) {
                     $gradesForCourse[$grade->getType()] = ['val'=>$grade->getValue(), 'coeff'=>$grade->getCoefficient()];
                 }
             }

@@ -64,7 +64,7 @@ class ProjectGroupRepository extends ServiceEntityRepository
             LEFT JOIN users_groups ug ON pg.id = ug.group_id
             WHERE ug.user_id = :user
             AND pg.project_id = :project",
-        $rsm
+            $rsm
         );
 
         $query->setParameter('user', $user);

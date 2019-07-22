@@ -68,7 +68,7 @@ class ProjectRepository extends ServiceEntityRepository
             AND p.type = :type
             ORDER BY p.updated_at DESC
             LIMIT ".$limit,
-        $rsm
+            $rsm
         );
 
         $query->setParameter('classroom', $classroom);
@@ -93,7 +93,7 @@ class ProjectRepository extends ServiceEntityRepository
             WHERE cl.id = :classroom
             AND p.type = :type
             ORDER BY p.updated_at DESC",
-        $rsm
+            $rsm
         );
 
         $query->setParameter('classroom', $classroom);
@@ -116,7 +116,7 @@ class ProjectRepository extends ServiceEntityRepository
             JOIN course co ON p.course_id = co.id
             WHERE co.user_id = :user
             AND p.type = :type",
-        $rsm
+            $rsm
         );
 
         $query->setParameter('user', $teacher);

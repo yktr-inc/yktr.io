@@ -65,7 +65,7 @@ class TeacherController extends AbstractController
         $coefficient = $parameters['grade_coefficient'];
         unset($parameters['grade_type']);
 
-        foreach ($parameters as $username => $value){
+        foreach ($parameters as $username => $value) {
             $user = $userRepository->findOneBy(['username'=>$username]);
 
             $grade = new Grade();
@@ -73,7 +73,7 @@ class TeacherController extends AbstractController
             $grade->setCourse($course);
             $grade->setValue($value);
             $grade->setCoefficient($coefficient);
-            $grade->setType(strtolower ($type));
+            $grade->setType(strtolower($type));
             $manager->persist($grade);
         }
 

@@ -11,8 +11,8 @@ use App\Service\DBNotifcationServiceInterface;
 class NotificationService implements NotificationServiceInterface
 {
     public function __construct(
-    MailerServiceInterface $mailerService,
-    DBNotifcationServiceInterface $DBNotifcationService
+        MailerServiceInterface $mailerService,
+        DBNotifcationServiceInterface $DBNotifcationService
     ) {
         $this->mailerService = $mailerService;
         $this->DBNotifcationService = $DBNotifcationService;

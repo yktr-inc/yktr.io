@@ -35,7 +35,6 @@ class InformationController extends CRUDController
         $crud = $this->newAction(Information::class);
 
         if ($crud->getType() === 'redirect') {
-
             $newObj = $crud->getArgs()['obj'];
 
             $recipients = $userRepository->findAll();

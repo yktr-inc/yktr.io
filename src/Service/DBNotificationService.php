@@ -23,9 +23,9 @@ class DBNotificationService implements DBNotificationServiceInterface
     private $objectManager;
 
     public function __construct(
-      ObjectManager $objectManager,
-      NotificationRepository $notificationRepository,
-      Security $security
+        ObjectManager $objectManager,
+        NotificationRepository $notificationRepository,
+        Security $security
   ) {
         $this->objectManager = $objectManager;
         $this->notificationRepository = $notificationRepository;

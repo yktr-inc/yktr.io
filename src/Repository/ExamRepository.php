@@ -66,7 +66,7 @@ class ExamRepository extends ServiceEntityRepository
             WHERE cl.id = :classroom
             ORDER BY e.date DESC
             LIMIT ".$limit,
-        $rsm
+            $rsm
         );
 
         $query->setParameter('classroom', $classroom);
