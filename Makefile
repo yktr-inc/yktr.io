@@ -8,22 +8,24 @@ install-docker-tools:
 	&& docker pull phpstan/phpstan
 
 install-dev:
-	make build \
+	make stop \
+	&& make build \
 	&& make start \
-	&& docker-compose exec php-yktr-dev make composer-install \
-	&& docker-compose exec php-yktr-dev make yarn \
-	&& docker-compose exec php-yktr-dev make yarn-build \
-	&& docker-compose exec php-yktr-dev make create-db \
-	&& docker-compose exec php-yktr-dev make cache-clear
+	&& docker-compose exec -T php-yktr-dev make composer-install \
+	&& docker-compose exec -T php-yktr-dev make yarn \
+	&& docker-compose exec -T php-yktr-dev make yarn-build \
+	&& docker-compose exec -T php-yktr-dev make create-db \
+	&& docker-compose exec -T php-yktr-dev make cache-clear
 
 install-prod:
-	make build \
+	make stop \
+	&& make build \
 	&& make start \
-	&& docker-compose exec php-yktr-prod make composer-install-prod \
-	&& docker-compose exec php-yktr-prod make yarn \
-	&& docker-compose exec php-yktr-prod make yarn-build \
-	&& docker-compose exec php-yktr-prod make create-db-prod \
-	&& docker-compose exec php-yktr-prod make cache-clear
+	&& docker-compose exec -T php-yktr-prod make composer-install-prod \
+	&& docker-compose exec -T php-yktr-prod make yarn \
+	&& docker-compose exec -T php-yktr-prod make yarn-build \
+	&& docker-compose exec -T php-yktr-prod make create-db-prod \
+	&& docker-compose exec -T php-yktr-prod make cache-clear
 
 yarn:
 	yarn install
@@ -69,6 +71,9 @@ phpcs-dry:
 
 phpcs:
 	docker run --rm -v $$(pwd)/src:/src phpqa/php-cs-fixer fix /src
+
+phpspec:
+	@./vendor/bin/phpspec run --config=phpspec.yml
 
 cache-clear:
 	php bin/console cache:clear

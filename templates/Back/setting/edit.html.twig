@@ -1,15 +1,15 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
 {% block breadcrumb %}
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Settings</a></li>
+      <li class="breadcrumb-item"><a href="{{ path('dashboard_school') }}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{ path('setting_index') }}">Settings</a></li>
       <li class="breadcrumb-item active">Edit</li>
 {% endblock %}
 
 {% block body %}
-<div class="card m-auto w-75">
+<div class="card m-auto w-90">
     <div class="card-header card-header-primary">
-        <h4 class="card-title">Edit "{{ setting.key }}"</h4>
+        <h4 class="card-title">Edit "{{ setting.label }}"</h4>
     </div>
     <div class="card-body">
     <div class="clear mb-2">

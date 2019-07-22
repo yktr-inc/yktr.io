@@ -1,0 +1,126 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+    {% if is_granted('ROLE_TEACHER') %}
+        <li class="breadcrumb-item"><a href="{{ path('dashboard_teacher') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ path('teacher_course_index') }}">Courses</a></li>
+    {% else %}
+        <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ path('student_course_index') }}">Courses</a></li>
+    {% endif %}
+    <li class="breadcrumb-item active">{{ course.title }}</li>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('crud') }}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('js/app') }}
+{% endblock %}
+
+{% block body %}
+
+<div class="col-6">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 ml-3">
+            <h6 class="m-0 font-weight-bold text-primary">Course Manager</h6>
+        </div>
+        <div class="card-body mb-2">
+            <div class="text-center">
+                <img class="img-fluid px-3 px-sm-4 mb-4" style="width: 20em;margin-top:-20px;margin-bottom:-40px;" src="https://www.arcapers.com/images/digital-marketing/content2.png" alt="">
+            </div>
+            <p>Welcome to your Courses Manager. Here, you can see the resume of your Course. You can also add Exams, Projects and Grades for this Course.</p>
+            <a target="_blank" rel="nofollow" href="#">Back to Courses List →</a>
+        </div>
+    </div>
+    <div class="card dashboard-item dashboard-small-list">
+        <div class="card-header card-header-{{ colorClass }}">
+            <h4 class="card-title pt-3">{{ course.title }}</h4>
+        </div>
+        <div class="card-body table-responsive">
+            <div class="row mt-3 mb-3">
+                <div class="col-3 mt-2">
+                    <div class="card-title">
+                        <h5 class="float-left">Classroom :</h5>
+                        <span class="ml-2">{{ course.classroom.name }}</span>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    {{ course.description|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-6">
+    <div class="card dashboard-item dashboard-small-list">
+        <div class="card-header card-header-{{ colorClass }} small-card-header">
+            <h5 class="card-title pl-3">Exams</h5>
+        </div>
+        <div class="card-body table-responsive">
+            <ul class="list-group">
+                {% for exam in course.exams %}
+                    <li class="list-group-item">
+                        {% if is_granted('ROLE_STUDENT') %}
+                            <a href="{{ path('student_exam_show', { 'id':exam.id }) }}">
+                                {{ exam.type|upper }} : "{{ exam.name }}" on {{ exam.date|date('d/m/y') }}
+                            </a>
+                        {% else %}
+                            <a href="{{ path('teacher_exam_show', { 'id':exam.id }) }}">
+                                {{ exam.type|upper }} : "{{ exam.name }}" on {{ exam.date|date('d/m/y') }}
+                            </a>
+                        {% endif %}
+                    </li>
+                {% else %}
+                    <li class="list-group-item"> No exam for this course at this moment </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <a class="btn btn-error btn-sm" href="{{ path('teacher_exam_new', { 'id': course.id }) }}">Add new</a>
+    </div>
+    <div class="card dashboard-item dashboard-small-list small-card-header">
+        <div class="card-header card-header-{{ colorClass }} small-card-header">
+            <h5 class="card-title pl-3">Projects</h5>
+        </div>
+        <div class="card-body table-responsive">
+            <ul class="list-group">
+                {% for project in course.projects %}
+                    <li class="list-group-item">
+                        {% if is_granted('ROLE_TEACHER') %}
+                            <a href="{{ path('teacher_project_show', { 'id':project.id }) }}">
+                                {{ project.type|upper }} : "{{ project.name }}"
+                            </a>
+                        {% else %}
+                            <a href="{{ path('student_project_show', { 'id':project.id }) }}">
+                                {{ project.type|upper }} : "{{ project.name }}"
+                            </a>
+                        {% endif %}
+                    </li>
+                {% else %}
+                    <li class="list-group-item"> No project for this course at this moment </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <a class="btn btn-error btn-sm" href="{{ path('teacher_project_new', { 'id': course.id }) }}">Add new</a>
+    </div>
+    <div class="card dashboard-item dashboard-small-list small-card-header">
+        <div class="card-header card-header-{{ colorClass }} small-card-header">
+            <h5 class="card-title pl-3">Grades</h5>
+        </div>
+        <div class="card-body table-responsive">
+            <ul class="list-group">
+                {% if course.grades is not empty %}
+                    <li class="list-group-item"> You have registered grades of type Exam : < 1min ago</li>
+                {% else %}
+                    <li class="list-group-item"> No grade for this course at this moment </li>
+                {% endif %}
+            </ul>
+        </div>
+        <a class="btn btn-error btn-sm" href="{{ path('teacher_add_grade', { 'id': course.id }) }}">Add grades</a>
+    </div>
+</div>
+
+{% endblock %}

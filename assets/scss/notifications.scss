@@ -3,3 +3,20 @@
 .alert-notification{
   font-size: 15px;
 }
+
+.notification-primary{
+  background: $primary-color;
+}
+
+.notification-secondary{
+  background: $secondary-color;
+}
+
+.notification-tertiary{
+  background: $tertiary-color;
+}
+
+.notification-quaternary{
+  background: $quaternary-color;
+}
+

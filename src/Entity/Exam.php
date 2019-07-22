@@ -44,10 +44,22 @@ class Exam
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Classroom")
-     * @ORM\JoinColumn(name="classroom_id", referencedColumnName="id")
+     *  @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "La description de l'examen doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "La description de l'examen ne peut pas faire plus de {{ limit }} caractères"
+     * )
+     *
+     * @ORM\Column(type="text", nullable=false)
      */
-    private $classroom;
+    private $description;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Course", inversedBy="exams")
+     * @ORM\JoinColumn(name="course_id", referencedColumnName="id")
+     */
+    private $course;
 
     /**
      *
@@ -98,14 +110,26 @@ class Exam
         return $this;
     }
 
-    public function getClassroom(): ?Classroom
+    public function getCourse(): ?Course
     {
-        return $this->classroom;
+        return $this->course;
     }
 
-    public function setClassroom(?Classroom $classroom): self
+    public function setCourse(?Course $course): self
     {
-        $this->classroom = $classroom;
+        $this->course = $course;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

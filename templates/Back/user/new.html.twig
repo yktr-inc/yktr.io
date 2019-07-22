@@ -1,18 +1,42 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
 {% block breadcrumb %}
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
+<li class="breadcrumb-item"><a href="{{ path('dashboard_school')}}">Home</a></li>
+{% if app.request.attributes.get( '_route' ) == "user_new" %}
+<li class="breadcrumb-item"><a href="{{ path('user_index') }}">Users</a></li>
+{% elseif app.request.attributes.get( '_route' ) == "teacher_new" %}
+<li class="breadcrumb-item"><a href="{{ path('teacher_index') }}">Teachers</a></li>
+{% elseif app.request.attributes.get( '_route' ) == "student_new" %}
+<li class="breadcrumb-item"><a href="{{ path('student_index') }}">Students</a></li>
+{% endif %}
+<li class="breadcrumb-item active">Add user</li>
 {% endblock %}
 
 {% block title %}Register!{% endblock %}
 
-{% block body %}
-    <a href="{{ path('user_index') }}">back to list</a>
-
-    <h1>Create new User</h1>
-
-    {{ include('Back/user/_form.html.twig') }}
-
+{% block stylesheets %}
+    {{ encore_entry_link_tags('dashboard') }}
 {% endblock %}
+
+{% block body %}
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+        <div class="card-header card-header-{{ colorClass }}">
+            <h4 class="card-title">Add a user</a></h4>
+        </div>
+        <div class="card-body table-responsive">
+
+    <div class="clear mb-2">
+     {% if app.request.attributes.get( '_route' ) == "user_new" %}
+     <a class="btn btn-default btn-sm" role="button" href="{{ path('user_index') }}">back to list</a>
+     {% elseif app.request.attributes.get( '_route' ) == "teacher_new" %}
+     <a class="btn btn-default btn-sm" role="button" href="{{ path('teacher_index') }}">back to list</a>
+     {% elseif app.request.attributes.get( '_route' ) == "student_new" %}
+     <a class="btn btn-default btn-sm" role="button" href="{{ path('student_index') }}">back to list</a>
+     {% endif %}
+   </div>
+   {{ include('Back/user/_form.html.twig') }}
+ </div>
+</div>
+</div>
+ {% endblock %}

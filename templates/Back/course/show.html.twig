@@ -7,12 +7,9 @@
 {% endblock %}
 
 {% block body %}
-<div class="card m-auto w-75">
-    <div class="card-header card-header-primary row">
-        <h4 class="card-title col-md-10">Course</h4>
-        <div class="col-md-2">
-            <a class="btn btn-primary" role="button" href="{{ path('course_new') }}">Create new</a>
-        </div>
+<div class="card m-auto w-90">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title">Course</h4>
     </div>
     <div class="card-body">
         <div class="clear mb-2">
@@ -30,16 +27,12 @@
                     <td>{{ course.title }}</td>
                 </tr>
                 <tr>
+                    <th>Classroom</th>
+                    <td>{{ course.classroom.name }}</td>
+                </tr>
+                <tr>
                     <th>Status</th>
                     <td>{{ course.status }}</td>
-                </tr>
-                <tr>
-                    <th>CreatedAt</th>
-                    <td>{{ course.createdAt ? course.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                </tr>
-                <tr>
-                    <th>UpdatedAt</th>
-                    <td>{{ course.updatedAt ? course.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 </tr>
             </tbody>
         </table>

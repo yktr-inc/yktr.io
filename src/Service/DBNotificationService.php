@@ -14,49 +14,81 @@ use Symfony\Component\Security\Core\Security;
 class DBNotificationService implements DBNotificationServiceInterface
 {
     const NOTICATION_TYPES = [
-    "GRADE",
-    "ATTENDANCE",
-    "EXAM",
-    "PROJECT"
+        "GRADE",
+        "ATTENDANCE",
+        "EXAM",
+        "PROJECT",
+        "INFORMATION"
     ];
     private $objectManager;
 
     public function __construct(
-      ObjectManager $objectManager,
-      NotificationRepository $notificationRepository,
-      Security $security
-    ) {
+        ObjectManager $objectManager,
+        NotificationRepository $notificationRepository,
+        Security $security
+  ) {
         $this->objectManager = $objectManager;
         $this->notificationRepository = $notificationRepository;
         $this->security = $security;
     }
 
-    public function notify(string $type,User $recipient, string $content): ?bool
+    public function registerNotification(string $type, $recipient, string $content, int $ressource)
     {
-        if(self::verifyType($type)){
+        $notification = new Notification();
+        $notification->setType($type);
+        $notification->setContent($content);
+        $notification->setLink(self::generateLink($type, $ressource));
+        $notification->setUser($recipient);
+        $this->objectManager->persist($notification);
+        $this->objectManager->flush();
+    }
 
-          $notification = new Notification();
-
-          $notification->setType($type);
-          $notification->setContent($content);
-          $notification->setUser($recipient);
-
-          $this->objectManager->persist($notification);
-          $this->objectManager->flush();
-          return true;
+    public function notify(string $type, $recipient, string $content, int $ressource): ?bool
+    {
+        if (self::verifyType($type)) {
+            if (!$recipient instanceof User) {
+                foreach ($recipient as $user) {
+                    $this->registerNotification($type, $user, $content, $ressource);
+                }
+            } else {
+                $this->registerNotification($type, $recipient, $content, $ressource);
+            }
         }
-        return false;
+
+        return true;
     }
 
-    private static function verifyType($type){
-      return in_array($type, self::NOTICATION_TYPES);
+    private static function verifyType($type)
+    {
+        return in_array($type, self::NOTICATION_TYPES);
     }
 
-    public function getNotifications(){
+    public function getNotifications()
+    {
         return $this->notificationRepository->findLast(5, $this->security->getUser());
     }
 
-    public function getNotificationsCount(){
+    public function getNotificationsCount()
+    {
         return $this->notificationRepository->countNotif($this->security->getUser());
+    }
+
+    private static function generateLink($type, $ressource)
+    {
+        switch ($type) {
+            case 'GRADE':
+                return "/student/grade/".$ressource;
+            case 'ATTENDANCE':
+                return "/student/attendance/".$ressource;
+            case 'EXAM':
+                return "/student/exam/".$ressource;
+            case 'PROJECT':
+                return "/student/project/".$ressource;
+            case 'INFORMATION':
+                return "/information/".$ressource;
+            default:
+                return "/student";
+                break;
+        }
     }
 }

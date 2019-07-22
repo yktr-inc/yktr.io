@@ -38,5 +38,7 @@ security:
         ROLE_SUPERADMIN: [ROLE_ADMINISTRATIVE, ROLE_STUDENT, ROLE_TEACHER, ROLE_ALLOWED_TO_SWITCH]
 
     access_control:
-        - { path: ^/school, roles: ROLE_SUPERADMIN }
-        - { path: ^/dashboard, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_SUPERADMIN }
+        - { path: ^/school, roles: ROLE_ADMINISTRATIVE }
+        - { path: ^/teacher, roles: ROLE_TEACHER }
+        - { path: ^/student, roles: ROLE_STUDENT }

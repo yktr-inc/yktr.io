@@ -1,0 +1,45 @@
+<div class="sidebar">
+    <div class="logo">
+        <span class="simple-text">
+            {{ config.get('sitename') }}
+        </span>
+    </div>
+    <div class="user-infos row align-items-center">
+        <div class="col-3">
+            <div class="{{ colorClass }}">
+                <img class="avatar-sm" src="https://miro.medium.com/max/3150/1*1xvOzBkDJqYcsZ0pIPYgww.jpeg">
+            </div>
+        </div>
+        <div id="name" class="col-9 text-left">
+            <span>{{ app.user.firstname }} {{ app.user.lastname }}</span>
+        </div>
+    </div>
+    <div class="sidebar-wrapper">
+        <ul class="nav {{ colorClass }}">
+           <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'dashboard' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('dashboard_teacher') }}">
+                    <i class="material-icons">dashboard</i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'teacher_course' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('teacher_course_index') }}">
+                    <i class="material-icons">school</i>
+                    <p>Courses</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'teacher_project' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('teacher_project_index') }}">
+                    <i class="material-icons">location_city</i>
+                    <p>Projets</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

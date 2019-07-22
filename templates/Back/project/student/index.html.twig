@@ -1,0 +1,47 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Projects</li>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('student') }}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
+{% block body %}
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+        <div class="card-header card-header-{{ colorClass }}">
+            <h4 class="card-title">Projects</h4>
+        </div>
+        <div class="card-body table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Course</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for project in projects %}
+            <tr>
+                <td>{{ project.type }}</td>
+                <td>{{ project.name }}</td>
+                <td>{{ project.course.title }}</td>
+                <td><a class="btn btn-sm btn-primary" href="{{ path('student_project_show', { 'id': project.id }) }}">View</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td class="text-center" colspan="6">No project at this moment</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+{% endblock %}

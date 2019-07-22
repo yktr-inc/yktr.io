@@ -3,8 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Project;
+use App\Entity\User;
+use App\Entity\Classroom;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 /**
  * @method Project|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +50,78 @@ class ProjectRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findLastProjects($limit, $type, Classroom $classroom)
+    {
+        $em = $this->getEntityManager();
+
+        $rsm = new ResultSetMappingBuilder($em);
+
+        $rsm->addRootEntityFromClassMetadata(Project::class, 'p');
+
+        $query = $em->createNativeQuery(
+            "
+            SELECT p.* FROM project p
+            JOIN course co ON p.course_id = co.id
+            JOIN classroom cl ON co.classroom_id = cl.id
+            WHERE cl.id = :classroom
+            AND p.type = :type
+            ORDER BY p.updated_at DESC
+            LIMIT ".$limit,
+            $rsm
+        );
+
+        $query->setParameter('classroom', $classroom);
+        $query->setParameter('type', $type);
+
+        return $query->getResult();
+    }
+
+    public function findClassroomProjects($type, Classroom $classroom)
+    {
+        $em = $this->getEntityManager();
+
+        $rsm = new ResultSetMappingBuilder($em);
+
+        $rsm->addRootEntityFromClassMetadata(Project::class, 'p');
+
+        $query = $em->createNativeQuery(
+            "
+            SELECT p.* FROM project p
+            JOIN course co ON p.course_id = co.id
+            JOIN classroom cl ON co.classroom_id = cl.id
+            WHERE cl.id = :classroom
+            AND p.type = :type
+            ORDER BY p.updated_at DESC",
+            $rsm
+        );
+
+        $query->setParameter('classroom', $classroom);
+        $query->setParameter('type', $type);
+
+        return $query->getResult();
+    }
+
+    public function findByTeacher($type, User $teacher)
+    {
+        $em = $this->getEntityManager();
+
+        $rsm = new ResultSetMappingBuilder($em);
+
+        $rsm->addRootEntityFromClassMetadata(Project::class, 'p');
+
+        $query = $em->createNativeQuery(
+            "
+            SELECT p.* FROM project p
+            JOIN course co ON p.course_id = co.id
+            WHERE co.user_id = :user
+            AND p.type = :type",
+            $rsm
+        );
+
+        $query->setParameter('user', $teacher);
+        $query->setParameter('type', $type);
+
+        return $query->getResult();
+    }
 }

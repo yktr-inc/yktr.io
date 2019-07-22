@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Promotion;
 use App\Entity\Classroom;
+use App\Repository\ClassroomRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,29 +22,18 @@ class PromotionType extends AbstractType
             ->add('code', TextType::class)
             ->add('startedAt', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'MM/YYYY',
+                'format' => 'MM/yyyy',
                 'html5' => false,
-                'data' => new \DateTime(date("Y-m")),
                 'attr' => [
-                    'class' => 'datepicker'
+                    'class' => 'full-datepicker'
                 ]
             ])
             ->add('finishedAt', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'MM/YYYY',
+                'format' => 'MM/yyyy',
                 'html5' => false,
-                'data' => new \DateTime(date("Y-m")),
                 'attr' => [
-                    'class' => 'datepicker'
-                ]
-            ])
-            ->add('classrooms', EntityType::class, [
-                'class' => Classroom::class,
-                'required' => false,
-                'choice_label' => 'name',
-                'multiple' => true,
-                'attr' => [
-                    'class' => 'select-popup'
+                    'class' => 'full-datepicker'
                 ]
             ])
         ;

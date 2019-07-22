@@ -1,28 +1,28 @@
-<div class="col-lg-3">
+<div class="col-12">
     <div class="card dashboard-item dashboard-small-list">
         <div class="card-header card-header-{{ colorClass }}">
-            <h4 class="card-title">Upcoming Exams</h4>
+            <h5 class="mt-2 mb-2 card-title">Upcoming Exams</h5>
         </div>
-        <div class="card-body table-responsive">
+        <div class="card-body mt-2 table-responsive" style="height: 15vh;">
             <table class="table table-hover">
-                {% if lastExams is not empty %}
                 <thead>
                     <tr>
+                        <th>Name</th>
                         <th>Course</th>
                         <th>Date</th>
                     </tr>
                 </thead>
-                {% endif %}
                 <tbody>
                     {% for exam in lastExams %}
                     <tr>
-                        <td>{{ exam.getName }}</td>
+                        <td>{{ exam.name }}</td>
+                        <td>{{ exam.course.title }}</td>
                         <td>
-                            <span class="card-title">{{ exam.getDate|ago }}</span>
+                            <span class="card-title">{{ exam.getDate|date('d/m/Y') }}</span>
                         </td>
                     </tr>
                     {% else %}
-                    <tr> No upcoming exams </tr>
+                        <tr><th class=".text-muted font-weight-normal">No upcoming exams</th><th></th><th></th></tr>
                     {% endfor %}
                 </tbody>
             </table>

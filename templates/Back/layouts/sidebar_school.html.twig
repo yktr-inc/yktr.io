@@ -1,0 +1,85 @@
+<div class="sidebar">
+    <div class="logo">
+        <span class="simple-text">
+            {{ config.get('sitename') }}
+        </span>
+    </div>
+    <div class="user-infos row align-items-center">
+        <div class="col-3">
+            <div class="{{ colorClass }}">
+                <img class="avatar-sm" src="https://media.licdn.com/dms/image/C4E03AQG0qDHmsmTD2A/profile-displayphoto-shrink_800_800/0?e=1568851200&v=beta&t=RFDmjSZr3k696YVRZ1mnBNDSHYQvzPoZEvqxqJRsJOc">
+            </div>
+        </div>
+        <div id="name" class="col-9 text-left">
+            <span>{{ app.user.firstname }} {{ app.user.lastname }}</span>
+        </div>
+    </div>
+    <div class="sidebar-wrapper">
+        <ul class="nav {{ colorClass }}">
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'dashboard' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('dashboard_school') }}">
+                    <i class="material-icons">dashboard</i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'promotion' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('promotion_index') }}">
+                    <i class="material-icons">school</i>
+                    <p>Promotions</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'classroom' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('classroom_index') }}">
+                    <i class="material-icons">school</i>
+                    <p>Classes</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'course' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('course_index') }}">
+                    <i class="material-icons">school</i>
+                    <p>Courses</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'student' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('student_index') }}">
+                    <i class="material-icons">rate_review</i>
+                    <p>Students</p>
+                </a>
+            </li>
+             <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'teacher' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('teacher_index') }}">
+                    <i class="material-icons">question_answer</i>
+                    <p>Teachers</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'information' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('information_index') }}">
+                    <i class="material-icons">public</i>
+                    <p>Informations</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'event' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{# path('event_index') #}">
+                    <i class="material-icons">event_note</i>
+                    <p>Events</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

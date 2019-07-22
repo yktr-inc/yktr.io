@@ -1,43 +1,71 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
 {% block breadcrumb %}
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
+<li class="breadcrumb-item"><a href="{{ path('dashboard_school') }}">Home</a></li>
+<li class="breadcrumb-item active">Classrooms</li>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
+
 {% block body %}
-    <h1>Classroom index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for classroom in classrooms %}
-            <tr>
-                <td>{{ classroom.id }}</td>
-                <td>{{ classroom.name }}</td>
-                <td>{{ classroom.createdAt ? classroom.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ classroom.updatedAt ? classroom.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a class="btn btn-default btn-md" role="button" href="{{ path('classroom_show', {'id': classroom.id}) }}">show</a>
-                    <a class="btn btn-error btn-md" role="button" href="{{ path('classroom_edit', {'id': classroom.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('classroom_new') }}">Create new</a>
+<div class="col-lg-3 m-auto">
+    <div class="select_mate" data-mate-select="active" >
+    <select name="" onchange="" onclick="return false;" id="">
+    <option value=""  >2018-2019</option>
+    <option value="1">2019-2020</option>
+      </select>
+    <p class="selecionado_opcion"  onclick="open_select(this)" ></p><span onclick="open_select(this)" class="icon_select_mate" ><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
+        <path d="M0-.75h24v24H0z" fill="none"/>
+    </svg></span>
+    <div class="cont_list_select_mate">
+      <ul class="cont_select_int">  </ul>
+    </div>
+      </div>
+</div>
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+      <div class="row">
+        <div class="col-md-9 card-header card-header-{{ colorClass }}">
+            <h4 class="card-title">Classes</h4>
+        </div>
+        <div class="col-md-2 mt-2">
+            <a class="btn btn-primary btn-block" role="button" href="{{ path('classroom_new') }}">Create new</a>
+        </div>
+     </div>
+    <div class="card-body table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Promotion</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for classroom in classrooms %}
+                <tr>
+                    <td>{{ classroom.name }}</td>
+                    <td>{{ classroom.promotion ? classroom.promotion.code : 'No promotion yet' }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-default" role="button" href="{{ path('classroom_show', {'id': classroom.id}) }}">show</a>
+                        <a class="btn btn-sm btn-warning" role="button" href="{{ path('classroom_edit', {'id': classroom.id}) }}">edit</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation">
+            {{ knp_pagination_render(classrooms) }}
+        </div>
+    </div>
+</div>
+</div>
 {% endblock %}

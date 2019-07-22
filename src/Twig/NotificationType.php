@@ -5,14 +5,17 @@ namespace App\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-class NotificationType extends AbstractExtension{
-    public function getFilters(){
+class NotificationType extends AbstractExtension
+{
+    public function getFilters()
+    {
         return [
             new TwigFilter('noticationsType', [$this, 'formatType'])
         ];
     }
 
-    public function formatType(string $type){
+    public function formatType(string $type)
+    {
         switch ($type) {
           case 'GRADE':
             return "A new grade has been added";

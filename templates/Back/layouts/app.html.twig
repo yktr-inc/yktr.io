@@ -5,7 +5,6 @@
   <title>{% block title %}{% endblock %}</title>
   {% block stylesheets %}{% endblock %}
   <link rel="stylesheet" type="text/css" href="{{ asset('build/css/app.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('build/css/style.css') }}">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -13,7 +12,16 @@
     {% set colorClass = color.getColorByRole() %}
 
     <div class="main-panel">
-        {% include "Back/layouts/sidebar.html.twig" %}
+
+      {% if is_granted('ROLE_SUPERADMIN') %}
+      {% include "Back/layouts/sidebar_admin.html.twig" %}
+      {% elseif is_granted('ROLE_ADMINISTRATIVE') %}
+      {% include "Back/layouts/sidebar_school.html.twig" %}
+      {% elseif is_granted('ROLE_TEACHER') %}
+      {% include "Back/layouts/sidebar_teacher.html.twig" %}
+      {% elseif is_granted('ROLE_STUDENT') %}
+      {% include "Back/layouts/sidebar_student.html.twig" %}
+      {% endif %}
 
         {% set breadcrumb = block('breadcrumb') %}
         {% embed "Back/layouts/navbar.html.twig" %}
@@ -21,6 +29,16 @@
         {% endembed %}
 
         <div class="content container-fluid">
+              {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-dismissible fade show alert-{{ label }}">
+                        {{ message }}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                {% endfor %}
+              {% endfor %}
             <div class="row">
                 {% block body %}{% endblock %}
             </div>

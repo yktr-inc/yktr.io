@@ -15,6 +15,7 @@ Encore
     .addStyleEntry('notifications', './assets/scss/notifications.scss')
     .addStyleEntry('login', './assets/scss/login.scss')
     .addStyleEntry('crud', './assets/scss/crud.scss')
+    .addStyleEntry('student', './assets/scss/student.scss')
     .addStyleEntry('dashboard',
         [
             './assets/scss/app.scss',
@@ -22,6 +23,7 @@ Encore
             './assets/scss/dashboard/dashboard_items.scss',
             './assets/scss/dashboard/dashboard_admin.scss'
         ])
+    .addStyleEntry('errors', './assets/scss/errors.scss')
 ;
 
 module.exports = Encore.getWebpackConfig();

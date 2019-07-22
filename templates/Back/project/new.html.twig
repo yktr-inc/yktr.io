@@ -1,16 +1,36 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
 {% block breadcrumb %}
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
+<li class="breadcrumb-item"><a href="#">Home</a></li>
+<li class="breadcrumb-item"><a href="#">Library</a></li>
+<li class="breadcrumb-item active" aria-current="page">Data</li>
 {% endblock %}
 
+{% block stylesheets %}
+{{ encore_entry_link_tags('crud') }}
+{{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
+{% block javascripts %}
+{{ encore_entry_script_tags('js/crud') }}
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Project</h1>
-
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+        <div class="card-header card-header-{{ colorClass }}">
+            <h4 class="card-title">New project</h4>
+        </div>
+        <div class="card-body table-responsive">
+          <div class="clear mb-2">
+      {% if is_granted('ROLE_TEACHER') %}
+      <a class="btn btn-default btn-sm" role="button" href="{{ path('teacher_project_index') }}">back to list</a>
+      {% else %}
+      <a class="btn btn-default btn-sm" role="button" href="{{ path('project_index') }}">back to list</a>
+      {% endif %}
+    </div>
     {{ include('Back/project/_form.html.twig') }}
-
-    <a href="{{ path('project_index') }}">back to list</a>
+  </div>
+</div>
+</div>
 {% endblock %}

@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\DateTrait;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FileRepository")
@@ -22,67 +21,40 @@ class File
     private $id;
 
     /**
-     * @Assert\NotBlank(
-     *     message = "Le chemin vers le fichier ne devrait pas être vide"
-     * )
-     *
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string")
      */
-    private $path;
+    private $file;
 
     /**
-     * @Assert\Choice(
-     *     choices={"video", "image", "audio", "pdf", "file" },
-     *     message="Le type de fichierr est incorrect."
-     * )
-     *
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $type;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-    */
-    private $owner;
+    private $originalName;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPath(): ?string
+    public function getFile()
     {
-        return $this->path;
+        return $this->file;
     }
 
-    public function setPath(string $path): self
+    public function setFile($file = null)
     {
-        $this->path = $path;
+        $this->file = $file;
 
         return $this;
     }
 
-    public function getType(): ?string
+    public function getOriginalName(): ?string
     {
-        return $this->type;
+        return $this->originalName;
     }
 
-    public function setType(string $type): self
+    public function setOriginalName(string $originalName): self
     {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getOwner(): ?User
-    {
-        return $this->owner;
-    }
-
-    public function setOwner(?User $owner): self
-    {
-        $this->owner = $owner;
+        $this->originalName = $originalName;
 
         return $this;
     }

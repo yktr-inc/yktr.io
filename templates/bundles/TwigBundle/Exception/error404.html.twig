@@ -1,0 +1,14 @@
+{% extends 'errors/errors.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('errors') }}
+{% endblock %}
+
+{% block title %}
+    404
+{% endblock %}
+
+{% block body %}
+    <h1 data-h1="404">404</h1>
+    <p data-p="NOT FOUND">NOT FOUND</p>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Projects</li>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('student') }}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
+{% block body %}
+<div class="col-lg-3 m-auto">
+    <div class="select_mate" data-mate-select="active" >
+    <select name="" onchange="" onclick="return false;" id="">
+    <option value=""  >2018-2019</option>
+    <option value="1">2019-2020</option>
+      </select>
+    <p class="selecionado_opcion"  onclick="open_select(this)" ></p><span onclick="open_select(this)" class="icon_select_mate" ><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
+        <path d="M0-.75h24v24H0z" fill="none"/>
+    </svg></span>
+    <div class="cont_list_select_mate">
+      <ul class="cont_select_int">  </ul>
+    </div>
+      </div>
+</div>
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+        <div class="card-header card-header-{{ colorClass }}">
+            <h4 class="card-title">Projects</h4>
+        </div>
+        <div class="card-body table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Course</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for project in projects %}
+            <tr>
+                <td>{{ project.type }}</td>
+                <td>{{ project.name }}</td>
+                <td>{{ project.course.title }}</td>
+                <td><a class="btn btn-sm btn-default" href="{{ path('teacher_project_show', { 'id': project.id }) }}">View</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td class="text-center" colspan="6">No project at this moment</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+{% endblock %}

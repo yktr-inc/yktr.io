@@ -1,0 +1,158 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{{ path('dashboard') }} ">Home</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('teacher_course_index') }}">Courses</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('teacher_course_show', { 'id': course.id }) }}">{{ course.title }}</a></li>
+    <li class="breadcrumb-item active">Add Grade</li>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('student') }}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
+{% block body %}
+    <form class="col-12 row" action="{{ path('grade_submit', {'id': course.id}) }}" method="post">
+        <div class="col-3">
+            <div class="card dashboard-item dashboard-small-list small-card-header">
+                <div class="card-header card-header-{{ colorClass }} small-card-header">
+                    <h5 class="card-title pl-3">Grade Details</h5>
+                </div>
+                <div class="card-body table-responsive">
+                    <label for="type">Type of your Grade: </label>
+                    <div class="dropdown">
+                        <button class="dLabel col-12 dropdown-select" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select an Exam type
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                            <li value="cc1">CC1</li>
+                            <li value="cc2">CC2</li>
+                            <li value="exam">Exam</li>
+                        </ul>
+                        <input type="text" required id="coeff" hidden name="grade_type">
+                    </div>
+                    <div class="form-group">
+                        <label class="mt-3" for="grade_coefficient">Coefficient of your Grade:</label>
+                        <input type="text" class="form-control dLabel" id="grade_coefficient" name="grade_coefficient" required>
+                    </div>
+                    <button type="submit" class="mt-1 mb-2 btn btn-success btn-sm">Save Grades</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card dashboard-item dashboard-small-list small-card-header">
+                <div class="card-header card-header-{{ colorClass }} small-card-header">
+                    <h5 class="card-title pl-3">Student's Grades</h5>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Mark</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for student in students %}
+                            <tr>
+                                <td>{{ student.lastName }} {{ student.firstName }}</td>
+                                <td>
+                                    <input required name="{{ student.userName }}"/>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card shadow mt-4 mb-4">
+                <div class="card-header py-3 ml-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Notes</h6>
+                </div>
+                <div class="card-body mb-2">
+                    <div class="text-center">
+                        <img class="img-fluid px-3 px-sm-4 mb-4" style="width: 15rem;margin-top:-20px;margin-bottom:-40px;" src="https://pershingai.com/wp-content/uploads/2019/04/Flat-color-Modern-Isometric-Illustration-design-Online-Learning.png" alt="">
+                    </div>
+                    <p>Here you can add Grades for your Students for the Course you have selected. Be sure to write the good coefficient and add a Grade for each student : You can't partially add grades.</p>
+                    <a style="color:#2f995b;" target="_blank" rel="nofollow" href="#">Contact an Administrative →</a>
+                </div>
+            </div>
+        </div>
+    </form>
+    <style>
+        .dLabel {
+            height: 40px;
+            border-radius: 4px;
+            background-color: #fff;
+            border: solid 1px #cccccc;
+            text-align: left;
+            padding: 7.5px 15px;
+            color: #707070;
+            letter-spacing: 0.7px;
+        }
+
+        .caret {
+            float: right;
+            margin-top: 9px;
+            display: block;
+        }
+
+        .dropdown-menu {
+            width: 240px;
+            padding: 0;
+            margin: 0;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        .dropdown button:hover, .dropdown button:focus {
+            border: none;
+            outline: 0;
+        }
+
+        .dropdown.open button#dLabel {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.23);
+            border: solid 1px #666;
+            border-bottom: none;
+        }
+
+        .dropdown.open ul {
+            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.23);
+            border: solid 1px #666;
+            border-top: none;
+            height: 200px;
+            overflow-y: scroll;
+        }
+
+        .dropdown-menu li {
+            line-height: 1.5;
+            letter-spacing: 0.7px;
+            color: #707070;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 7.5px 15px;
+            border-top: solid 1px #f3f3f3;
+        }
+
+        .dropdown-menu li:hover {
+            background-color: #ccc;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script>
+        $('.dropdown-menu li').on('click', function() {
+            var getValue = $(this).text();
+            $('.dropdown-select').text(getValue);
+            $('#coeff').val(getValue);
+        });
+    </script>
+{% endblock %}

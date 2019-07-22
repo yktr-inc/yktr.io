@@ -1,38 +1,80 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
 {% block breadcrumb %}
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
+<li class="breadcrumb-item"><a href="#">Home</a></li>
+<li class="breadcrumb-item"><a href="#">Classes</a></li>
+<li class="breadcrumb-item active" aria-current="page">{{ classroom.name }}</li>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('dashboard') }}
 {% endblock %}
 
 {% block body %}
-    <h1>Classroom</h1>
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list col-3">
+        <div class="card-header card-header-{{ colorClass }}">
+            <h4 class="card-title">{{ classroom.name }}</a></h4>
+        </div>
+        <div class="card-body table-responsive">
+            <div class="text-center">
+                <a class="btn btn-primary" role="button" href="{{ path('classroom_index') }}">Back to List</a>
+                <a class="btn btn-warning" role="button" href="{{ path('classroom_edit', {'id': classroom.id}) }}">edit</a>
+                {{ include('Back/classroom/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="card dashboard-item dashboard-small-list">
+                <div class="card-header card-header-{{ colorClass }}">
+                    <h4 class="card-title">Students</h4>
+                </div>
+                <div class="card-body table-responsive">
+                    <div class="mt-2">
+                        <ul class="list-group">
+                            {% for user in classroom.users %}
+                                <li class="list-group-item">
+                                    {{ user.fullname }}
+                                    <span class="float-right">
+                                        <a class="btn btn-default btn-sm" href="{{ path('student_show', {'id': user.id}) }}">show</a>
+                                        <a class="btn btn-warning btn-sm" href="{{ path('student_edit', {'id': user.id}) }}">edit</a>
+                                    </span>
+                                </li>
+                            {% else %}
+                                <li> No user in this class at this moment </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card dashboard-item dashboard-small-list">
+                <div class="card-header card-header-{{ colorClass }}">
+                    <h4 class="card-title">Courses</h4>
+                </div>
+                <div class="card-body table-responsive">
+                    <div class="mt-2">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ classroom.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ classroom.name }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ classroom.createdAt ? classroom.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ classroom.updatedAt ? classroom.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('classroom_index') }}">back to list</a>
-
-    <a href="{{ path('classroom_edit', {'id': classroom.id}) }}">edit</a>
-
-    {{ include('Back/classroom/_delete_form.html.twig') }}
+                        <ul class="list-group">
+                            {% for course in classroom.courses %}
+                                <li class="list-group-item">
+                                    {{ course.title }}
+                                    <span class="float-right">
+                                        <a class="btn btn-warning btn-sm" href="{{ path('course_edit', {'id': course.id}) }}">edit</a>
+                                        <a class="btn btn-danger btn-sm" href="{{ path('course_show', {'id': course.id}) }}">show</a>
+                                    </span>
+                                </li>
+                            {% else %}
+                                No course for this class this moment
+                            {% endfor %}
+                        </ul>
+                        <a class="btn btn-success mt-3 mb-1" role="button" href="{{ path('classroom_course_new', { 'id': classroom.id }) }}">Add new course</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

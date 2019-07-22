@@ -6,13 +6,23 @@
 {% endblock %}
 
 {% block body %}
-<div class="card m-auto w-75">
+<div class="card m-auto w-90">
     <div class="card-header card-header-primary">
         <h4 class="card-title">My profile</h4>
     </div>
     <div class="card-body">
     <table class="table">
         <tbody>
+            <tr>
+                <th>Avatar</th>
+                <td>
+                    {% if app.user.avatar.file is defined %}
+                        <img class="avatar-sm" src="/public/uploads/documents/{{ app.user.avatar.file }}">
+                    {% else %}
+                        No avatar found
+                    {% endif %}
+                </td>
+            </tr>
             <tr>
                 <th>Email</th>
                 <td>{{ user.email }}</td>
@@ -45,5 +55,5 @@
         </div>
 
 </div>
-    <a href="{{ path('user_profile_edit') }}">edit</a>
+    <a class="btn btn-error btn-md" role="button" href="{{ path('user_profile_edit') }}">edit my profile</a>
 {% endblock %}

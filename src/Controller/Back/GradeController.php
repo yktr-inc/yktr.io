@@ -4,6 +4,7 @@ namespace App\Controller\Back;
 
 use App\Entity\Grade;
 use App\Form\GradeType;
+use App\Repository\CourseRepository;
 use App\Repository\GradeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,17 +12,35 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/dashboard/grades")
+ * @Route("/grades")
  */
 class GradeController extends AbstractController
 {
     /**
-     * @Route("/", name="grade_index", methods={"GET"})
+     * @Route("/student", name="student_grade_index", methods={"GET"})
      */
     public function index(GradeRepository $gradeRepository): Response
     {
-        return $this->render('Back/grade/index.html.twig', [
-            'grades' => $gradeRepository->findAll(),
+        $allGrades = $gradeRepository->findBy(['user' => $this->getUser()]);
+        $gradesByCourse = [];
+        $allCourses = [];
+        foreach ($allGrades as $grade) {
+            if (!in_array($grade->getCourse()->getTitle(), $allCourses)) {
+                array_push($allCourses, $grade->getCourse()->getTitle());
+            }
+        }
+        foreach ($allCourses as $c) {
+            $gradesForCourse = [];
+            foreach ($allGrades as $grade) {
+                if ($grade->getCourse()->getTitle() == $c) {
+                    $gradesForCourse[$grade->getType()] = ['val'=>$grade->getValue()];
+                }
+            }
+            $gradesByCourse[$c] = $gradesForCourse;
+        }
+
+        return $this->render('Back/grade/student/index.html.twig', [
+            'grades' => $gradesByCourse
         ]);
     }
 

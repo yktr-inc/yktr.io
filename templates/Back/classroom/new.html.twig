@@ -1,15 +1,28 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
 {% block breadcrumb %}
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
+<li class="breadcrumb-item"><a href="{{ path('dashboard_school') }}">Home</a></li>
+<li class="breadcrumb-item"><a href="{{ path('classroom_index') }}">Classrooms</a></li>
+<li class="breadcrumb-item active">New classroom</li>
 {% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
 
 {% block body %}
-    <h1>Create new Classroom</h1>
-
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+        <div class="card-header card-header-{{ colorClass }}">
+            <h4 class="card-title">Add a classroom</a></h4>
+        </div>
+        <div class="card-body table-responsive">
+    <div class="clear mb-2">
+      <a class="btn btn-default btn-sm" role="button" href="{{ path('classroom_index') }}">back to list</a>
+    </div>
     {{ include('Back/classroom/_form.html.twig') }}
-
-    <a href="{{ path('classroom_index') }}">back to list</a>
-{% endblock %}
+  </div>
+</div>
+</div>
+  {% endblock %}

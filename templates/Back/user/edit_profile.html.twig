@@ -7,13 +7,12 @@
 {% endblock %}
 
 {% block body %}
-<div class="card m-auto w-75">
+<div class="card m-auto w-90">
     <div class="card-header card-header-primary">
         <h4 class="card-title">Edit my profile</h4>
     </div>
     <div class="card-body">
     <a class="btn btn-default btn-sm" role="button" href="{{ path('user_profile') }}">Back to my profile</a>
-
     {{ include('Back/user/_form.html.twig', {'button_label': 'Update'}) }}
 </div>
 </div>

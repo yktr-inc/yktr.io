@@ -46,14 +46,40 @@ class Project
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Classroom", inversedBy="projects")
-     * @ORM\JoinTable(name="classrooms_projects")
+     *  @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Le nom du projet doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "Le nom du projet ne peut pas faire plus de {{ limit }} caractères"
+     * )
+     *
+     * @ORM\Column(type="text", nullable=false)
      */
-    private $classrooms;
+    private $description;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Course", inversedBy="projects")
+     * @ORM\JoinColumn(name="course_id", referencedColumnName="id")
+     */
+    private $course;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ProjectGroup", mappedBy="project")
+     */
+    private $groups;
+
+    /**
+     *
+     * @Assert\Date
+     *
+     * @ORM\Column(type="datetime", nullable=false)
+     */
+    private $deadline;
 
     public function __construct()
     {
-        $this->classrooms = new ArrayCollection();
+        $this->projectSteps = new ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,28 +111,108 @@ class Project
         return $this;
     }
 
-    /**
-     * @return Collection|Classroom[]
-     */
-    public function getClassrooms(): Collection
+    public function getCourse(): ?Course
     {
-        return $this->classrooms;
+        return $this->course;
     }
 
-    public function addClassroom(Classroom $classroom): self
+    public function setCourse(?Course $course): self
     {
-        if (!$this->classrooms->contains($classroom)) {
-            $this->classrooms[] = $classroom;
+        $this->course = $course;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjectStep[]
+     */
+    public function getProjectSteps(): Collection
+    {
+        return $this->projectSteps;
+    }
+
+    public function addProjectStep(ProjectStep $projectStep): self
+    {
+        if (!$this->projectSteps->contains($projectStep)) {
+            $this->projectSteps[] = $projectStep;
+            $projectStep->setProject($this);
         }
 
         return $this;
     }
 
-    public function removeClassroom(Classroom $classroom): self
+    public function removeProjectStep(ProjectStep $projectStep): self
     {
-        if ($this->classrooms->contains($classroom)) {
-            $this->classrooms->removeElement($classroom);
+        if ($this->projectSteps->contains($projectStep)) {
+            $this->projectSteps->removeElement($projectStep);
+            // set the owning side to null (unless already changed)
+            if ($projectStep->getProject() === $this) {
+                $projectStep->setProject(null);
+            }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjectGroup[]
+     */
+    public function getGroups(): Collection
+    {
+        return $this->groups;
+    }
+
+    public function addGroup(ProjectGroup $group): self
+    {
+        if (!$this->groups->contains($group)) {
+            $this->groups[] = $group;
+            $group->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroup(ProjectGroup $group): self
+    {
+        if ($this->groups->contains($group)) {
+            $this->groups->removeElement($group);
+            // set the owning side to null (unless already changed)
+            if ($group->getProject() === $this) {
+                $group->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDeadline()
+    {
+        return $this->deadline;
+    }
+
+    /**
+     * @param mixed $deadline
+     *
+     * @return self
+     */
+    public function setDeadline($deadline)
+    {
+        $this->deadline = $deadline;
 
         return $this;
     }

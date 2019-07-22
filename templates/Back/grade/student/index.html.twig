@@ -1,0 +1,193 @@
+{% extends 'Back/layouts/app.html.twig' %}
+
+{% block breadcrumb %}
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a>Grades & Attendances</a></li>
+{% endblock %}
+
+
+{% block body %}
+    <style>
+        textarea {
+            display: block;
+            outline: none;
+        }
+
+        textarea:focus, input:focus {
+            border-color: transparent !important;
+        }
+
+        .js-pscroll {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .table100 {
+            background-color: #fff;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        th, td {
+            font-weight: unset;
+            padding-right: 10px;
+        }
+
+        .column1 {
+            width: 33%;
+            padding-left: 40px;
+        }
+
+        .column2 {
+            width: 13%;
+        }
+
+        .column3 {
+            width: 22%;
+        }
+
+        .column4 {
+            width: 19%;
+        }
+
+        .column5 {
+            width: 13%;
+        }
+
+        .table100-head th {
+            padding-top: 18px;
+            padding-bottom: 18px;
+        }
+
+        .table100-body td {
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+
+        .table100 {
+            position: relative;
+            padding-top: 60px;
+        }
+
+        .table100-head {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .table100-body {
+            max-height: 585px;
+            overflow: auto;
+        }
+
+        .table100.ver1 th {
+            font-size: 16px;
+            color: #fff;
+            line-height: 1.4;
+
+            background-color: #a96dad;
+        }
+
+        .table100.ver1 td {
+            font-size: 14px;
+            color: #808080;
+            line-height: 1.4;
+        }
+
+        .table100.ver1 .table100-body tr:nth-child(even) {
+            background-color: #f8f6ff;
+        }
+
+        .table100.ver1 {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+            -moz-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+            -webkit-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+            -o-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+            -ms-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+        }
+
+        .table100.ver1 .ps__rail-y {
+            right: 5px;
+        }
+
+        .table100.ver1 .ps__rail-y::before {
+            background-color: #ebebeb;
+        }
+
+        .table100.ver1 .ps__rail-y .ps__thumb-y::before {
+            background-color: #cccccc;
+        }
+    </style>
+    <div class="col-3">
+        <h2 class="ml-1">Attendances</h2>
+        <div class="table100 ver1">
+            <div class="table100-head">
+                <table>
+                    <thead>
+                    <tr class="row100 head">
+                        <th class="cell100 column1">Course</th>
+                        <th class="cell100 column2">Missed</th>
+                        <th class="cell100 column3">Date</th>
+                        <th class="cell100 column4">CC2</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <div class="table100-body p-0 js-pscroll">
+                <table>
+                    <tbody>
+                    <tr class="row100 body">
+                        <td class="cell100 column1">Projet Annuel</td>
+                        <td class="cell100 column2">1h30</td>
+                        <td class="cell100 column3">19/07/2019</td>
+                        <td class="cell100 column4">Yes</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <h2 class="ml-1">Grades</h2>
+        <div class="table100 ver1">
+            <div class="table100-head">
+                <table>
+                    <thead>
+                    <tr class="row100 head">
+                        <th class="cell100 column1">Course</th>
+                        <th class="cell100 column3">CC1</th>
+                        <th class="cell100 column4">CC2</th>
+                        <th class="cell100 column5">Exam</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <div class="table100-body p-0 js-pscroll">
+                <table>
+                    <tbody>
+                    {% for title,grade in grades %}
+                    <tr class="row100 body">
+                        <td class="cell100 column1">{{ title }}</td>
+                        <td class="cell100 column3">{{ grade.cc1.val|default('') }}</td>
+                        <td class="cell100 column4">{{ grade.cc2.val|default('') }}</td>
+                        <td class="cell100 column5">{{ grade.exam.val|default('') }}</td>
+                    </tr>
+                    {% else %}
+                        <tr class="row100 body">No Grades at the moment.</tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

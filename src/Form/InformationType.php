@@ -16,7 +16,7 @@ class InformationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class )
+            ->add('title', TextType::class)
             ->add('content', TextareaType::class, [
                 'label' => false,
                 'attr' => [
@@ -28,7 +28,7 @@ class InformationType extends AbstractType
                 'html5' => false,
                 'data' => new \DateTime(date("Y-m")),
                 'attr' => [
-                    'class' => 'datepicker-full'
+                    'class' => 'full-datepicker'
                 ]
             ])
         ;

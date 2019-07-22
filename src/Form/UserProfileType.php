@@ -2,15 +2,18 @@
 
 namespace App\Form;
 
+use App\Entity\Classroom;
+use App\Entity\File;
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class UserProfileType extends AbstractType
 {
@@ -21,6 +24,9 @@ class UserProfileType extends AbstractType
             ->add('number', TextType::class)
             ->add('streetName', TextType::class)
             ->add('postalCode', TextType::class)
+            ->add('avatar', FileType::class, [
+                'data_class' => File::class
+            ])
             ->add('city', TextType::class)
         ;
     }
@@ -29,7 +35,7 @@ class UserProfileType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'validation_groups' => array('edit'),
+            'validation_groups' => ['edit'],
         ]);
     }
 }

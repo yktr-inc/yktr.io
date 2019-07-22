@@ -7,6 +7,7 @@
     "phpstan": "make phpstan",
     "phpunit": "make phpunit",
     "php-cs": "make phpcs-dry",
+    "phpspec": "make phpspec",
     "dev-server": "encore dev-server",
     "dev": "encore dev",
     "watch": "encore dev --watch",
@@ -38,14 +39,15 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn php-cs && yarn phpstan analyse src && yarn phpunit",
-      "pre-push": "yarn phpstan analyse src && yarn phpunit"
+      "pre-commit": "yarn php-cs && yarn phpspec",
+      "pre-push": "yarn php-cs && yarn phpspec"
     }
   },
   "dependencies": {
-    "bootstrap-datepicker": "^1.8.0",
     "bootswatch": "^4.2.1",
+    "flatpickr": "^4.5.4",
     "material-icons": "^0.3.0",
+    "moment": "^2.24.0",
     "select2": "^4.0.6-rc.1",
     "trumbowyg": "^2.14.0"
   }

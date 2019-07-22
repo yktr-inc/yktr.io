@@ -1,15 +1,38 @@
 {% extends 'Back/layouts/app.html.twig' %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('crud') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('js/crud') }}
+{% endblock %}
+
 {% block breadcrumb %}
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
+<li class="breadcrumb-item"><a href="{{ path('dashboard_school') }}">Home</a></li>
+{% if app.request.attributes.get( '_route' ) == "exam_new" %}
+<li class="breadcrumb-item"><a href="{{ path('exam_index') }}">Exams</a></li>
+{% else %}
+<li class="breadcrumb-item"><a href="{{ path('teacher_course_index') }}">Course</a></li>
+<li class="breadcrumb-item"><a href="{{ path('teacher_course_show', { 'id': course.id }) }}">{{ course.title }}</a></li>
+{% endif %}
+<li class="breadcrumb-item active">Add Exam</li>
 {% endblock %}
 
 {% block body %}
-    <h1>Create new Exam</h1>
-
+<div class="card m-auto w-90">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title">New exam</h4>
+    </div>
+    <div class="card-body">
+    <div class="clear mb-2">
+      {% if app.request.attributes.get( '_route' ) == "exam_new" %}
+      <a class="btn btn-default btn-sm" role="button" href="{{ path('exam_index') }}">back to list</a>
+      {% else %}
+      <a class="btn btn-default btn-sm" role="button" href="{{ path('teacher_course_show', { 'id': course.id }) }}">back to course</a>
+      {% endif %}
+    </div>
     {{ include('Back/exam/_form.html.twig') }}
-
-    <a href="{{ path('exam_index') }}">back to list</a>
+    </div>
+</div>
 {% endblock %}

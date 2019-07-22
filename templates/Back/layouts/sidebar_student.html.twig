@@ -1,0 +1,69 @@
+<div class="sidebar">
+    <div class="logo">
+        <span class="simple-text">
+            {{ config.get('sitename') }}
+        </span>
+    </div>
+    <div class="user-infos row align-items-center">
+        <div class="col-3">
+            <div class="{{ colorClass }}">
+                <img class="avatar-sm" src="https://media.licdn.com/dms/image/C4D03AQHfrdfgu4kKbQ/profile-displayphoto-shrink_200_200/0?e=1568851200&v=beta&t=nO0YwoDqXRFe3r51umkVlTHBXLJtid0SIvrraNCH5LA">
+            </div>
+        </div>
+        <div id="name" class="col-9 text-left">
+            <span>{{ app.user.firstname }} {{ app.user.lastname }}</span>
+        </div>
+    </div>
+    <div class="sidebar-wrapper">
+        <ul class="nav {{ colorClass }}">
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'dashboard' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('dashboard') }}">
+                    <i class="material-icons">dashboard</i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'student_course' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('student_course_index') }}">
+                    <i class="material-icons">school</i>
+                    <p>Courses</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'student_grade_index' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="/grades/student">
+                    <i class="material-icons">account_balance</i>
+                    <p>Grades & Attendance</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'student_project' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="{{ path('student_project_index') }}">
+                    <i class="material-icons">location_city</i>
+                    <p>Projets</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'student_files' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="#">
+                    <i class="material-icons">folder_open</i>
+                    <p>Files</p>
+                </a>
+            </li>
+            <li class="nav-item
+                {{ (app.request.attributes.get( '_route' ) starts with 'student_files' ? 'active' : '') }}"
+            >
+                <a class="nav-link" href="#">
+                    <i class="material-icons">cloud</i>
+                    <p>Spaces</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

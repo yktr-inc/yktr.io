@@ -6,12 +6,17 @@
 <li class="breadcrumb-item active">{{ promotion.code }}</li>
 {% endblock %}
 
+{% block stylesheets %}
+{{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
 {% block body %}
-<div class="card m-auto w-75">
-    <div class="card-header card-header-primary">
-        <h4 class="card-title">Promotions</h4>
-    </div>
-    <div class="card-body">
+<div class="col-lg-11 m-auto">
+    <div class="card dashboard-item dashboard-small-list">
+        <div class="card-header card-header-{{ colorClass }}">
+            <h4 class="card-title">Promotion</a></h4>
+        </div>
+        <div class="card-body table-responsive">
         <div class="clear mb-2">
             <a class="btn btn-default btn-sm" role="button" href="{{ path('promotion_index') }}">back to list</a>
         </div>
@@ -34,7 +39,7 @@
                     <td>{{ promotion.startedAt ? promotion.startedAt|date('F Y') : '' }}</td>
                 </tr>
                 <tr>
-                    <th>Start</th>
+                    <th>End</th>
                     <td>{{ promotion.finishedAt ? promotion.finishedAt|date('F Y') : '' }}</td>
                 </tr>
             </tbody>
@@ -58,5 +63,6 @@
           </ul>
       </div>
   </div>
+</div>
 </div>
 {% endblock %}
